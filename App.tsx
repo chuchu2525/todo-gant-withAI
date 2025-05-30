@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Task, ViewMode } from './types';
 import { TaskForm } from './components/TaskForm';
@@ -106,7 +105,7 @@ const App: React.FC = () => {
       case 'list':
         return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} />;
       case 'ai':
         return (
           <AiInteraction

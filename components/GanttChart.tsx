@@ -4,6 +4,7 @@ import { PRIORITY_COLORS } from '../constants';
 
 interface GanttChartProps {
   tasks: Task[];
+  onEditTask: (task: Task) => void;
 }
 
 const DAY_WIDTH = 30; // pixels per day
@@ -12,9 +13,16 @@ const CHART_PADDING = 20;
 const MIN_LABEL_WIDTH = 80; // ラベルの最小幅
 const MAX_LABEL_WIDTH = 400; // ラベルの最大幅
 
-export const GanttChart: React.FC<GanttChartProps> = ({ tasks }) => {
+interface TooltipData {
+  task: Task;
+  x: number;
+  y: number;
+}
+
+export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => {
   const [labelWidth, setLabelWidth] = useState(150); // 初期値を150に設定
   const [isResizing, setIsResizing] = useState(false);
+  const [tooltipData, setTooltipData] = useState<TooltipData | null>(null); // ツールチップ用state
   const resizeHandleRef = useRef<HTMLDivElement>(null);
   const chartContainerRef = useRef<HTMLDivElement>(null); // チャート全体のコンテナ参照用
 
@@ -83,7 +91,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks }) => {
   };
 
   return (
-    <div className="bg-slate-800 p-4 rounded-lg shadow-lg overflow-x-auto" ref={chartContainerRef}>
+    <div className="bg-slate-800 p-4 rounded-lg shadow-lg overflow-x-auto relative" ref={chartContainerRef}>
       <h3 className="text-xl font-semibold text-sky-400 mb-4">Gantt Chart</h3>
       <div style={{ width: chartWidth, minHeight: (tasks.length + 2) * ROW_HEIGHT + CHART_PADDING*2 }} className="relative">
         {/* Date Headers and Resizer */}
@@ -134,14 +142,34 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks }) => {
               <div style={{ width: '8px', flexShrink: 0 }} className="border-r border-slate-700 h-full"></div>
               <div className="relative h-full" style={{ width: chartWidth - labelWidth -8 /* Resizer分引く*/ }}>
                 <div
-                  title={`${task.name} (${task.status}) - ${task.startDate} to ${task.endDate}`}
                   style={{
                     left: startOffset,
                     width: taskWidth,
                     height: ROW_HEIGHT * 0.7,
                     top: ROW_HEIGHT * 0.15,
+                    cursor: 'pointer',
                   }}
-                  className={`absolute rounded ${PRIORITY_COLORS[task.priority]} text-white text-xs flex items-center px-2 overflow-hidden shadow-md`}
+                  className={`absolute rounded ${PRIORITY_COLORS[task.priority]} text-white text-xs flex items-center px-2 overflow-hidden shadow-md hover:brightness-125 transition-all`}
+                  onClick={() => onEditTask(task)}
+                  onMouseEnter={(e) => {
+                    setTooltipData({ 
+                      task,
+                      x: e.clientX + 15, 
+                      y: e.clientY - 10 // マウスカーソルの少し上
+                    });
+                  }}
+                  onMouseMove={(e) => {
+                    if (tooltipData) {
+                      setTooltipData({ 
+                        ...tooltipData, 
+                        x: e.clientX + 15,
+                        y: e.clientY - 10 // マウスカーソルの少し上
+                      });
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipData(null);
+                  }}
                 >
                  <span className="truncate">{task.name}</span>
                 </div>
@@ -199,6 +227,28 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks }) => {
             </defs>
         </svg>
       </div>
+      {/* Custom Tooltip */} 
+      {tooltipData && (
+        <div 
+          style={{
+            position: 'fixed', // fixed に変更してビューポート基準で位置決め
+            left: `${tooltipData.x}px`,
+            top: `${tooltipData.y}px`,
+            transform: 'translateY(-100%)', // Y座標をツールチップの高さ分だけ上にオフセット
+            backgroundColor: 'rgba(0,0,0,0.85)',
+            color: 'white',
+            padding: '8px 12px',
+            borderRadius: '6px',
+            fontSize: '1rem', // 少し大きく
+            zIndex: 100, // 他の要素より手前に表示
+            pointerEvents: 'none', // ツールチップ自体がマウスイベントを拾わないように
+            whiteSpace: 'nowrap',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+          }}
+        >
+          {tooltipData.task.name}
+        </div>
+      )}
     </div>
   );
 };
