@@ -169,7 +169,7 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl min-h-[60vh]">
+        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl h-[80vh] overflow-y-auto">
             {renderView()}
         </div>
       </main>
