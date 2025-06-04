@@ -144,7 +144,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="mx-auto max-w-full px-2 md:px-4 flex-grow">
+      <main className="mx-auto max-w-full px-2 md:px-4 pt-4 md:pt-6 flex-grow">
         {error && (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-700 text-red-300 rounded-md" role="alert">
             <strong className="font-bold">Error:</strong>
@@ -169,7 +169,7 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl ">
+        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl min-h-[70vh]">
         {/* h-[80vh] overflow-y-auto */}
             {renderView()}
         </div>
