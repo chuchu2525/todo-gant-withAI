@@ -228,7 +228,8 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
           </div>
         </div>
       </div>
-      <div className="overflow-auto" style={{ height: 'calc(80vh - 140px)' }}>
+      <div className="overflow-auto" style={{ height: '75vh' }}>
+      {/* overflow-y-auto */}
         <div style={{ width: totalUnits * unitWidth + labelWidth + 8, minHeight: (tasks.length + 2) * rowHeight + CHART_PADDING*2 }} className="relative">
           {/* Date Headers and Resizer - MaterialTable style sticky header */}
           <div 

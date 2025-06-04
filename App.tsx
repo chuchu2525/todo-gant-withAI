@@ -144,7 +144,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="container mx-auto p-4 md:p-6 flex-grow">
+      <main className="mx-auto max-w-full px-2 md:px-4 flex-grow">
         {error && (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-700 text-red-300 rounded-md" role="alert">
             <strong className="font-bold">Error:</strong>
@@ -169,7 +169,8 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl h-[80vh] overflow-y-auto">
+        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl ">
+        {/* h-[80vh] overflow-y-auto */}
             {renderView()}
         </div>
       </main>
@@ -183,7 +184,7 @@ const App: React.FC = () => {
         />
       </Modal>
       
-      <footer className="text-center p-4 text-xs text-slate-500 border-t border-slate-700/50 mt-8">
+      <footer className="text-center p-1 text-xs text-slate-500 border-t border-slate-700/50 mt-2">
         Powered by React, Tailwind CSS, and Gemini AI.
       </footer>
     </div>
