@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { Task } from '../types';
 import { getAiTaskSummary, updateTasksViaAi } from '../services/geminiService';
-import { parseTasksFromYaml } from '../services/yamlService';
 
 interface AiInteractionProps {
   tasks: Task[];
@@ -22,15 +22,6 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
 }) => {
   const [aiSummary, setAiSummary] = useState<string>('');
   const [userPrompt, setUserPrompt] = useState<string>('');
-  // `editableYaml` represents the user-editable version of the YAML data.
-  // It is initialized with `currentYaml` and updated whenever `currentYaml` changes
-  // to ensure the editable state reflects the latest YAML data from the parent component.
-  const [editableYaml, setEditableYaml] = useState<string>(currentYaml);
-
-  useEffect(() => {
-    // Synchronize `editableYaml` with `currentYaml` whenever `currentYaml` changes.
-    setEditableYaml(currentYaml);
-  }, [currentYaml]);
 
   const fetchSummary = useCallback(async () => {
     setIsLoading(true);
@@ -68,19 +59,6 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
       setUserPrompt(''); // Clear prompt on success
     } catch (err) {
       setError((err as Error).message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDirectYamlSubmit = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      parseTasksFromYaml(editableYaml);
-      await onYamlUpdateByAi(editableYaml);
-    } catch (err) {
-      setError(`Invalid YAML format: ${(err as Error).message}. Please correct the YAML or use the AI to modify it.`);
     } finally {
       setIsLoading(false);
     }
@@ -132,22 +110,14 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold text-sky-400 mb-2">Current Tasks (YAML) - Edit or Paste Here</h3>
+        <h3 className="text-xl font-semibold text-sky-400 mb-2">Current Tasks (YAML)</h3>
         <textarea
-          value={editableYaml}
-          onChange={(e) => setEditableYaml(e.target.value)}
+          value={currentYaml}
+          readOnly
           rows={15}
-          className="w-full bg-slate-700 border-slate-600 text-slate-100 p-3 text-xs rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-          aria-label="Current tasks in YAML format, editable"
-          disabled={isLoading}
+          className="w-full bg-slate-950 text-slate-300 p-3 text-xs rounded-md border border-slate-700 focus:outline-none focus:ring-1 focus:ring-sky-500"
+          aria-label="Current tasks in YAML format"
         />
-        <button
-          onClick={handleDirectYamlSubmit}
-          disabled={isLoading}
-          className="mt-2 px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-purple-500 disabled:opacity-50"
-        >
-          {isLoading ? 'Applying YAML...' : 'Apply YAML Changes'}
-        </button>
       </div>
     </div>
   );

@@ -5,11 +5,11 @@ import { Task } from "../types";
 // Assume process.env.API_KEY is available in the execution environment
 // This is a significant assumption for client-side code as per prompt.
 let apiKey = "";
-if (typeof process !== 'undefined' && process.env && process.env.GEMINI_API_KEY) {
-  apiKey = process.env.GEMINI_API_KEY;
+if (typeof process !== 'undefined' && process.env && process.env.API_KEY) {
+  apiKey = process.env.API_KEY;
 } else {
   // Fallback or warning if not found - in a real app, this needs robust handling or a clear setup guide.
-  console.warn("GEMINI_API_KEY not found in process.env. It must be set in .env.local and be prefixed with VITE_ for client-side exposure if not using define.");
+  console.warn("API_KEY not found in process.env. It must be globally available for Gemini API calls.");
   // To prevent the app from completely breaking if API key is not set (e.g. for local dev without key)
   // we can set a placeholder, but API calls will fail.
   // apiKey = "YOUR_API_KEY"; // This line should NOT be used in production or committed.
