@@ -22,9 +22,13 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
 }) => {
   const [aiSummary, setAiSummary] = useState<string>('');
   const [userPrompt, setUserPrompt] = useState<string>('');
+  // `editableYaml` represents the user-editable version of the YAML data.
+  // It is initialized with `currentYaml` and updated whenever `currentYaml` changes
+  // to ensure the editable state reflects the latest YAML data from the parent component.
   const [editableYaml, setEditableYaml] = useState<string>(currentYaml);
 
   useEffect(() => {
+    // Synchronize `editableYaml` with `currentYaml` whenever `currentYaml` changes.
     setEditableYaml(currentYaml);
   }, [currentYaml]);
 
