@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Task, TaskStatus, TaskPriority } from '../types';
 import { DEFAULT_TASK_STATUS, DEFAULT_TASK_PRIORITY } from '../constants';
@@ -20,6 +19,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
   const [startDate, setStartDate] = useState(getDefaultDate());
   const [endDate, setEndDate] = useState(getDefaultDate());
   const [dependencies, setDependencies] = useState<string[]>([]);
+  const [dependencySearchTerm, setDependencySearchTerm] = useState('');
 
   useEffect(() => {
     if (existingTask) {
@@ -66,16 +66,21 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
     onSubmit(taskData);
   };
 
-  const handleDependencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-    // Prevent self-dependency
-    const filteredOptions = existingTask ? selectedOptions.filter(id => id !== existingTask.id) : selectedOptions;
-    setDependencies(filteredOptions);
+  const handleDependencyToggle = (taskId: string) => {
+    setDependencies(prev => 
+      prev.includes(taskId) 
+        ? prev.filter(id => id !== taskId) 
+        : [...prev, taskId]
+    );
   };
 
-  const availableDependencies = existingTask 
-    ? allTasks.filter(t => t.id !== existingTask.id)
-    : allTasks;
+  const availableDependencies = allTasks.filter(t => 
+    existingTask ? t.id !== existingTask.id : true
+  );
+  
+  const filteredAvailableDependencies = availableDependencies.filter(task => 
+    task.name.toLowerCase().includes(dependencySearchTerm.toLowerCase())
+  );
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-slate-300">
@@ -150,18 +155,34 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
       </div>
       <div>
         <label htmlFor="task-dependencies" className="block text-sm font-medium text-slate-300">Dependencies</label>
-        <select
+        <input 
+          type="text"
+          placeholder="Search dependencies..."
+          value={dependencySearchTerm}
+          onChange={(e) => setDependencySearchTerm(e.target.value)}
+          className="mt-1 mb-2 block w-full bg-slate-600 border-slate-500 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm text-slate-100"
+        />
+        <div 
           id="task-dependencies"
-          multiple
-          value={dependencies}
-          onChange={handleDependencyChange}
-          className="mt-1 block w-full h-32 bg-slate-700 border-slate-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm text-slate-100"
+          className="mt-1 block w-full h-40 bg-slate-700 border-slate-600 rounded-md shadow-sm p-2 overflow-y-auto space-y-1"
         >
-          {availableDependencies.map(task => (
-            <option key={task.id} value={task.id}>{task.name}</option>
-          ))}
-        </select>
-        <p className="mt-1 text-xs text-slate-400">Hold Ctrl/Cmd to select multiple. Cannot select itself.</p>
+          {filteredAvailableDependencies.length > 0 ? (
+            filteredAvailableDependencies.map(task => (
+            <label key={task.id} className="flex items-center space-x-2 p-1.5 rounded hover:bg-slate-600 cursor-pointer">
+              <input 
+                type="checkbox"
+                checked={dependencies.includes(task.id)}
+                onChange={() => handleDependencyToggle(task.id)}
+                className="form-checkbox h-4 w-4 text-sky-600 bg-slate-800 border-slate-500 rounded focus:ring-sky-500"
+              />
+              <span>{task.name}</span>
+            </label>
+          ))
+        ) : (
+          <p className="text-xs text-slate-400 text-center py-4">No matching tasks found, or no other tasks available.</p>
+        )}
+        </div>
+        <p className="mt-1 text-xs text-slate-400">Cannot select itself. Search to filter tasks.</p>
       </div>
       <div className="flex justify-end space-x-3 pt-2">
         <button

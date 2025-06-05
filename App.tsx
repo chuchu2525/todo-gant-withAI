@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { Task, ViewMode } from './types';
 import { TaskForm } from './components/TaskForm';
@@ -106,7 +105,7 @@ const App: React.FC = () => {
       case 'list':
         return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} />;
       case 'ai':
         return (
           <AiInteraction
@@ -125,8 +124,8 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100">
-      <header className="bg-slate-800/50 backdrop-blur-md shadow-lg p-4 sticky top-0 z-40">
-        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+      <header className="bg-slate-800/50 backdrop-blur-md shadow-lg p-3 md:p-4 sticky top-0 z-40">
+        <div className="w-full max-w-none px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-400 tracking-tight">{APP_TITLE}</h1>
           <nav className="mt-2 sm:mt-0 flex space-x-2 sm:space-x-3">
             {(['list', 'gantt', 'ai'] as ViewMode[]).map(view => (
@@ -145,7 +144,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="container mx-auto p-4 md:p-6 flex-grow">
+      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-grow">
         {error && (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-700 text-red-300 rounded-md" role="alert">
             <strong className="font-bold">Error:</strong>
@@ -170,7 +169,8 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className="bg-slate-800/30 p-4 sm:p-6 rounded-xl shadow-2xl min-h-[60vh]">
+        <div className={`bg-slate-800/30 rounded-xl shadow-2xl min-h-[70vh] ${currentView === 'list' ? 'p-3 sm:p-5' : 'p-4 sm:p-6'}`}>
+        {/* h-[80vh] overflow-y-auto */}
             {renderView()}
         </div>
       </main>
@@ -184,7 +184,7 @@ const App: React.FC = () => {
         />
       </Modal>
       
-      <footer className="text-center p-4 text-xs text-slate-500 border-t border-slate-700/50 mt-8">
+      <footer className="text-center p-1 text-xs text-slate-500 border-t border-slate-700/50 mt-2">
         Powered by React, Tailwind CSS, and Gemini AI.
       </footer>
     </div>
