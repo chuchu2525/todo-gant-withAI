@@ -125,7 +125,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100">
       <header className="bg-slate-800/50 backdrop-blur-md shadow-lg p-3 md:p-4 sticky top-0 z-40">
-        <div className="w-full max-w-none px-2 md:px-4 flex flex-col sm:flex-row justify-between items-center">
+        <div className="w-full max-w-none px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-400 tracking-tight">{APP_TITLE}</h1>
           <nav className="mt-2 sm:mt-0 flex space-x-2 sm:space-x-3">
             {(['list', 'gantt', 'ai'] as ViewMode[]).map(view => (
@@ -144,7 +144,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="w-full px-2 md:px-4 pt-4 md:pt-6 flex-grow">
+      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-grow">
         {error && (
           <div className="mb-4 p-3 bg-red-500/20 border border-red-700 text-red-300 rounded-md" role="alert">
             <strong className="font-bold">Error:</strong>
