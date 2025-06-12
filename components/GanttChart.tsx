@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { Task, TaskPriority } from '../types';
-import { PRIORITY_COLORS } from '../constants';
+import { PRIORITY_COLORS, STATUS_TEXT_JP, PRIORITY_TEXT_JP } from '../constants';
 
 interface GanttChartProps {
   tasks: Task[];
@@ -347,16 +347,16 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
                     onMouseEnter={(e) => {
                       setTooltipData({ 
                         task,
-                        x: e.clientX + 15, 
-                        y: e.clientY - 10 // マウスカーソルの少し上
+                        x: e.clientX,
+                        y: e.clientY
                       });
                     }}
                     onMouseMove={(e) => {
                       if (tooltipData) {
                         setTooltipData({ 
                           ...tooltipData, 
-                          x: e.clientX + 15,
-                          y: e.clientY - 10 // マウスカーソルの少し上
+                          x: e.clientX,
+                          y: e.clientY
                         });
                       }
                     }}
@@ -495,21 +495,31 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
         <div 
           style={{
             position: 'fixed', // fixed に変更してビューポート基準で位置決め
-            left: `${tooltipData.x}px`,
-            top: `${tooltipData.y}px`,
+            left: `${tooltipData.x + 15}px`, // マウス追従
+            top: `${tooltipData.y - 10}px`, // マウス追従
             transform: 'translateY(-100%)', // Y座標をツールチップの高さ分だけ上にオフセット
-            backgroundColor: 'rgba(0,0,0,0.85)',
+            backgroundColor: 'rgba(15, 23, 42, 0.85)', // bg-slate-900/85
             color: 'white',
-            padding: '8px 12px',
-            borderRadius: '6px',
-            fontSize: '1rem', // 少し大きく
+            padding: '10px 14px',
+            borderRadius: '8px',
+            fontSize: '0.875rem',
             zIndex: 100, // 他の要素より手前に表示
             pointerEvents: 'none', // ツールチップ自体がマウスイベントを拾わないように
+            backdropFilter: 'blur(4px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
             whiteSpace: 'nowrap',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+            transition: 'opacity 0.2s ease-in-out',
+            opacity: 1,
           }}
         >
-          {tooltipData.task.name}
+          <div className="font-bold text-base mb-1.5 text-sky-300">{tooltipData.task.name}</div>
+          <div className="text-slate-300 space-y-1">
+            <p><span className="font-semibold text-slate-400 w-16 inline-block">ステータス:</span> {STATUS_TEXT_JP[tooltipData.task.status]}</p>
+            <p><span className="font-semibold text-slate-400 w-16 inline-block">優先度:</span> {PRIORITY_TEXT_JP[tooltipData.task.priority]}</p>
+            <p><span className="font-semibold text-slate-400 w-16 inline-block">開始日:</span> {tooltipData.task.startDate}</p>
+            <p><span className="font-semibold text-slate-400 w-16 inline-block">終了日:</span> {tooltipData.task.endDate}</p>
+          </div>
         </div>
       )}
     </div>

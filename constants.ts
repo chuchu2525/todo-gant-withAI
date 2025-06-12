@@ -1,4 +1,3 @@
-
 import { TaskPriority, TaskStatus } from './types';
 
 export const APP_TITLE = "AI Powered TODO App";
@@ -12,10 +11,22 @@ export const PRIORITY_COLORS: Record<TaskPriority, string> = {
   [TaskPriority.LOW]: 'bg-green-500 hover:bg-green-600',
 };
 
-export const STATUS_COLORS: Record<TaskStatus, string> = {
-  [TaskStatus.NOT_STARTED]: 'bg-slate-500 hover:bg-slate-600',
-  [TaskStatus.IN_PROGRESS]: 'bg-blue-500 hover:bg-blue-600',
-  [TaskStatus.COMPLETED]: 'bg-emerald-500 hover:bg-emerald-600',
+export const STATUS_COLORS: { [key in TaskStatus]: string } = {
+  "Not Started": "bg-slate-500",
+  "In Progress": "bg-sky-500",
+  "Completed": "bg-green-600",
+};
+
+export const STATUS_TEXT_JP: { [key in TaskStatus]: string } = {
+  "Not Started": "未着手",
+  "In Progress": "進行中",
+  "Completed": "完了",
+};
+
+export const PRIORITY_TEXT_JP: { [key in TaskPriority]: string } = {
+  "High": "高",
+  "Medium": "中",
+  "Low": "低",
 };
 
 export const GEMINI_TEXT_MODEL = 'gemini-2.5-flash-preview-04-17';
