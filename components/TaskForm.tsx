@@ -45,11 +45,11 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
-      alert("Task name cannot be empty.");
+      alert("タスク名は空にできません。");
       return;
     }
     if (new Date(startDate) > new Date(endDate)) {
-      alert("Start date cannot be after end date.");
+      alert("開始日は終了日より後に設定できません。");
       return;
     }
     
@@ -85,7 +85,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-slate-300">
       <div>
-        <label htmlFor="task-name" className="block text-sm font-medium text-slate-300">Task Name</label>
+        <label htmlFor="task-name" className="block text-sm font-medium text-slate-300">タスク名</label>
         <input
           type="text"
           id="task-name"
@@ -96,7 +96,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
         />
       </div>
       <div>
-        <label htmlFor="task-description" className="block text-sm font-medium text-slate-300">Description (Optional)</label>
+        <label htmlFor="task-description" className="block text-sm font-medium text-slate-300">説明（任意）</label>
         <textarea
           id="task-description"
           value={description}
@@ -107,7 +107,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="task-status" className="block text-sm font-medium text-slate-300">Status</label>
+          <label htmlFor="task-status" className="block text-sm font-medium text-slate-300">ステータス</label>
           <select
             id="task-status"
             value={status}
@@ -118,7 +118,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
           </select>
         </div>
         <div>
-          <label htmlFor="task-priority" className="block text-sm font-medium text-slate-300">Priority</label>
+          <label htmlFor="task-priority" className="block text-sm font-medium text-slate-300">優先度</label>
           <select
             id="task-priority"
             value={priority}
@@ -131,7 +131,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="task-start-date" className="block text-sm font-medium text-slate-300">Start Date</label>
+          <label htmlFor="task-start-date" className="block text-sm font-medium text-slate-300">開始日</label>
           <input
             type="date"
             id="task-start-date"
@@ -142,7 +142,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
           />
         </div>
         <div>
-          <label htmlFor="task-end-date" className="block text-sm font-medium text-slate-300">End Date</label>
+          <label htmlFor="task-end-date" className="block text-sm font-medium text-slate-300">終了日</label>
           <input
             type="date"
             id="task-end-date"
@@ -154,10 +154,10 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
         </div>
       </div>
       <div>
-        <label htmlFor="task-dependencies" className="block text-sm font-medium text-slate-300">Dependencies</label>
+        <label htmlFor="task-dependencies" className="block text-sm font-medium text-slate-300">依存関係</label>
         <input 
           type="text"
-          placeholder="Search dependencies..."
+          placeholder="依存関係を検索..."
           value={dependencySearchTerm}
           onChange={(e) => setDependencySearchTerm(e.target.value)}
           className="mt-1 mb-2 block w-full bg-slate-600 border-slate-500 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm text-slate-100"
@@ -179,10 +179,10 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
             </label>
           ))
         ) : (
-          <p className="text-xs text-slate-400 text-center py-4">No matching tasks found, or no other tasks available.</p>
+          <p className="text-xs text-slate-400 text-center py-4">一致するタスクが見つからないか、他のタスクがありません。</p>
         )}
         </div>
-        <p className="mt-1 text-xs text-slate-400">Cannot select itself. Search to filter tasks.</p>
+        <p className="mt-1 text-xs text-slate-400">自分自身は選択できません。検索してタスクを絞り込みます。</p>
       </div>
       <div className="flex justify-end space-x-3 pt-2">
         <button
@@ -190,13 +190,13 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, onCancel, existing
           onClick={onCancel}
           className="px-4 py-2 text-sm font-medium text-slate-300 bg-slate-600 hover:bg-slate-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
         >
-          Cancel
+          キャンセル
         </button>
         <button
           type="submit"
           className="px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500"
         >
-          {existingTask ? 'Save Changes' : 'Add Task'}
+          {existingTask ? '変更を保存' : 'タスクを追加'}
         </button>
       </div>
     </form>

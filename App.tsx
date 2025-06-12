@@ -66,7 +66,7 @@ const App: React.FC = () => {
   };
 
   const handleDeleteTask = (taskId: string) => {
-    if (window.confirm('Are you sure you want to delete this task? This may affect dependent tasks.')) {
+    if (window.confirm('このタスクを削除してもよろしいですか？依存するタスクに影響する可能性があります。')) {
       const newTasks = tasks.filter(task => task.id !== taskId)
         // Also remove this task from other tasks' dependencies
         .map(t => ({
@@ -164,7 +164,7 @@ const App: React.FC = () => {
               onClick={openNewTaskModal}
               className="px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 transition-transform hover:scale-105"
             >
-              ✨ Add New Task
+              ✨ 新規タスクを追加
             </button>
           </div>
         )}
@@ -175,7 +175,7 @@ const App: React.FC = () => {
         </div>
       </main>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={editingTask ? 'Edit Task' : 'Add New Task'}>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={editingTask ? 'タスクの編集' : '新規タスクの追加'}>
         <TaskForm
           onSubmit={editingTask ? handleUpdateTask : handleAddTask}
           onCancel={() => { setIsModalOpen(false); setEditingTask(null); }}
