@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Task } from '../types';
 import { TaskItem } from './TaskItem';
 
@@ -9,23 +8,80 @@ interface TaskListProps {
   onDeleteTask: (taskId: string) => void;
 }
 
+type SortKey = 'startDate' | 'endDate' | 'priority' | 'status';
+type SortOrder = 'asc' | 'desc';
+
+const SORT_LABELS: { [key in SortKey]: string } = {
+  startDate: '開始日',
+  endDate: '終了日',
+  priority: '優先度',
+  status: 'ステータス',
+};
+
 export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask }) => {
+  const [sortKey, setSortKey] = useState<SortKey>('startDate');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    let aValue: any = a[sortKey];
+    let bValue: any = b[sortKey];
+    if (sortKey === 'priority') {
+      // High > Medium > Low
+      const order = { High: 3, Medium: 2, Low: 1 };
+      aValue = order[a.priority];
+      bValue = order[b.priority];
+    } else if (sortKey === 'status') {
+      // In Progress > Not Started > Completed
+      const order = { 'In Progress': 2, 'Not Started': 1, 'Completed': 0 };
+      aValue = order[a.status];
+      bValue = order[b.status];
+    } else if (sortKey === 'startDate' || sortKey === 'endDate') {
+      aValue = new Date(aValue).getTime();
+      bValue = new Date(bValue).getTime();
+    }
+    if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
+    return 0;
+  });
+
   if (tasks.length === 0) {
     return <p className="text-center text-slate-400 py-8">No tasks yet. Add one to get started!</p>;
   }
 
-  // Sort tasks: In Progress > Not Started > Completed, then by End Date (earlier first)
-  const sortedTasks = [...tasks].sort((a, b) => {
-    const statusOrder = { "In Progress": 1, "Not Started": 2, "Completed": 3 };
-    if (statusOrder[a.status] !== statusOrder[b.status]) {
-      return statusOrder[a.status] - statusOrder[b.status];
-    }
-    return new Date(a.endDate).getTime() - new Date(b.endDate).getTime();
-  });
-
-
   return (
     <div className="space-y-4">
+      <div className="flex flex-wrap gap-2 mb-2">
+        {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
+          const isActive = sortKey === key;
+          let activeClass = '';
+          if (isActive) {
+            activeClass = sortOrder === 'asc'
+              ? 'bg-sky-600 text-white border-sky-600' // 昇順は青
+              : 'bg-pink-600 text-white border-pink-600'; // 降順は赤
+          } else {
+            activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
+          }
+          return (
+            <button
+              key={key}
+              onClick={() => handleSort(key)}
+              className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+            >
+              {SORT_LABELS[key]}
+              {isActive && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
+            </button>
+          );
+        })}
+      </div>
       {sortedTasks.map(task => (
         <TaskItem
           key={task.id}
