@@ -60,16 +60,27 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap gap-2 mb-2">
-        {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => (
-          <button
-            key={key}
-            onClick={() => handleSort(key)}
-            className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${sortKey === key ? 'bg-sky-600 text-white border-sky-600' : 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600'}`}
-          >
-            {SORT_LABELS[key]}
-            {sortKey === key && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
-          </button>
-        ))}
+        {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
+          const isActive = sortKey === key;
+          let activeClass = '';
+          if (isActive) {
+            activeClass = sortOrder === 'asc'
+              ? 'bg-sky-600 text-white border-sky-600' // 昇順は青
+              : 'bg-pink-600 text-white border-pink-600'; // 降順は赤
+          } else {
+            activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
+          }
+          return (
+            <button
+              key={key}
+              onClick={() => handleSort(key)}
+              className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+            >
+              {SORT_LABELS[key]}
+              {isActive && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
+            </button>
+          );
+        })}
       </div>
       {sortedTasks.map(task => (
         <TaskItem
