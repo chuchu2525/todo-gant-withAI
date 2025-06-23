@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
-import { Task, TaskPriority } from '../types';
+import { Task } from '../types';
 import { PRIORITY_COLORS, STATUS_TEXT_JP, PRIORITY_TEXT_JP } from '../constants';
 
 interface GanttChartProps {
@@ -70,26 +70,6 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
   }
 
   const sortedTasks = [...tasks].sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
-
-  const { minDate, maxDate } = sortedTasks.reduce(
-    (acc, task) => {
-      const start = new Date(task.startDate);
-      const end = new Date(task.endDate);
-      if (start < acc.minDate) acc.minDate = start;
-      if (end > acc.maxDate) acc.maxDate = end;
-      return acc;
-    },
-    { minDate: new Date(sortedTasks[0].startDate), maxDate: new Date(sortedTasks[0].endDate) }
-  );
-  
-  const getDaysFromStart = (date: Date): number => {
-    return Math.ceil((date.getTime() - minDate.getTime()) / (1000 * 60 * 60 * 24));
-  };
-
-  const getTaskName = (taskId: string): string => {
-    const task = tasks.find(t => t.id === taskId);
-    return task ? task.name : 'Unknown Task';
-  };
 
   // ビューモードに応じた設定
   const getChartSettings = () => {
@@ -295,7 +275,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
 
           {/* Task Rows */}
           <div style={{paddingTop: CHART_PADDING}}>
-          {sortedTasks.map((task, index) => {
+          {sortedTasks.map((task) => {
             const taskStart = new Date(task.startDate);
             const taskEnd = new Date(task.endDate);
 
@@ -419,64 +399,24 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
                       // 制御点のオフセット距離 (線の長さの一定割合)
                       const controlPointOffset = Math.abs(taskLineX - depLineX) * 0.3;
 
-                      // 依存先が依存元より視覚的に左にある、または非常に近い場合 (逆S字カーブまたは直線的な経路)
-                      if(taskLineX < depLineX + 10) { 
-                          // 制御点を調整して逆S字カーブまたは直線的な経路を形成
-                          const cp1x = depLineX + controlPointOffset;
-                          const cp1y = depLineY;
-                          const cp2x = taskLineX - controlPointOffset;
-                          const cp2y = taskLineY;
+                      // Y座標が同じ場合は、直線でつなぐか、わずかにカーブさせる。
+                      // 異なる場合は、少し複雑なS字になる。
+                      // この分岐では、従来の角ばった線の方が、予期せぬ描画を防げる可能性が高いです。
+                      // 要望は「曲線」なので、3次ベジェで試みます。
+                      // ただし、始点と終点が非常に近い、またはX座標が逆転している場合、制御点の計算によっては不自然なループを描く可能性あり。
+                      
+                      // もしXが逆転しているなら、制御点のX方向も反転させるイメージ
+                      // depLineX > taskLineX の場合
+                      const dx1 = depLineX > taskLineX ? -controlPointOffset : controlPointOffset;
+                      const dx2 = depLineX > taskLineX ? controlPointOffset : -controlPointOffset;
 
-                          // Y座標が大きく異なる場合は、中間点を設けて階段状のカーブにするか、
-                          // または単純な角付きのままにするかを検討。ここでは簡易的に制御点を調整。
-                          // Yの差が大きい場合は、S字が不自然になることがあるため、ここでは従来の角付きパスを使用することを推奨
-                          // 今回はユーザーの要望に「曲線で」とあるため、制御点を調整したS字で試みる
-                          // ただし、depLineY と taskLineY が同じか近い場合は、この制御点だと直線に近くなる
-                          // より自然な逆S字のためには、Y方向にも制御点を振る必要があるかもしれない
-                          // 例: cp1y = depLineY + (taskLineY - depLineY) * 0.25; cp2y = taskLineY - (taskLineY - depLineY) * 0.25;
-                          // 今回はシンプルに保つため、X方向のオフセットのみで試行。
-                          // やはりこのケースは従来の角付きの方が安定する場合が多い。
-                          // ユーザー要望を優先しつつ、複雑になりすぎる場合は代替案を提示できるようにしておく。
-                          // ここでは、既存の角付きのロジックを維持し、曲線は通常の左→右の場合のみとするのが安全策かもしれない。
-                          // 今回は、曲線で、という強い要望があるので、逆向きでもS字を試みる。
-                          // X方向の距離が短い場合は、制御点オフセットが小さくなり、ほぼ直線に近づく。
-
-                          // Y座標が同じ場合は、直線でつなぐか、わずかにカーブさせる。
-                          // 異なる場合は、少し複雑なS字になる。
-                          // この分岐では、従来の角ばった線の方が、予期せぬ描画を防げる可能性が高いです。
-                          // 要望は「曲線」なので、3次ベジェで試みます。
-                          // ただし、始点と終点が非常に近い、またはX座標が逆転している場合、制御点の計算によっては不自然なループを描く可能性あり。
-                          // 制御点をdepLineXとtaskLineXの間に来るように調整。
-                          const midX = (depLineX + taskLineX) / 2;
-                          const c1x = depLineX + controlPointOffset; // 始点から右に
-                          const c1y = depLineY; 
-                          const c2x = taskLineX - controlPointOffset; // 終点から左に
-                          const c2y = taskLineY;
-
-                          // もしXが逆転しているなら、制御点のX方向も反転させるイメージ
-                          // depLineX > taskLineX の場合
-                          const dx1 = depLineX > taskLineX ? -controlPointOffset : controlPointOffset;
-                          const dx2 = depLineX > taskLineX ? controlPointOffset : -controlPointOffset;
-
-                          return (
-                              <path
-                                  key={`${depId}-${task.id}`}
-                                  d={`M ${depLineX} ${depLineY} C ${depLineX + dx1} ${depLineY}, ${taskLineX + dx2} ${taskLineY}, ${taskLineX} ${taskLineY}`}
-                                  stroke="#60a5fa" 
-                                  strokeWidth="1.5"
-                                  fill="none"
-                                  markerEnd="url(#arrowhead)"
-                              />
-                          );
-                      }
-                      // 通常の左から右への依存線 (S字ベジェ曲線)
                       return (
-                          <path // lineからpathに変更
+                          <path
                               key={`${depId}-${task.id}`}
-                              d={`M ${depLineX} ${depLineY} C ${depLineX + controlPointOffset} ${depLineY}, ${taskLineX - controlPointOffset} ${taskLineY}, ${taskLineX} ${taskLineY}`}
-                              stroke="#60a5fa"
+                              d={`M ${depLineX} ${depLineY} C ${depLineX + dx1} ${depLineY}, ${taskLineX + dx2} ${taskLineY}, ${taskLineX} ${taskLineY}`}
+                              stroke="#60a5fa" 
                               strokeWidth="1.5"
-                              fill="none" // fillをnoneに設定
+                              fill="none"
                               markerEnd="url(#arrowhead)"
                           />
                       );

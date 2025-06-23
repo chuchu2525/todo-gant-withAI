@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task, TaskPriority, TaskStatus } from '../types';
+import { Task } from '../types';
 import { PRIORITY_COLORS, STATUS_COLORS, STATUS_TEXT_JP, PRIORITY_TEXT_JP } from '../constants';
 
 interface TaskItemProps {
