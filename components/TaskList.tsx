@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Task } from '../types';
 import { TaskItem } from './TaskItem';
+import { exportMultipleTasksToGoogleCalendar } from '../services/calendarService';
 
 interface TaskListProps {
   tasks: Task[];
@@ -31,6 +32,10 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
     }
   };
 
+  const handleExportAllToCalendar = () => {
+    exportMultipleTasksToGoogleCalendar(tasks);
+  };
+
   const sortedTasks = [...tasks].sort((a, b) => {
     let aValue: any = a[sortKey];
     let bValue: any = b[sortKey];
@@ -59,28 +64,40 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap gap-2 mb-2">
-        {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
-          const isActive = sortKey === key;
-          let activeClass = '';
-          if (isActive) {
-            activeClass = sortOrder === 'asc'
-              ? 'bg-sky-600 text-white border-sky-600' // 昇順は青
-              : 'bg-pink-600 text-white border-pink-600'; // 降順は赤
-          } else {
-            activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
-          }
-          return (
-            <button
-              key={key}
-              onClick={() => handleSort(key)}
-              className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
-            >
-              {SORT_LABELS[key]}
-              {isActive && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
+        <div className="flex flex-wrap gap-2">
+          {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
+            const isActive = sortKey === key;
+            let activeClass = '';
+            if (isActive) {
+              activeClass = sortOrder === 'asc'
+                ? 'bg-sky-600 text-white border-sky-600' // 昇順は青
+                : 'bg-pink-600 text-white border-pink-600'; // 降順は赤
+            } else {
+              activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
+            }
+            return (
+              <button
+                key={key}
+                onClick={() => handleSort(key)}
+                className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+              >
+                {SORT_LABELS[key]}
+                {isActive && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
+              </button>
+            );
+          })}
+        </div>
+        
+        {tasks.length > 0 && (
+          <button
+            onClick={handleExportAllToCalendar}
+            className="px-4 py-2 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors border border-green-700 hover:border-green-600"
+            title="全タスクをGoogle Calendarにエクスポート"
+          >
+            📅 全タスクをカレンダーに追加
+          </button>
+        )}
       </div>
       {sortedTasks.map(task => (
         <TaskItem

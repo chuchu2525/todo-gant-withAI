@@ -1,6 +1,7 @@
 import React from 'react';
 import { Task } from '../types';
 import { PRIORITY_COLORS, STATUS_COLORS, STATUS_TEXT_JP, PRIORITY_TEXT_JP } from '../constants';
+import { exportTaskToGoogleCalendar } from '../services/calendarService';
 
 interface TaskItemProps {
   task: Task;
@@ -20,6 +21,10 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, allT
     return dependencyIds
       .map(id => allTasks.find(t => t.id === id)?.name || 'Unknown Task')
       .join(', ');
+  };
+
+  const handleExportToCalendar = () => {
+    exportTaskToGoogleCalendar(task);
   };
   
   return (
@@ -44,6 +49,13 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, allT
         <p className="text-slate-400"><strong className="text-slate-300">依存先:</strong> {getDependencyNames(task.dependencies)}</p>
       </div>
       <div className="flex justify-end space-x-2">
+        <button
+          onClick={handleExportToCalendar}
+          className="px-3 py-1 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors"
+          title="Google Calendarにエクスポート"
+        >
+          📅 カレンダー
+        </button>
         <button
           onClick={() => onEdit(task)}
           className="px-3 py-1 text-sm font-medium text-sky-400 bg-sky-900/50 hover:bg-sky-800/70 rounded-md"

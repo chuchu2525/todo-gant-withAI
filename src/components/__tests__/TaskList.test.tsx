@@ -13,6 +13,11 @@ vi.mock('../../../components/TaskItem', () => ({
   )
 }));
 
+// calendarServiceをモック
+vi.mock('../../../services/calendarService', () => ({
+  exportMultipleTasksToGoogleCalendar: vi.fn()
+}));
+
 describe('TaskList', () => {
   const mockOnEditTask = vi.fn();
   const mockOnDeleteTask = vi.fn();
@@ -231,5 +236,46 @@ describe('TaskList', () => {
 
     const descendingButton = screen.getByText('開始日 ▼');
     expect(descendingButton).toHaveClass('bg-pink-600', 'text-white');
+  });
+
+  test('全タスクをカレンダーに追加ボタンが表示される', () => {
+    render(
+      <TaskList
+        tasks={mockTasks}
+        onEditTask={mockOnEditTask}
+        onDeleteTask={mockOnDeleteTask}
+      />
+    );
+
+    expect(screen.getByText('📅 全タスクをカレンダーに追加')).toBeInTheDocument();
+  });
+
+  test('タスクがない場合は全タスクエクスポートボタンが表示されない', () => {
+    render(
+      <TaskList
+        tasks={[]}
+        onEditTask={mockOnEditTask}
+        onDeleteTask={mockOnDeleteTask}
+      />
+    );
+
+    expect(screen.queryByText('📅 全タスクをカレンダーに追加')).not.toBeInTheDocument();
+  });
+
+  test('全タスクをカレンダーに追加ボタンをクリックすると正しく動作する', async () => {
+    const { exportMultipleTasksToGoogleCalendar } = await import('../../../services/calendarService');
+    
+    render(
+      <TaskList
+        tasks={mockTasks}
+        onEditTask={mockOnEditTask}
+        onDeleteTask={mockOnDeleteTask}
+      />
+    );
+
+    const exportButton = screen.getByText('📅 全タスクをカレンダーに追加');
+    fireEvent.click(exportButton);
+
+    expect(exportMultipleTasksToGoogleCalendar).toHaveBeenCalledWith(mockTasks);
   });
 });
