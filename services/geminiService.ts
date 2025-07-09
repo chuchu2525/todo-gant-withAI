@@ -2,26 +2,118 @@ import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { GEMINI_TEXT_MODEL } from '../constants';
 import { Task } from "../types";
 
-// Assume process.env.API_KEY is available in the execution environment
-// This is a significant assumption for client-side code as per prompt.
-let apiKey = "";
-if (typeof process !== 'undefined' && process.env && process.env.GEMINI_API_KEY) {
-  apiKey = process.env.GEMINI_API_KEY;
-} else {
-  // Fallback or warning if not found - in a real app, this needs robust handling or a clear setup guide.
-  console.warn("GEMINI_API_KEY not found in process.env. It must be set in .env.local and be prefixed with VITE_ for client-side exposure if not using define.");
-  // To prevent the app from completely breaking if API key is not set (e.g. for local dev without key)
-  // we can set a placeholder, but API calls will fail.
-  // apiKey = "YOUR_API_KEY"; // This line should NOT be used in production or committed.
+// セキュリティ強化: APIキーの安全な管理
+class SecureApiKeyManager {
+  private apiKey: string | null = null;
+  private isInitialized = false;
+
+  constructor() {
+    this.initializeApiKey();
+  }
+
+  private initializeApiKey() {
+    if (this.isInitialized) return;
+    
+    // セキュリティ: 環境変数からAPIキーを取得、コンソールに出力しない
+    if (typeof process !== 'undefined' && process.env && process.env.GEMINI_API_KEY) {
+      this.apiKey = process.env.GEMINI_API_KEY;
+    } else {
+      // セキュリティ: APIキーがない場合の警告（プロダクション環境では無効化）
+      if (process.env.NODE_ENV !== 'production') {
+        console.warn("GEMINI_API_KEY not found in process.env. Please set it in your environment variables.");
+      }
+      this.apiKey = null;
+    }
+    
+    this.isInitialized = true;
+  }
+
+  public hasApiKey(): boolean {
+    return this.apiKey !== null && this.apiKey.length > 0;
+  }
+
+  public getApiKey(): string | null {
+    return this.apiKey;
+  }
+
+  // セキュリティ: APIキーの検証
+  public isValidApiKey(): boolean {
+    if (!this.apiKey) return false;
+    
+    // 基本的な形式チェック（Gemini APIキーの形式）
+    const apiKeyPattern = /^[A-Za-z0-9_-]{35,}$/;
+    return apiKeyPattern.test(this.apiKey);
+  }
 }
 
-const ai = new GoogleGenAI({ apiKey });
+// シングルトンパターンでAPIキーマネージャーを管理
+const apiKeyManager = new SecureApiKeyManager();
+
+// セキュリティ強化: AI インスタンスの安全な初期化
+function createSecureAiInstance(): GoogleGenAI | null {
+  if (!apiKeyManager.hasApiKey()) {
+    return null;
+  }
+  
+  const apiKey = apiKeyManager.getApiKey();
+  if (!apiKey) {
+    return null;
+  }
+  
+  try {
+    return new GoogleGenAI({ apiKey });
+  } catch (error) {
+    console.error('Failed to initialize AI instance:', error);
+    return null;
+  }
+}
+
+// セキュリティ強化: リクエストの検証
+function validateRequest(input: any): boolean {
+  if (!input || typeof input !== 'object') return false;
+  
+  // 悪意のあるペイロードの検出
+  const maliciousPatterns = [
+    /eval\s*\(/,
+    /function\s*\(/,
+    /javascript:/,
+    /<script/i,
+    /on\w+\s*=/i
+  ];
+  
+  const inputStr = JSON.stringify(input);
+  return !maliciousPatterns.some(pattern => pattern.test(inputStr));
+}
 
 export const getAiTaskSummary = async (tasks: Task[]): Promise<string> => {
-  if (!apiKey) return "API Key not configured. Cannot fetch summary.";
-  if (tasks.length === 0) return "No tasks to summarize.";
+  // セキュリティ: APIキーの存在確認
+  if (!apiKeyManager.hasApiKey()) {
+    return "API Key not configured. Cannot fetch summary.";
+  }
 
-  const taskContext = tasks.map(task => 
+  // セキュリティ: 入力検証
+  if (!tasks || tasks.length === 0) {
+    return "No tasks to summarize.";
+  }
+
+  if (!validateRequest(tasks)) {
+    return "Invalid input detected. Cannot process request.";
+  }
+
+  const ai = createSecureAiInstance();
+  if (!ai) {
+    return "Failed to initialize AI service. Please check your configuration.";
+  }
+
+  // セキュリティ: 入力のサニタイズ
+  const sanitizedTasks = tasks.map(task => ({
+    name: String(task.name).replace(/[<>]/g, ''),
+    priority: String(task.priority),
+    status: String(task.status),
+    endDate: String(task.endDate).replace(/[^\d-]/g, '')
+  }));
+
+  const taskContext = sanitizedTasks.map(task => 
     `- ${task.name} (Priority: ${task.priority}, Status: ${task.status}, Due: ${task.endDate})`
   ).join('\n');
 
@@ -37,6 +129,7 @@ Focus on overdue tasks, high priority items, and overall progress.
       model: GEMINI_TEXT_MODEL,
       contents: prompt,
     });
+    
     return response.text || "No response received from AI.";
   } catch (error) {
     console.error("Error getting AI task summary:", error);
@@ -45,7 +138,32 @@ Focus on overdue tasks, high priority items, and overall progress.
 };
 
 export const updateTasksViaAi = async (currentYaml: string, userInstruction: string): Promise<string> => {
-  if (!apiKey) return Promise.reject(new Error("API Key not configured. Cannot update tasks via AI."));
+  // セキュリティ: APIキーの存在確認
+  if (!apiKeyManager.hasApiKey()) {
+    return Promise.reject(new Error("API Key not configured. Cannot update tasks via AI."));
+  }
+
+  // セキュリティ: 入力検証
+  if (!currentYaml || typeof currentYaml !== 'string') {
+    return Promise.reject(new Error("Invalid YAML input."));
+  }
+
+  if (!userInstruction || typeof userInstruction !== 'string') {
+    return Promise.reject(new Error("Invalid instruction input."));
+  }
+
+  if (!validateRequest({ currentYaml, userInstruction })) {
+    return Promise.reject(new Error("Invalid input detected. Cannot process request."));
+  }
+
+  const ai = createSecureAiInstance();
+  if (!ai) {
+    return Promise.reject(new Error("Failed to initialize AI service. Please check your configuration."));
+  }
+
+  // セキュリティ: 入力のサニタイズ
+  const sanitizedInstruction = userInstruction.replace(/[<>]/g, '').substring(0, 500);
+  const sanitizedYaml = currentYaml.substring(0, 10000); // YAML サイズ制限
 
   const currentDate = new Date().toISOString().split('T')[0];
 
@@ -65,28 +183,39 @@ ${systemInstruction}
 
 Current YAML:
 \`\`\`yaml
-${currentYaml}
+${sanitizedYaml}
 \`\`\`
 
-User Instruction: ${userInstruction}
+User Instruction: ${sanitizedInstruction}
 
 Updated YAML:
 `;
+
   try {
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: GEMINI_TEXT_MODEL,
       contents: prompt,
-      // config: { responseMimeType: "text/plain" } // Ensure we get plain text to parse YAML from
     });
 
     let newYaml = (response.text || "").trim();
+    
+    // セキュリティ: レスポンスの検証
+    if (!newYaml) {
+      throw new Error("Empty response from AI service.");
+    }
+
+    // YAML フェンスの処理
     const fenceRegex = /^```(?:yaml)?\s*\n?(.*?)\n?\s*```$/s;
     const match = newYaml.match(fenceRegex);
     if (match && match[1]) {
       newYaml = match[1].trim();
     } else if (newYaml.startsWith("```") && newYaml.endsWith("```")) {
-      // Simpler fallback if no language tag but fences exist
       newYaml = newYaml.substring(3, newYaml.length - 3).trim();
+    }
+    
+    // セキュリティ: 出力の検証
+    if (!validateRequest({ yaml: newYaml })) {
+      throw new Error("Invalid response from AI service.");
     }
     
     return newYaml;
@@ -96,4 +225,9 @@ Updated YAML:
     throw new Error(`AI update failed: ${(error as Error).message}`);
   }
 };
-    
+
+// セキュリティ: APIキーの状態確認用エクスポート（テスト用）
+export const getApiKeyStatus = () => ({
+  hasApiKey: apiKeyManager.hasApiKey(),
+  isValid: apiKeyManager.isValidApiKey()
+});
