@@ -6,15 +6,15 @@ export const DEFAULT_TASK_STATUS = TaskStatus.NOT_STARTED;
 export const DEFAULT_TASK_PRIORITY = TaskPriority.MEDIUM;
 
 export const PRIORITY_COLORS: Record<TaskPriority, string> = {
-  [TaskPriority.HIGH]: 'bg-red-500 hover:bg-red-600',
-  [TaskPriority.MEDIUM]: 'bg-yellow-500 hover:bg-yellow-600',
-  [TaskPriority.LOW]: 'bg-green-500 hover:bg-green-600',
+  [TaskPriority.HIGH]: 'bg-red-500 hover:bg-red-600 shadow-red-500/20',
+  [TaskPriority.MEDIUM]: 'bg-amber-500 hover:bg-amber-600 shadow-amber-500/20',
+  [TaskPriority.LOW]: 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/20',
 };
 
 export const STATUS_COLORS: { [key in TaskStatus]: string } = {
-  "Not Started": "bg-slate-500",
-  "In Progress": "bg-sky-500",
-  "Completed": "bg-green-600",
+  "Not Started": "bg-slate-500 hover:bg-slate-600",
+  "In Progress": "bg-blue-500 hover:bg-blue-600",
+  "Completed": "bg-green-500 hover:bg-green-600",
 };
 
 export const STATUS_TEXT_JP: { [key in TaskStatus]: string } = {

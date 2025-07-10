@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { CloseIcon, iconSizes } from './icons';
 
 interface ModalProps {
   isOpen: boolean;
@@ -18,10 +19,10 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
           <h2 className="text-2xl font-semibold text-slate-100">{title}</h2>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-100 text-2xl"
+            className="text-slate-400 hover:text-slate-100 p-1 rounded-md hover:bg-slate-700 transition-colors"
             aria-label="Close modal"
           >
-            &times;
+            <CloseIcon className={iconSizes.lg} />
           </button>
         </div>
         <div className="overflow-y-auto pr-2">
