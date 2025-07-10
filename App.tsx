@@ -7,6 +7,15 @@ import { AiInteraction } from './components/AiInteraction';
 import { Modal } from './components/Modal';
 import { parseTasksFromYaml, stringifyTasksToYaml } from './services/yamlService';
 import { APP_TITLE, INITIAL_TASKS_YAML } from './constants';
+import { 
+  ListViewIcon, 
+  GanttViewIcon, 
+  AiViewIcon,
+  AddIcon,
+  CloseIcon,
+  iconSizes
+} from './components/icons';
+import './styles/globals.css';
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -114,6 +123,17 @@ const App: React.FC = () => {
     syncTasksToYaml(updatedTasks);
   }, [tasks, syncTasksToYaml]);
 
+  const handleMultipleTaskDateChange = useCallback((taskUpdates: Array<{taskId: string, newStartDate: string, newEndDate: string}>) => {
+    const updatedTasks = tasks.map(task => {
+      const update = taskUpdates.find(u => u.taskId === task.id);
+      return update 
+        ? { ...task, startDate: update.newStartDate, endDate: update.newEndDate }
+        : task;
+    });
+    setTasks(updatedTasks);
+    syncTasksToYaml(updatedTasks);
+  }, [tasks, syncTasksToYaml]);
+
 
   const openNewTaskModal = () => {
     setEditingTask(null);
@@ -125,7 +145,7 @@ const App: React.FC = () => {
       case 'list':
         return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} />;
       case 'ai':
         return (
           <AiInteraction
@@ -143,33 +163,60 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 to-slate-950 text-slate-100">
-      <header className="bg-slate-800/50 backdrop-blur-md shadow-lg p-3 md:p-4 sticky top-0 z-40">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-slate-100">
+      <header className="bg-slate-800/60 backdrop-blur-md shadow-xl border-b border-slate-700/50 p-3 md:p-4 sticky top-0 z-40">
         <div className="w-full max-w-none px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center">
-          <h1 className="text-3xl font-bold text-sky-400 tracking-tight">{APP_TITLE}</h1>
+          <h1 className="text-3xl font-bold text-sky-400 tracking-tight drop-shadow-md">{APP_TITLE}</h1>
           <nav className="mt-2 sm:mt-0 flex space-x-2 sm:space-x-3">
-            {(['list', 'gantt', 'ai'] as ViewMode[]).map(view => (
-              <button
-                key={view}
-                onClick={() => setCurrentView(view)}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors
-                  ${currentView === view 
-                    ? 'bg-sky-600 text-white shadow-md' 
-                    : 'text-slate-300 hover:bg-slate-700 hover:text-white'}`}
-              >
-                {view.charAt(0).toUpperCase() + view.slice(1)} View
-              </button>
-            ))}
+            {(['list', 'gantt', 'ai'] as ViewMode[]).map(view => {
+              const getViewIcon = (viewType: ViewMode) => {
+                switch (viewType) {
+                  case 'list': return <ListViewIcon className={iconSizes.sm} />;
+                  case 'gantt': return <GanttViewIcon className={iconSizes.sm} />;
+                  case 'ai': return <AiViewIcon className={iconSizes.sm} />;
+                }
+              };
+
+              return (
+                <button
+                  key={view}
+                  onClick={() => setCurrentView(view)}
+                  className={`flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-all duration-200
+                    ${currentView === view 
+                      ? 'bg-sky-600 text-white shadow-lg shadow-sky-600/25 ring-1 ring-sky-500/50' 
+                      : 'text-slate-300 hover:bg-slate-700/70 hover:text-white hover:shadow-md'}`}
+                >
+                  {getViewIcon(view)}
+                  {view.charAt(0).toUpperCase() + view.slice(1)} View
+                </button>
+              );
+            })}
           </nav>
         </div>
       </header>
 
       <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-grow">
         {error && (
-          <div className="mb-4 p-3 bg-red-500/20 border border-red-700 text-red-300 rounded-md" role="alert">
-            <strong className="font-bold">Error:</strong>
-            <span className="block sm:inline ml-2">{error}</span>
-            <button onClick={() => setError(null)} className="float-right font-bold text-lg">&times;</button>
+          <div className="mb-4 p-4 bg-red-500/20 border border-red-400/50 text-red-200 rounded-lg shadow-lg" role="alert">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                  <svg className="w-5 h-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-red-300">エラーが発生しました</h4>
+                  <p className="mt-1 text-red-200">{error}</p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setError(null)} 
+                className="text-red-300 hover:text-red-100 p-1 rounded-md hover:bg-red-500/20 transition-colors"
+              >
+                <CloseIcon className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         )}
          {isLoading && currentView !== 'ai' && ( // Show general loading indicator if not in AI view (AI view has its own)
@@ -182,14 +229,15 @@ const App: React.FC = () => {
           <div className="mb-6 flex justify-end">
             <button
               onClick={openNewTaskModal}
-              className="px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 transition-transform hover:scale-105"
+              className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 transition-all hover:scale-105 border border-green-500/30"
             >
-              ✨ 新規タスクを追加
+              <AddIcon className={iconSizes.sm} />
+              新規タスクを追加
             </button>
           </div>
         )}
         
-        <div className={`bg-slate-800/30 rounded-xl shadow-2xl min-h-[70vh] ${currentView === 'list' ? 'p-3 sm:p-5' : 'p-4 sm:p-6'}`}>
+        <div className={`bg-slate-800/40 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-700/50 min-h-[70vh] ${currentView === 'list' ? 'p-3 sm:p-5' : 'p-4 sm:p-6'}`}>
         {/* h-[80vh] overflow-y-auto */}
             {renderView()}
         </div>
@@ -204,8 +252,12 @@ const App: React.FC = () => {
         />
       </Modal>
       
-      <footer className="text-center p-1 text-xs text-slate-500 border-t border-slate-700/50 mt-2">
-        Powered by React, Tailwind CSS, and Gemini AI.
+      <footer className="text-center p-4 text-xs text-slate-400 border-t border-slate-700/30 mt-8 bg-slate-800/20">
+        <div className="flex items-center justify-center gap-2">
+          <span>Powered by React, Tailwind CSS, and Gemini AI</span>
+          <span className="text-slate-600">•</span>
+          <span className="text-sky-400">Made with ❤️</span>
+        </div>
       </footer>
     </div>
   );

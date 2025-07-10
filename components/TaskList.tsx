@@ -3,6 +3,14 @@ import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea
 import { Task, TaskStatus, TaskPriority } from '../types';
 import { TaskItem } from './TaskItem';
 import { exportMultipleTasksToGoogleCalendar } from '../services/calendarService';
+import { 
+  ChevronUpIcon, 
+  ChevronDownIcon, 
+  CalendarIcon,
+  CheckIcon,
+  DeleteIcon,
+  iconSizes
+} from './icons';
 
 interface TaskListProps {
   tasks: Task[];
@@ -187,14 +195,14 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   return (
     <div className="space-y-4">
       {/* Filter Controls */}
-      <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700">
-        <div className="flex flex-wrap gap-4 mb-4">
+      <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4">
           <div className="flex items-center gap-2">
             <label className="text-sm font-medium text-slate-300">ステータス:</label>
             <select
               value={filters.status}
               onChange={(e) => setFilters({...filters, status: e.target.value as TaskStatus | 'all'})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-2 py-1"
+              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
             >
               <option value="all">すべて</option>
               {Object.values(TaskStatus).map(status => (
@@ -207,7 +215,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
             <select
               value={filters.priority}
               onChange={(e) => setFilters({...filters, priority: e.target.value as TaskPriority | 'all'})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-2 py-1"
+              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
             >
               <option value="all">すべて</option>
               {Object.values(TaskPriority).map(priority => (
@@ -220,7 +228,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
             <select
               value={filters.dateRange}
               onChange={(e) => setFilters({...filters, dateRange: e.target.value as FilterState['dateRange']})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-2 py-1"
+              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
             >
               <option value="all">すべて</option>
               <option value="today">今日</option>
@@ -232,7 +240,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
       </div>
 
       {/* Sort and Bulk Actions */}
-      <div className="flex flex-wrap justify-between items-center gap-2 mb-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
         <div className="flex flex-wrap gap-2">
           {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
             const isActive = sortKey === key;
@@ -248,21 +256,25 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
               <button
                 key={key}
                 onClick={() => handleSort(key)}
-                className={`px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+                className={`flex items-center gap-1 px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
               >
-                {SORT_LABELS[key]}
-                {isActive && (sortOrder === 'asc' ? ' ▲' : ' ▼')}
+                <span>{SORT_LABELS[key]}</span>
+                {isActive && (
+                  sortOrder === 'asc' 
+                    ? <ChevronUpIcon className={iconSizes.xs} /> 
+                    : <ChevronDownIcon className={iconSizes.xs} />
+                )}
               </button>
             );
           })}
         </div>
         
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={toggleSelectionMode}
-            className={`px-3 py-1 text-sm font-medium rounded transition-colors ${
+            className={`px-3 py-2 text-sm font-medium rounded transition-all ${
               isSelectionMode 
-                ? 'bg-purple-600 text-white' 
+                ? 'bg-purple-600 text-white shadow-md' 
                 : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
             }`}
           >
@@ -272,10 +284,11 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
           {tasks.length > 0 && (
             <button
               onClick={handleExportAllToCalendar}
-              className="px-4 py-2 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors border border-green-700 hover:border-green-600"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors border border-green-700 hover:border-green-600"
               title="全タスクをGoogle Calendarにエクスポート"
             >
-              📅 全タスクをカレンダーに追加
+              <CalendarIcon className={iconSizes.sm} />
+              全タスクをカレンダーに追加
             </button>
           )}
         </div>
@@ -300,20 +313,23 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
             <div className="flex gap-2">
               <button
                 onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
-                className="px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded"
+                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
               >
+                <CheckIcon className={iconSizes.xs} />
                 進行中に変更
               </button>
               <button
                 onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
-                className="px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded"
+                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
               >
+                <CheckIcon className={iconSizes.xs} />
                 完了に変更
               </button>
               <button
                 onClick={handleBulkDelete}
-                className="px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded"
+                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
               >
+                <DeleteIcon className={iconSizes.xs} />
                 削除
               </button>
             </div>
