@@ -48,6 +48,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
   const [hasDragged, setHasDragged] = useState(false); // 実際にドラッグが発生したか
   const [dragStartPosition, setDragStartPosition] = useState({ x: 0, y: 0 }); // ドラッグ開始位置
   const [preventClick, setPreventClick] = useState(false); // クリック抑制フラグ
+  const [dragTooltip, setDragTooltip] = useState<{x: number, y: number, startDate: string, endDate: string, deltaUnits: number} | null>(null); // ドラッグ中のツールチップ
   const resizeHandleRef = useRef<HTMLDivElement>(null);
   const chartContainerRef = useRef<HTMLDivElement>(null); // チャート全体のコンテナ参照用
   
@@ -238,7 +239,84 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
       const deltaX = e.clientX - dragStartX;
       const deltaUnits = Math.round(deltaX / unitWidth);
 
+      // 自動スクロール機能
+      if (chartContainerRef.current && hasDragged) {
+        const scrollContainer = chartContainerRef.current.querySelector('.overflow-auto') as HTMLElement;
+        if (scrollContainer) {
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const mouseX = e.clientX - containerRect.left;
+          const scrollThreshold = 50; // スクロール開始の閾値（ピクセル）
+          const scrollSpeed = 10; // スクロール速度
+          
+          if (mouseX < scrollThreshold) {
+            // 左端に近い場合、左にスクロール
+            scrollContainer.scrollLeft = Math.max(0, scrollContainer.scrollLeft - scrollSpeed);
+          } else if (mouseX > containerRect.width - scrollThreshold) {
+            // 右端に近い場合、右にスクロール
+            scrollContainer.scrollLeft = Math.min(
+              scrollContainer.scrollWidth - scrollContainer.clientWidth,
+              scrollContainer.scrollLeft + scrollSpeed
+            );
+          }
+        }
+      }
+
       if (deltaUnits === 0) return;
+
+      // ドラッグ中のツールチップ情報を更新
+      if (originalTaskData) {
+        const originalStart = new Date(originalTaskData.startDate);
+        const originalEnd = new Date(originalTaskData.endDate);
+        
+        let newStartDate = new Date(originalStart);
+        let newEndDate = new Date(originalEnd);
+
+        if (timeUnit === 'day') {
+          newStartDate.setDate(originalStart.getDate() + deltaUnits);
+          newEndDate.setDate(originalEnd.getDate() + deltaUnits);
+        } else if (timeUnit === 'week') {
+          newStartDate.setDate(originalStart.getDate() + (deltaUnits * 7));
+          newEndDate.setDate(originalEnd.getDate() + (deltaUnits * 7));
+        } else if (timeUnit === 'month') {
+          newStartDate.setMonth(originalStart.getMonth() + deltaUnits);
+          newEndDate.setMonth(originalEnd.getMonth() + deltaUnits);
+        }
+
+        setDragTooltip({
+          x: e.clientX,
+          y: e.clientY - 80,
+          startDate: newStartDate.toLocaleDateString('ja-JP'),
+          endDate: newEndDate.toLocaleDateString('ja-JP'),
+          deltaUnits
+        });
+      } else if (originalMultiTaskData.size > 0) {
+        // 複数タスクの場合は最初のタスクの情報を表示
+        const firstTaskData = Array.from(originalMultiTaskData.values())[0];
+        const originalStart = new Date(firstTaskData.startDate);
+        const originalEnd = new Date(firstTaskData.endDate);
+        
+        let newStartDate = new Date(originalStart);
+        let newEndDate = new Date(originalEnd);
+
+        if (timeUnit === 'day') {
+          newStartDate.setDate(originalStart.getDate() + deltaUnits);
+          newEndDate.setDate(originalEnd.getDate() + deltaUnits);
+        } else if (timeUnit === 'week') {
+          newStartDate.setDate(originalStart.getDate() + (deltaUnits * 7));
+          newEndDate.setDate(originalEnd.getDate() + (deltaUnits * 7));
+        } else if (timeUnit === 'month') {
+          newStartDate.setMonth(originalStart.getMonth() + deltaUnits);
+          newEndDate.setMonth(originalEnd.getMonth() + deltaUnits);
+        }
+
+        setDragTooltip({
+          x: e.clientX,
+          y: e.clientY - 80,
+          startDate: newStartDate.toLocaleDateString('ja-JP'),
+          endDate: newEndDate.toLocaleDateString('ja-JP'),
+          deltaUnits
+        });
+      }
 
       // 複数タスクの移動処理
       if (originalMultiTaskData.size > 0) {
@@ -340,6 +418,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
       setOriginalMultiTaskData(new Map());
       setHasDragged(false);
       setDragStartPosition({ x: 0, y: 0 });
+      setDragTooltip(null); // ドラッグ終了時にツールチップを非表示
       
       // ドラッグが発生した場合、短時間クリックを抑制
       if (hadDraggedBefore) {
@@ -509,6 +588,30 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
             >
               <ResetIcon className={iconSizes.xs} />
               リセット
+            </button>
+            <button
+              onClick={() => {
+                // 今日の日付に自動スクロール
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (today >= chartMinDate && today <= chartMaxDate && chartContainerRef.current) {
+                  const todayOffsetUnits = getOffsetUnits(today);
+                  const todayLinePx = todayOffsetUnits * unitWidth;
+                  const scrollContainer = chartContainerRef.current.querySelector('.overflow-auto');
+                  
+                  if (scrollContainer) {
+                    // 今日の線が画面中央に来るようにスクロール
+                    const containerWidth = scrollContainer.clientWidth;
+                    const scrollLeft = Math.max(0, todayLinePx - containerWidth / 2);
+                    scrollContainer.scrollLeft = scrollLeft;
+                  }
+                }
+              }}
+              className="flex items-center gap-1 px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-xs transition-colors"
+              title="今日の日付にスクロール"
+            >
+              📅 今日へ
             </button>
           </div>
           {/* Row Height Input */}
@@ -734,6 +837,37 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
             );
           })}
           </div>
+          
+          {/* Today's Date Line */}
+          {(() => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // 今日の日付がチャート範囲内にあるかチェック
+            if (today >= chartMinDate && today <= chartMaxDate) {
+              const todayOffsetUnits = getOffsetUnits(today);
+              const todayLinePx = todayOffsetUnits * unitWidth + labelWidth + 8;
+              
+              return (
+                <div
+                  className="absolute top-0 pointer-events-none z-30"
+                  style={{
+                    left: todayLinePx,
+                    width: '2px',
+                    height: '100%',
+                    background: 'linear-gradient(to bottom, #ef4444, #dc2626)',
+                    boxShadow: '0 0 8px rgba(239, 68, 68, 0.6)'
+                  }}
+                >
+                  <div className="absolute -top-6 -left-8 bg-red-600 text-white text-xs px-2 py-1 rounded shadow-lg font-medium">
+                    今日
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })()}
+          
            {/* Dependency Lines (Basic visualization, might need more advanced SVG for curves) */}
           <svg className="absolute top-0 left-0 w-full h-full pointer-events-none" style={{/* paddingTop: rowHeight + CHART_PADDING REMOVED - this was an incorrect comment */}}>
               {sortedTasks.flatMap((task, taskIndex) => 
@@ -846,6 +980,37 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
             <p><span className="font-semibold text-slate-400 w-16 inline-block">優先度:</span> {PRIORITY_TEXT_JP[tooltipData.task.priority]}</p>
             <p><span className="font-semibold text-slate-400 w-16 inline-block">開始日:</span> {tooltipData.task.startDate}</p>
             <p><span className="font-semibold text-slate-400 w-16 inline-block">終了日:</span> {tooltipData.task.endDate}</p>
+          </div>
+        </div>
+      )}
+      
+      {/* Drag Tooltip */}
+      {dragTooltip && (
+        <div 
+          style={{
+            position: 'fixed',
+            left: `${dragTooltip.x + 15}px`,
+            top: `${dragTooltip.y}px`,
+            backgroundColor: 'rgba(59, 130, 246, 0.95)', // bg-blue-500/95
+            color: 'white',
+            padding: '8px 12px',
+            borderRadius: '6px',
+            fontSize: '0.75rem',
+            zIndex: 110,
+            pointerEvents: 'none',
+            backdropFilter: 'blur(4px)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <div className="font-medium mb-1">
+            {selectedTaskIds.size > 1 ? `${selectedTaskIds.size}件のタスクを移動中` : 'タスクを移動中'}
+          </div>
+          <div>開始: {dragTooltip.startDate}</div>
+          <div>終了: {dragTooltip.endDate}</div>
+          <div className="text-xs opacity-80 mt-1">
+            {dragTooltip.deltaUnits > 0 ? '+' : ''}{dragTooltip.deltaUnits}{timeUnit === 'day' ? '日' : timeUnit === 'week' ? '週' : 'ヶ月'}移動
           </div>
         </div>
       )}
