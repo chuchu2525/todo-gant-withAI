@@ -5,6 +5,7 @@ import { PRIORITY_COLORS, STATUS_TEXT_JP, PRIORITY_TEXT_JP } from '../constants'
 interface GanttChartProps {
   tasks: Task[];
   onEditTask: (task: Task) => void;
+  onTaskDateChange?: (taskId: string, newStartDate: string, newEndDate: string) => void;
 }
 
 // const DAY_WIDTH = 30; // pixels per day // This seems unused, unitWidth is used instead
@@ -21,12 +22,16 @@ interface TooltipData {
   y: number;
 }
 
-export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => {
+export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTaskDateChange }) => {
   const [labelWidth, setLabelWidth] = useState(150); // 初期値を150に設定
   const [isResizing, setIsResizing] = useState(false);
   const [tooltipData, setTooltipData] = useState<TooltipData | null>(null); // ツールチップ用state
   const [viewMode, setViewMode] = useState<GanttViewMode>('day'); // ビューモードstate
   const [rowHeight, setRowHeight] = useState(40); // 行の高さをstate管理する
+  const [zoomLevel, setZoomLevel] = useState(1); // ズームレベル
+  const [draggingTask, setDraggingTask] = useState<string | null>(null); // ドラッグ中のタスクID
+  const [dragStartX, setDragStartX] = useState(0); // ドラッグ開始位置
+  const [originalTaskData, setOriginalTaskData] = useState<{startDate: string, endDate: string} | null>(null);
   const resizeHandleRef = useRef<HTMLDivElement>(null);
   const chartContainerRef = useRef<HTMLDivElement>(null); // チャート全体のコンテナ参照用
 
@@ -71,19 +76,116 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
 
   const sortedTasks = [...tasks].sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
 
-  // ビューモードに応じた設定
+  // ビューモードに応じた設定（ズームレベルを適用）
   const getChartSettings = () => {
+    let baseUnitWidth;
+    let timeUnit;
+    
     switch (viewMode) {
       case 'week':
-        return { unitWidth: 70, timeUnit: 'week' }; // 1週間あたり70px
+        baseUnitWidth = 70;
+        timeUnit = 'week';
+        break;
       case 'month':
-        return { unitWidth: 180, timeUnit: 'month' }; // 1ヶ月あたり180px
+        baseUnitWidth = 180;
+        timeUnit = 'month';
+        break;
       case 'day':
       default:
-        return { unitWidth: 75, timeUnit: 'day' }; // 1日あたり55px -> 75px に変更
+        baseUnitWidth = 75;
+        timeUnit = 'day';
+        break;
     }
+    
+    return { 
+      unitWidth: Math.round(baseUnitWidth * zoomLevel), 
+      timeUnit 
+    };
   };
   const { unitWidth, timeUnit } = getChartSettings();
+
+  // ズーム制御関数
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev * 1.2, 3)); // 最大3倍まで
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev / 1.2, 0.3)); // 最小0.3倍まで
+  };
+
+  const resetZoom = () => {
+    setZoomLevel(1);
+  };
+
+  // タスクバーのドラッグ開始
+  const handleTaskMouseDown = useCallback((e: React.MouseEvent, task: Task) => {
+    if (!onTaskDateChange) return;
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setDraggingTask(task.id);
+    setDragStartX(e.clientX);
+    setOriginalTaskData({
+      startDate: task.startDate,
+      endDate: task.endDate
+    });
+  }, [onTaskDateChange]);
+
+  // タスクバーのドラッグ中とドラッグ終了の処理
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!draggingTask || !originalTaskData || !onTaskDateChange) return;
+
+      const deltaX = e.clientX - dragStartX;
+      const deltaUnits = Math.round(deltaX / unitWidth);
+
+      if (deltaUnits === 0) return;
+
+      const task = tasks.find(t => t.id === draggingTask);
+      if (!task) return;
+
+      // 元の日付から新しい日付を計算
+      const originalStart = new Date(originalTaskData.startDate);
+      const originalEnd = new Date(originalTaskData.endDate);
+      
+      let newStartDate = new Date(originalStart);
+      let newEndDate = new Date(originalEnd);
+
+      if (timeUnit === 'day') {
+        newStartDate.setDate(originalStart.getDate() + deltaUnits);
+        newEndDate.setDate(originalEnd.getDate() + deltaUnits);
+      } else if (timeUnit === 'week') {
+        newStartDate.setDate(originalStart.getDate() + (deltaUnits * 7));
+        newEndDate.setDate(originalEnd.getDate() + (deltaUnits * 7));
+      } else if (timeUnit === 'month') {
+        newStartDate.setMonth(originalStart.getMonth() + deltaUnits);
+        newEndDate.setMonth(originalEnd.getMonth() + deltaUnits);
+      }
+
+      const newStartStr = newStartDate.toISOString().split('T')[0];
+      const newEndStr = newEndDate.toISOString().split('T')[0];
+      
+      // リアルタイムで更新（プレビューとして）
+      onTaskDateChange(draggingTask, newStartStr, newEndStr);
+    };
+
+    const handleMouseUp = () => {
+      setDraggingTask(null);
+      setDragStartX(0);
+      setOriginalTaskData(null);
+    };
+
+    if (draggingTask) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [draggingTask, dragStartX, originalTaskData, onTaskDateChange, unitWidth, timeUnit, tasks]);
 
   // 期間の開始日と終了日を決定
   const { chartMinDate, chartMaxDate } = useMemo(() => {
@@ -179,7 +281,35 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
     <div className="bg-slate-800 p-4 rounded-lg shadow-lg relative" ref={chartContainerRef}>
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-semibold text-sky-400">Gantt Chart</h3>
-        <div className="flex items-center space-x-4"> {/* Added space-x-4 for better spacing */}
+        <div className="flex items-center space-x-4">
+          {/* Zoom Controls */}
+          <div className="flex items-center space-x-2">
+            <label className="text-sm text-slate-300 whitespace-nowrap">ズーム:</label>
+            <button
+              onClick={handleZoomOut}
+              className="w-8 h-8 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded text-sm font-bold flex items-center justify-center"
+              title="ズームアウト"
+            >
+              −
+            </button>
+            <span className="text-xs text-slate-400 min-w-[40px] text-center">
+              {Math.round(zoomLevel * 100)}%
+            </span>
+            <button
+              onClick={handleZoomIn}
+              className="w-8 h-8 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded text-sm font-bold flex items-center justify-center"
+              title="ズームイン"
+            >
+              +
+            </button>
+            <button
+              onClick={resetZoom}
+              className="px-2 py-1 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded text-xs"
+              title="ズームリセット"
+            >
+              リセット
+            </button>
+          </div>
           {/* Row Height Input */}
           <div className="flex items-center space-x-2">
             <label htmlFor="rowHeightInput" className="text-sm text-slate-300 whitespace-nowrap">Row Height:</label>
@@ -320,19 +450,30 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
                       width: taskWidthPx,
                       height: rowHeight * 0.7, // Use rowHeight here
                       top: rowHeight * 0.15,  // Use rowHeight here
-                      cursor: 'pointer',
+                      cursor: onTaskDateChange ? 'grab' : 'pointer',
                     }}
-                    className={`absolute rounded ${PRIORITY_COLORS[task.priority]} text-white text-xs flex items-center px-1.5 overflow-hidden shadow-md hover:brightness-125 transition-all ${task.status === 'Completed' ? 'opacity-60' : ''} ${task.status === 'In Progress' ? 'brightness-110' : ''}`}
-                    onClick={() => onEditTask(task)}
+                    className={`absolute rounded ${PRIORITY_COLORS[task.priority]} text-white text-xs flex items-center px-1.5 overflow-hidden shadow-md hover:brightness-125 transition-all ${task.status === 'Completed' ? 'opacity-60' : ''} ${task.status === 'In Progress' ? 'brightness-110' : ''} ${draggingTask === task.id ? 'opacity-80 scale-105' : ''}`}
+                    onClick={(e) => {
+                      if (!draggingTask) {
+                        onEditTask(task);
+                      }
+                    }}
+                    onMouseDown={(e) => {
+                      if (onTaskDateChange) {
+                        handleTaskMouseDown(e, task);
+                      }
+                    }}
                     onMouseEnter={(e) => {
-                      setTooltipData({ 
-                        task,
-                        x: e.clientX,
-                        y: e.clientY
-                      });
+                      if (!draggingTask) {
+                        setTooltipData({ 
+                          task,
+                          x: e.clientX,
+                          y: e.clientY
+                        });
+                      }
                     }}
                     onMouseMove={(e) => {
-                      if (tooltipData) {
+                      if (tooltipData && !draggingTask) {
                         setTooltipData({ 
                           ...tooltipData, 
                           x: e.clientX,
@@ -341,7 +482,9 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
                       }
                     }}
                     onMouseLeave={() => {
-                      setTooltipData(null);
+                      if (!draggingTask) {
+                        setTooltipData(null);
+                      }
                     }}
                   >
                     {/* Status Icon for Task Bar */}
@@ -415,17 +558,37 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask }) => 
                               key={`${depId}-${task.id}`}
                               d={`M ${depLineX} ${depLineY} C ${depLineX + dx1} ${depLineY}, ${taskLineX + dx2} ${taskLineY}, ${taskLineX} ${taskLineY}`}
                               stroke="#60a5fa" 
-                              strokeWidth="1.5"
+                              strokeWidth="2"
                               fill="none"
                               markerEnd="url(#arrowhead)"
+                              className="dependency-line"
+                              style={{
+                                filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))',
+                                transition: 'stroke-width 0.2s ease'
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.strokeWidth = '3';
+                                e.currentTarget.style.stroke = '#3b82f6';
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.strokeWidth = '2';
+                                e.currentTarget.style.stroke = '#60a5fa';
+                              }}
                           />
                       );
                   }).filter(Boolean)
               )}
               <defs>
-                  <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
-                      <polygon points="0 0, 6 2, 0 4" fill="#60a5fa" />
+                  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                      <polygon points="0 0, 8 3, 0 6" fill="#60a5fa" stroke="#60a5fa" strokeWidth="0.5" />
                   </marker>
+                  <filter id="glow">
+                      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                      <feMerge> 
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                  </filter>
               </defs>
           </svg>
         </div>

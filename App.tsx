@@ -94,6 +94,26 @@ const App: React.FC = () => {
     }
   }, []);
 
+  const handleBulkUpdate = useCallback((updatedTasks: Task[]) => {
+    setTasks(updatedTasks);
+    syncTasksToYaml(updatedTasks);
+  }, [syncTasksToYaml]);
+
+  const handleReorderTasks = useCallback((reorderedTasks: Task[]) => {
+    setTasks(reorderedTasks);
+    syncTasksToYaml(reorderedTasks);
+  }, [syncTasksToYaml]);
+
+  const handleTaskDateChange = useCallback((taskId: string, newStartDate: string, newEndDate: string) => {
+    const updatedTasks = tasks.map(task => 
+      task.id === taskId 
+        ? { ...task, startDate: newStartDate, endDate: newEndDate }
+        : task
+    );
+    setTasks(updatedTasks);
+    syncTasksToYaml(updatedTasks);
+  }, [tasks, syncTasksToYaml]);
+
 
   const openNewTaskModal = () => {
     setEditingTask(null);
@@ -103,9 +123,9 @@ const App: React.FC = () => {
   const renderView = () => {
     switch (currentView) {
       case 'list':
-        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} />;
+        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} onEditTask={handleEditTask} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} />;
       case 'ai':
         return (
           <AiInteraction
