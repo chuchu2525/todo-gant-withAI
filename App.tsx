@@ -163,9 +163,9 @@ const App: React.FC = () => {
   const renderSingleView = (viewType: 'list' | 'gantt' | 'ai', isInSplitView: boolean = false) => {
     switch (viewType) {
       case 'list':
-        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} />;
+        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} isInSplitView={isInSplitView} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} isInSplitView={isInSplitView} />;
       case 'ai':
         return (
           <AiInteraction
@@ -175,6 +175,7 @@ const App: React.FC = () => {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             setError={setError}
+            isInSplitView={isInSplitView}
           />
         );
       default:
@@ -202,7 +203,7 @@ const App: React.FC = () => {
     }
 
     return (
-      <div className="flex h-full gap-2">
+      <div className="flex h-full gap-2 overflow-hidden">
         <ResizablePanel
           direction="horizontal"
           initialSize={splitViewConfig.leftSize}
@@ -243,8 +244,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-slate-100">
-      <header className="bg-slate-800/60 backdrop-blur-md shadow-xl border-b border-slate-700/50 p-3 md:p-4 sticky top-0 z-40">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-slate-100 overflow-hidden">
+      <header className="bg-slate-800/60 backdrop-blur-md shadow-xl border-b border-slate-700/50 p-3 md:p-4 flex-shrink-0 z-40">
         <div className="w-full max-w-none px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-400 tracking-tight drop-shadow-md">{APP_TITLE}</h1>
           <nav className="mt-2 sm:mt-0 flex flex-wrap gap-2 sm:gap-3">
@@ -313,7 +314,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-grow">
+      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-1 flex flex-col overflow-hidden">
         {error && (
           <div className="mb-4 p-4 bg-red-500/20 border border-red-400/50 text-red-200 rounded-lg shadow-lg" role="alert">
             <div className="flex items-start justify-between">
@@ -344,7 +345,7 @@ const App: React.FC = () => {
         )}
 
         {(currentView === 'list' || currentView.includes('list')) && (
-          <div className="mb-6 flex justify-end">
+          <div className="mb-6 flex justify-end flex-shrink-0">
             <button
               onClick={openNewTaskModal}
               className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 transition-all hover:scale-105 border border-green-500/30"
@@ -355,7 +356,7 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className={`${currentView.startsWith('split-') ? 'min-h-[70vh]' : 'bg-slate-800/40 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-700/50 min-h-[70vh]'} ${currentView === 'list' ? 'p-3 sm:p-5' : currentView.startsWith('split-') ? '' : 'p-4 sm:p-6'}`}>
+        <div className={`${currentView.startsWith('split-') ? 'flex-1 overflow-hidden' : 'bg-slate-800/40 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-700/50 flex-1 overflow-auto'} ${currentView === 'list' ? 'p-3 sm:p-5' : currentView.startsWith('split-') ? '' : 'p-4 sm:p-6'}`}>
             {renderView()}
         </div>
       </main>

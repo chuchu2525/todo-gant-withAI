@@ -18,6 +18,7 @@ interface TaskListProps {
   onDeleteTask: (taskId: string) => void;
   onBulkUpdate?: (tasks: Task[]) => void;
   onReorderTasks?: (reorderedTasks: Task[]) => void;
+  isInSplitView?: boolean;
 }
 
 type SortKey = 'startDate' | 'endDate' | 'priority' | 'status';
@@ -36,7 +37,7 @@ const SORT_LABELS: { [key in SortKey]: string } = {
   status: 'ステータス',
 };
 
-export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onBulkUpdate, onReorderTasks }) => {
+export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onBulkUpdate, onReorderTasks, isInSplitView = false }) => {
   const [sortKey, setSortKey] = useState<SortKey>('startDate');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedTasks, setSelectedTasks] = useState<Set<string>>(new Set());
@@ -193,191 +194,195 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   }
 
   return (
-    <div className="space-y-4">
-      {/* Filter Controls */}
-      <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
-        <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4">
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-slate-300">ステータス:</label>
-            <select
-              value={filters.status}
-              onChange={(e) => setFilters({...filters, status: e.target.value as TaskStatus | 'all'})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-            >
-              <option value="all">すべて</option>
-              {Object.values(TaskStatus).map(status => (
-                <option key={status} value={status}>{status}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-slate-300">優先度:</label>
-            <select
-              value={filters.priority}
-              onChange={(e) => setFilters({...filters, priority: e.target.value as TaskPriority | 'all'})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-            >
-              <option value="all">すべて</option>
-              {Object.values(TaskPriority).map(priority => (
-                <option key={priority} value={priority}>{priority}</option>
-              ))}
-            </select>
-          </div>
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium text-slate-300">期間:</label>
-            <select
-              value={filters.dateRange}
-              onChange={(e) => setFilters({...filters, dateRange: e.target.value as FilterState['dateRange']})}
-              className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-            >
-              <option value="all">すべて</option>
-              <option value="today">今日</option>
-              <option value="thisWeek">今週</option>
-              <option value="thisMonth">今月</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* Sort and Bulk Actions */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-        <div className="flex flex-wrap gap-2">
-          {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
-            const isActive = sortKey === key;
-            let activeClass = '';
-            if (isActive) {
-              activeClass = sortOrder === 'asc'
-                ? 'bg-sky-600 text-white border-sky-600'
-                : 'bg-pink-600 text-white border-pink-600';
-            } else {
-              activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
-            }
-            return (
-              <button
-                key={key}
-                onClick={() => handleSort(key)}
-                className={`flex items-center gap-1 px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+    <div className={`${isInSplitView ? 'h-full overflow-hidden' : ''} flex flex-col`}>
+      <div className={`${isInSplitView ? 'flex-shrink-0' : ''} space-y-4`}>
+        {/* Filter Controls */}
+        <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4">
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-slate-300">ステータス:</label>
+              <select
+                value={filters.status}
+                onChange={(e) => setFilters({...filters, status: e.target.value as TaskStatus | 'all'})}
+                className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
               >
-                <span>{SORT_LABELS[key]}</span>
-                {isActive && (
-                  sortOrder === 'asc' 
-                    ? <ChevronUpIcon className={iconSizes.xs} /> 
-                    : <ChevronDownIcon className={iconSizes.xs} />
-                )}
-              </button>
-            );
-          })}
-        </div>
-        
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={toggleSelectionMode}
-            className={`px-3 py-2 text-sm font-medium rounded transition-all ${
-              isSelectionMode 
-                ? 'bg-purple-600 text-white shadow-md' 
-                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-            }`}
-          >
-            {isSelectionMode ? '選択モード終了' : '選択モード'}
-          </button>
-          
-          {tasks.length > 0 && (
-            <button
-              onClick={handleExportAllToCalendar}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors border border-green-700 hover:border-green-600"
-              title="全タスクをGoogle Calendarにエクスポート"
-            >
-              <CalendarIcon className={iconSizes.sm} />
-              全タスクをカレンダーに追加
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Bulk Actions Bar */}
-      {isSelectionMode && (
-        <div className="bg-purple-900/30 p-3 rounded-lg border border-purple-700 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-300">
-              <input
-                type="checkbox"
-                checked={selectedTasks.size === tasks.length}
-                onChange={handleSelectAll}
-                className="form-checkbox h-4 w-4 text-purple-600 bg-slate-800 border-slate-600 rounded"
-              />
-              全選択 ({selectedTasks.size}/{tasks.length})
-            </label>
-          </div>
-          
-          {selectedTasks.size > 0 && (
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
-                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
-              >
-                <CheckIcon className={iconSizes.xs} />
-                進行中に変更
-              </button>
-              <button
-                onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
-                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
-              >
-                <CheckIcon className={iconSizes.xs} />
-                完了に変更
-              </button>
-              <button
-                onClick={handleBulkDelete}
-                className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
-              >
-                <DeleteIcon className={iconSizes.xs} />
-                削除
-              </button>
+                <option value="all">すべて</option>
+                {Object.values(TaskStatus).map(status => (
+                  <option key={status} value={status}>{status}</option>
+                ))}
+              </select>
             </div>
-          )}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-slate-300">優先度:</label>
+              <select
+                value={filters.priority}
+                onChange={(e) => setFilters({...filters, priority: e.target.value as TaskPriority | 'all'})}
+                className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+              >
+                <option value="all">すべて</option>
+                {Object.values(TaskPriority).map(priority => (
+                  <option key={priority} value={priority}>{priority}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-slate-300">期間:</label>
+              <select
+                value={filters.dateRange}
+                onChange={(e) => setFilters({...filters, dateRange: e.target.value as FilterState['dateRange']})}
+                className="bg-slate-700 border-slate-600 text-slate-100 text-sm rounded px-3 py-1.5 min-w-[120px] focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+              >
+                <option value="all">すべて</option>
+                <option value="today">今日</option>
+                <option value="thisWeek">今週</option>
+                <option value="thisMonth">今月</option>
+              </select>
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* Sort and Bulk Actions */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+          <div className="flex flex-wrap gap-2">
+            {(['startDate', 'endDate', 'priority', 'status'] as SortKey[]).map(key => {
+              const isActive = sortKey === key;
+              let activeClass = '';
+              if (isActive) {
+                activeClass = sortOrder === 'asc'
+                  ? 'bg-sky-600 text-white border-sky-600'
+                  : 'bg-pink-600 text-white border-pink-600';
+              } else {
+                activeClass = 'bg-slate-700 text-slate-300 border-slate-600 hover:bg-slate-600';
+              }
+              return (
+                <button
+                  key={key}
+                  onClick={() => handleSort(key)}
+                  className={`flex items-center gap-1 px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
+                >
+                  <span>{SORT_LABELS[key]}</span>
+                  {isActive && (
+                    sortOrder === 'asc' 
+                      ? <ChevronUpIcon className={iconSizes.xs} /> 
+                      : <ChevronDownIcon className={iconSizes.xs} />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={toggleSelectionMode}
+              className={`px-3 py-2 text-sm font-medium rounded transition-all ${
+                isSelectionMode 
+                  ? 'bg-purple-600 text-white shadow-md' 
+                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+              }`}
+            >
+              {isSelectionMode ? '選択モード終了' : '選択モード'}
+            </button>
+            
+            {tasks.length > 0 && (
+              <button
+                onClick={handleExportAllToCalendar}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-colors border border-green-700 hover:border-green-600"
+                title="全タスクをGoogle Calendarにエクスポート"
+              >
+                <CalendarIcon className={iconSizes.sm} />
+                全タスクをカレンダーに追加
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Bulk Actions Bar */}
+        {isSelectionMode && (
+          <div className="bg-purple-900/30 p-3 rounded-lg border border-purple-700 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <label className="flex items-center gap-2 text-sm font-medium text-slate-300">
+                <input
+                  type="checkbox"
+                  checked={selectedTasks.size === tasks.length}
+                  onChange={handleSelectAll}
+                  className="form-checkbox h-4 w-4 text-purple-600 bg-slate-800 border-slate-600 rounded"
+                />
+                全選択 ({selectedTasks.size}/{tasks.length})
+              </label>
+            </div>
+            
+            {selectedTasks.size > 0 && (
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
+                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                >
+                  <CheckIcon className={iconSizes.xs} />
+                  進行中に変更
+                </button>
+                <button
+                  onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
+                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
+                >
+                  <CheckIcon className={iconSizes.xs} />
+                  完了に変更
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
+                >
+                  <DeleteIcon className={iconSizes.xs} />
+                  削除
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Task List with Drag and Drop */}
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="tasks">
-          {(provided) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              className="space-y-3"
-            >
-              {sortedTasks.map((task, index) => (
-                <Draggable 
-                  key={task.id} 
-                  draggableId={task.id} 
-                  index={index}
-                  isDragDisabled={isSelectionMode}
-                >
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className={`${snapshot.isDragging ? 'opacity-75 rotate-1' : ''}`}
-                    >
-                      <TaskItem
-                        task={task}
-                        onEdit={onEditTask}
-                        onDelete={onDeleteTask}
-                        allTasks={tasks}
-                        isSelectionMode={isSelectionMode}
-                        isSelected={selectedTasks.has(task.id)}
-                        onSelectionChange={handleTaskSelection}
-                      />
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <div className={`${isInSplitView ? 'flex-1 overflow-auto mt-4' : 'mt-4'}`}>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="tasks">
+            {(provided) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className="space-y-3"
+              >
+                {sortedTasks.map((task, index) => (
+                  <Draggable 
+                    key={task.id} 
+                    draggableId={task.id} 
+                    index={index}
+                    isDragDisabled={isSelectionMode}
+                  >
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className={`${snapshot.isDragging ? 'opacity-75 rotate-1' : ''}`}
+                      >
+                        <TaskItem
+                          task={task}
+                          onEdit={onEditTask}
+                          onDelete={onDeleteTask}
+                          allTasks={tasks}
+                          isSelectionMode={isSelectionMode}
+                          isSelected={selectedTasks.has(task.id)}
+                          onSelectionChange={handleTaskSelection}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     </div>
   );
 };
