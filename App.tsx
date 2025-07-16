@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Task, ViewMode } from './types';
+import { Task, ViewMode, SplitViewConfig } from './types';
 import { TaskForm } from './components/TaskForm';
 import { TaskList } from './components/TaskList';
 import { GanttChart } from './components/GanttChart';
@@ -15,12 +15,20 @@ import {
   CloseIcon,
   iconSizes
 } from './components/icons';
+import { ResizablePanel } from './components/ResizablePanel';
 import './styles/globals.css';
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [yamlString, setYamlString] = useState<string>('');
   const [currentView, setCurrentView] = useState<ViewMode>('list');
+  const [splitViewConfig, setSplitViewConfig] = useState<SplitViewConfig>({
+    leftPane: 'list',
+    rightPane: 'gantt',
+    splitDirection: 'horizontal',
+    leftSize: 50,
+    rightSize: 50
+  });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +39,18 @@ const App: React.FC = () => {
     const storedYaml = localStorage.getItem('tasksYaml');
     const initialYaml = storedYaml || INITIAL_TASKS_YAML;
     setYamlString(initialYaml);
+    
+    // Load split view configuration from localStorage
+    const storedSplitConfig = localStorage.getItem('splitViewConfig');
+    if (storedSplitConfig) {
+      try {
+        const parsedConfig = JSON.parse(storedSplitConfig);
+        setSplitViewConfig(parsedConfig);
+      } catch (e) {
+        console.error('Failed to parse stored split view config:', e);
+      }
+    }
+    
     try {
       const parsedTasks = parseTasksFromYaml(initialYaml);
       setTasks(parsedTasks);
@@ -140,12 +160,12 @@ const App: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const renderView = () => {
-    switch (currentView) {
+  const renderSingleView = (viewType: 'list' | 'gantt' | 'ai', isInSplitView: boolean = false) => {
+    switch (viewType) {
       case 'list':
-        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} />;
+        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} isInSplitView={isInSplitView} />;
       case 'gantt':
-        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} />;
+        return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} isInSplitView={isInSplitView} />;
       case 'ai':
         return (
           <AiInteraction
@@ -155,6 +175,7 @@ const App: React.FC = () => {
             isLoading={isLoading}
             setIsLoading={setIsLoading}
             setError={setError}
+            isInSplitView={isInSplitView}
           />
         );
       default:
@@ -162,12 +183,73 @@ const App: React.FC = () => {
     }
   };
 
+  const renderSplitView = () => {
+    let leftPane: 'list' | 'gantt' | 'ai' = 'list';
+    let rightPane: 'list' | 'gantt' | 'ai' = 'gantt';
+
+    switch (currentView) {
+      case 'split-list-gantt':
+        leftPane = 'list';
+        rightPane = 'gantt';
+        break;
+      case 'split-list-ai':
+        leftPane = 'list';
+        rightPane = 'ai';
+        break;
+      case 'split-gantt-ai':
+        leftPane = 'gantt';
+        rightPane = 'ai';
+        break;
+    }
+
+    return (
+      <div className="flex h-full gap-2 overflow-hidden">
+        <ResizablePanel
+          direction="horizontal"
+          initialSize={splitViewConfig.leftSize}
+          onResize={(newSize) => {
+            const newConfig = { ...splitViewConfig, leftSize: newSize, rightSize: 100 - newSize };
+            setSplitViewConfig(newConfig);
+            localStorage.setItem('splitViewConfig', JSON.stringify(newConfig));
+          }}
+          className="flex-shrink-0"
+        >
+          <div className="h-full overflow-hidden bg-slate-800/40 backdrop-blur-sm rounded-lg shadow-lg border border-slate-700/50 p-4">
+            {renderSingleView(leftPane, true)}
+          </div>
+        </ResizablePanel>
+        
+        <div className="flex-1 overflow-hidden bg-slate-800/40 backdrop-blur-sm rounded-lg shadow-lg border border-slate-700/50 p-4">
+          {renderSingleView(rightPane, true)}
+        </div>
+      </div>
+    );
+  };
+
+  const renderView = () => {
+    // Force single view on mobile for split views
+    if (currentView.startsWith('split-')) {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        // Default to first view on mobile
+        let fallbackView: 'list' | 'gantt' | 'ai' = 'list';
+        if (currentView === 'split-list-gantt') fallbackView = 'list';
+        else if (currentView === 'split-list-ai') fallbackView = 'list';
+        else if (currentView === 'split-gantt-ai') fallbackView = 'gantt';
+        return renderSingleView(fallbackView);
+      }
+      return renderSplitView();
+    }
+    return renderSingleView(currentView as 'list' | 'gantt' | 'ai');
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-slate-100">
-      <header className="bg-slate-800/60 backdrop-blur-md shadow-xl border-b border-slate-700/50 p-3 md:p-4 sticky top-0 z-40">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-slate-100 overflow-hidden">
+      <header className="bg-slate-800/60 backdrop-blur-md shadow-xl border-b border-slate-700/50 p-3 md:p-4 flex-shrink-0 z-40">
         <div className="w-full max-w-none px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center">
           <h1 className="text-3xl font-bold text-sky-400 tracking-tight drop-shadow-md">{APP_TITLE}</h1>
-          <nav className="mt-2 sm:mt-0 flex space-x-2 sm:space-x-3">
+          <nav className="mt-2 sm:mt-0 flex flex-wrap gap-2 sm:gap-3">
+            {/* Single View Buttons */}
             {(['list', 'gantt', 'ai'] as ViewMode[]).map(view => {
               const getViewIcon = (viewType: ViewMode) => {
                 switch (viewType) {
@@ -191,11 +273,48 @@ const App: React.FC = () => {
                 </button>
               );
             })}
+
+            {/* Split View Buttons - Hidden on mobile */}
+            <div className="hidden sm:flex items-center gap-1 ml-2 pl-2 border-l border-slate-600">
+              <button
+                onClick={() => setCurrentView('split-list-gantt')}
+                className={`flex items-center gap-1 px-2 py-2 text-xs font-medium rounded-md transition-all duration-200
+                  ${currentView === 'split-list-gantt'
+                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-1 ring-emerald-500/50'
+                    : 'text-slate-300 hover:bg-slate-700/70 hover:text-white hover:shadow-md'}`}
+              >
+                <ListViewIcon className="w-3 h-3" />
+                <span className="text-slate-400">|</span>
+                <GanttViewIcon className="w-3 h-3" />
+              </button>
+              <button
+                onClick={() => setCurrentView('split-list-ai')}
+                className={`flex items-center gap-1 px-2 py-2 text-xs font-medium rounded-md transition-all duration-200
+                  ${currentView === 'split-list-ai'
+                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-1 ring-emerald-500/50'
+                    : 'text-slate-300 hover:bg-slate-700/70 hover:text-white hover:shadow-md'}`}
+              >
+                <ListViewIcon className="w-3 h-3" />
+                <span className="text-slate-400">|</span>
+                <AiViewIcon className="w-3 h-3" />
+              </button>
+              <button
+                onClick={() => setCurrentView('split-gantt-ai')}
+                className={`flex items-center gap-1 px-2 py-2 text-xs font-medium rounded-md transition-all duration-200
+                  ${currentView === 'split-gantt-ai'
+                    ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 ring-1 ring-emerald-500/50'
+                    : 'text-slate-300 hover:bg-slate-700/70 hover:text-white hover:shadow-md'}`}
+              >
+                <GanttViewIcon className="w-3 h-3" />
+                <span className="text-slate-400">|</span>
+                <AiViewIcon className="w-3 h-3" />
+              </button>
+            </div>
           </nav>
         </div>
       </header>
 
-      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-grow">
+      <main className="w-full px-4 md:px-8 pt-4 md:pt-6 flex-1 flex flex-col overflow-hidden">
         {error && (
           <div className="mb-4 p-4 bg-red-500/20 border border-red-400/50 text-red-200 rounded-lg shadow-lg" role="alert">
             <div className="flex items-start justify-between">
@@ -225,8 +344,8 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {currentView === 'list' && (
-          <div className="mb-6 flex justify-end">
+        {(currentView === 'list' || currentView.includes('list')) && (
+          <div className="mb-6 flex justify-end flex-shrink-0">
             <button
               onClick={openNewTaskModal}
               className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 transition-all hover:scale-105 border border-green-500/30"
@@ -237,8 +356,7 @@ const App: React.FC = () => {
           </div>
         )}
         
-        <div className={`bg-slate-800/40 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-700/50 min-h-[70vh] ${currentView === 'list' ? 'p-3 sm:p-5' : 'p-4 sm:p-6'}`}>
-        {/* h-[80vh] overflow-y-auto */}
+        <div className={`${currentView.startsWith('split-') ? 'flex-1 overflow-hidden' : 'bg-slate-800/40 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-700/50 flex-1 overflow-auto'} ${currentView === 'list' ? 'p-3 sm:p-5' : currentView.startsWith('split-') ? '' : 'p-4 sm:p-6'}`}>
             {renderView()}
         </div>
       </main>

@@ -22,7 +22,15 @@ export interface Task {
   dependencies: string[]; // Array of task IDs this task depends on
 }
 
-export type ViewMode = 'list' | 'gantt' | 'ai';
+export type ViewMode = 'list' | 'gantt' | 'ai' | 'split-list-gantt' | 'split-list-ai' | 'split-gantt-ai';
+
+export interface SplitViewConfig {
+  leftPane: 'list' | 'gantt' | 'ai';
+  rightPane: 'list' | 'gantt' | 'ai';
+  splitDirection: 'horizontal' | 'vertical';
+  leftSize: number; // Percentage (0-100)
+  rightSize: number; // Percentage (0-100)
+}
 
 // For Gemini Search Grounding (if used)
 export interface WebGroundingChunk {

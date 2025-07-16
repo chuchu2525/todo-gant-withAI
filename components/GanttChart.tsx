@@ -16,6 +16,7 @@ interface GanttChartProps {
   onEditTask: (task: Task) => void;
   onTaskDateChange?: (taskId: string, newStartDate: string, newEndDate: string) => void;
   onMultipleTaskDateChange?: (taskUpdates: Array<{taskId: string, newStartDate: string, newEndDate: string}>) => void;
+  isInSplitView?: boolean;
 }
 
 // const DAY_WIDTH = 30; // pixels per day // This seems unused, unitWidth is used instead
@@ -32,7 +33,7 @@ interface TooltipData {
   y: number;
 }
 
-export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTaskDateChange, onMultipleTaskDateChange }) => {
+export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTaskDateChange, onMultipleTaskDateChange, isInSplitView = false }) => {
   const [labelWidth, setLabelWidth] = useState(150); // 初期値を150に設定
   const [isResizing, setIsResizing] = useState(false);
   const [tooltipData, setTooltipData] = useState<TooltipData | null>(null); // ツールチップ用state
@@ -531,8 +532,8 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
   };
 
   return (
-    <div className="bg-slate-800 p-4 rounded-lg shadow-lg relative" ref={chartContainerRef}>
-      <div className="flex justify-between items-center mb-4">
+    <div className={`bg-slate-800 p-4 rounded-lg shadow-lg relative ${isInSplitView ? 'h-full flex flex-col' : ''}`} ref={chartContainerRef}>
+      <div className={`flex justify-between items-center mb-4 ${isInSplitView ? 'flex-shrink-0' : ''}`}>
         <h3 className="text-xl font-semibold text-sky-400">Gantt Chart</h3>
         <div className="flex items-center space-x-4">
           {/* Multi-select Mode Controls */}
@@ -642,7 +643,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
           </div>
         </div>
       </div>
-      <div className="overflow-auto" style={{ height: '75vh' }}>
+      <div className={`overflow-auto ${isInSplitView ? 'flex-1' : ''}`} style={{ height: isInSplitView ? undefined : '75vh' }}>
         <div style={{ width: totalUnits * unitWidth + labelWidth + 8, minHeight: (tasks.length + 2) * rowHeight + CHART_PADDING*2 }} className={`relative ${isMultiSelectMode ? 'bg-purple-900/10' : ''}`}>
           {/* Multi-select mode indicator */}
           {isMultiSelectMode && (
