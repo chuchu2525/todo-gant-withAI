@@ -99,6 +99,16 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
     setIsSelectionMode(false);
   };
 
+  const handleBulkPriorityChange = (priority: TaskPriority) => {
+    if (selectedTasks.size === 0 || !onBulkUpdate) return;
+    const updatedTasks = tasks.map(task => 
+      selectedTasks.has(task.id) ? { ...task, priority } : task
+    );
+    onBulkUpdate(updatedTasks);
+    setSelectedTasks(new Set());
+    setIsSelectionMode(false);
+  };
+
   const toggleSelectionMode = () => {
     setIsSelectionMode(!isSelectionMode);
     if (isSelectionMode) {
@@ -313,28 +323,78 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
             </div>
             
             {selectedTasks.size > 0 && (
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
-                >
-                  <CheckIcon className={iconSizes.xs} />
-                  進行中に変更
-                </button>
-                <button
-                  onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
-                >
-                  <CheckIcon className={iconSizes.xs} />
-                  完了に変更
-                </button>
-                <button
-                  onClick={handleBulkDelete}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
-                >
-                  <DeleteIcon className={iconSizes.xs} />
-                  削除
-                </button>
+              <div className="flex flex-wrap gap-4">
+                {/* Status Change Section */}
+                <div className="bg-slate-700/50 rounded-lg p-2 border border-slate-600">
+                  <div className="text-xs text-slate-300 font-medium mb-1 flex items-center gap-1">
+                    <CheckIcon className="w-3 h-3" />
+                    ステータス変更
+                  </div>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                      title="選択したタスクを進行中に変更"
+                    >
+                      進行中
+                    </button>
+                    <button
+                      onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
+                      title="選択したタスクを完了に変更"
+                    >
+                      完了
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Priority Change Section */}
+                <div className="bg-slate-700/50 rounded-lg p-2 border border-slate-600">
+                  <div className="text-xs text-slate-300 font-medium mb-1 flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                    優先度変更
+                  </div>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.HIGH)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
+                      title="選択したタスクを高優先度に変更"
+                    >
+                      高
+                    </button>
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.MEDIUM)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-600 hover:bg-yellow-700 text-white rounded transition-colors"
+                      title="選択したタスクを中優先度に変更"
+                    >
+                      中
+                    </button>
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.LOW)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-gray-600 hover:bg-gray-700 text-white rounded transition-colors"
+                      title="選択したタスクを低優先度に変更"
+                    >
+                      低
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Delete Section */}
+                <div className="bg-red-900/30 rounded-lg p-2 border border-red-700">
+                  <div className="text-xs text-red-300 font-medium mb-1 flex items-center gap-1">
+                    <DeleteIcon className="w-3 h-3" />
+                    削除
+                  </div>
+                  <button
+                    onClick={handleBulkDelete}
+                    className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-700 hover:bg-red-800 text-white rounded transition-colors"
+                    title="選択したタスクを削除"
+                  >
+                    削除
+                  </button>
+                </div>
               </div>
             )}
           </div>
