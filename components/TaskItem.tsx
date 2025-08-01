@@ -23,6 +23,8 @@ interface TaskItemProps {
   isSelectionMode?: boolean;
   isSelected?: boolean;
   onSelectionChange?: (taskId: string, isSelected: boolean) => void;
+  taskSize?: 'compact' | 'normal' | 'expanded';
+  onTaskSizeChange?: (size: 'compact' | 'normal' | 'expanded') => void;
 }
 
 const formatDate = (dateString: string): string => {
@@ -30,7 +32,7 @@ const formatDate = (dateString: string): string => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUpdateTask, allTasks, isSelectionMode, isSelected, onSelectionChange }) => {
+export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUpdateTask, allTasks, isSelectionMode, isSelected, onSelectionChange, taskSize = 'normal', onTaskSizeChange }) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -128,8 +130,88 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
     }
   }, [editingField]);
   
+  const getSizeClasses = () => {
+    switch (taskSize) {
+      case 'compact':
+        return 'p-2 sm:p-3';
+      case 'expanded':
+        return 'p-6 sm:p-7';
+      default:
+        return 'p-4 sm:p-5';
+    }
+  };
+
+  const getTextSizes = () => {
+    switch (taskSize) {
+      case 'compact':
+        return {
+          title: 'text-lg',
+          description: 'text-xs',
+          details: 'text-xs',
+          button: 'text-xs px-2 py-1'
+        };
+      case 'expanded':
+        return {
+          title: 'text-2xl',
+          description: 'text-base',
+          details: 'text-base',
+          button: 'text-sm px-4 py-2'
+        };
+      default:
+        return {
+          title: 'text-xl',
+          description: 'text-sm',
+          details: 'text-sm',
+          button: 'text-sm px-3 py-1.5'
+        };
+    }
+  };
+
+  const textSizes = getTextSizes();
+
   return (
-    <div className={`bg-slate-800/90 backdrop-blur-sm shadow-lg rounded-lg p-4 sm:p-5 transition-all hover:shadow-xl hover:shadow-sky-500/20 border border-slate-700/50 ${isSelectionMode && isSelected ? 'ring-2 ring-purple-500 shadow-purple-500/20' : ''}`}>
+    <div className={`bg-slate-800/90 backdrop-blur-sm shadow-lg rounded-lg ${getSizeClasses()} transition-all hover:shadow-xl hover:shadow-sky-500/20 border border-slate-700/50 ${isSelectionMode && isSelected ? 'ring-2 ring-purple-500 shadow-purple-500/20' : ''} relative group`}>
+      {/* Size Control */}
+      {onTaskSizeChange && (
+        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+          <div className="bg-slate-700/90 rounded-md border border-slate-600 flex">
+            <button
+              onClick={() => onTaskSizeChange('compact')}
+              className={`px-2 py-1 text-xs font-medium transition-colors ${
+                taskSize === 'compact' 
+                  ? 'bg-sky-600 text-white' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
+              } rounded-l-md`}
+              title="コンパクト表示"
+            >
+              S
+            </button>
+            <button
+              onClick={() => onTaskSizeChange('normal')}
+              className={`px-2 py-1 text-xs font-medium transition-colors ${
+                taskSize === 'normal' 
+                  ? 'bg-sky-600 text-white' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
+              }`}
+              title="通常表示"
+            >
+              M
+            </button>
+            <button
+              onClick={() => onTaskSizeChange('expanded')}
+              className={`px-2 py-1 text-xs font-medium transition-colors ${
+                taskSize === 'expanded' 
+                  ? 'bg-sky-600 text-white' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
+              } rounded-r-md`}
+              title="拡大表示"
+            >
+              L
+            </button>
+          </div>
+        </div>
+      )}
+      
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center gap-3">
           {isSelectionMode && (
@@ -148,7 +230,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
                 value={editValue}
                 onChange={(e) => setEditValue(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="text-xl font-semibold text-sky-400 bg-slate-700 border border-slate-600 rounded px-2 py-1 flex-1 min-w-0"
+                className={`${textSizes.title} font-semibold text-sky-400 bg-slate-700 border border-slate-600 rounded px-2 py-1 flex-1 min-w-0`}
               />
               <div className="flex items-center gap-1 flex-shrink-0">
                 <button
@@ -169,7 +251,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
             </div>
           ) : (
             <h3 
-              className="text-xl font-semibold text-sky-400 cursor-pointer hover:text-sky-300 transition-colors"
+              className={`${textSizes.title} font-semibold text-sky-400 cursor-pointer hover:text-sky-300 transition-colors`}
               onClick={() => startInlineEdit('name', task.name)}
               title="クリックして編集"
             >
@@ -257,14 +339,14 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
       </div>
       {task.description && (
         <p 
-          className="text-slate-400 text-sm mb-3 cursor-pointer hover:text-slate-200 transition-colors"
+          className={`text-slate-400 ${textSizes.description} mb-3 cursor-pointer hover:text-slate-200 transition-colors`}
           onClick={() => onEdit(task)}
           title="クリックして編集"
         >
           {task.description}
         </p>
       )}
-      <div className="grid grid-cols-1 gap-y-2 text-sm mb-3">
+      <div className={`grid grid-cols-1 gap-y-2 ${textSizes.details} mb-3`}>
         <div className="flex flex-col sm:flex-row sm:gap-x-4 gap-y-1">
           <div className="text-slate-400 sm:flex-1">
             <strong className="text-slate-300">開始日:</strong> 
@@ -346,7 +428,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
           </div>
         </div>
       </div>
-       <div className="text-sm mb-4">
+       <div className={`${textSizes.details} mb-4`}>
         <p className="text-slate-400">
           <strong className="text-slate-300">依存先:</strong> 
           <span 
@@ -361,7 +443,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
       <div className="flex flex-col sm:flex-row justify-end gap-2 sm:space-x-2 sm:gap-0">
         <button
           onClick={handleExportToCalendar}
-          className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-all border border-green-700/50 hover:border-green-600 hover:shadow-md min-h-[36px]"
+          className={`flex items-center justify-center gap-1.5 ${textSizes.button} font-medium text-green-400 bg-green-900/50 hover:bg-green-800/70 rounded-md transition-all border border-green-700/50 hover:border-green-600 hover:shadow-md ${taskSize === 'compact' ? 'min-h-[32px]' : 'min-h-[36px]'}`}
           title="Google Calendarにエクスポート"
         >
           <CalendarIcon className={iconSizes.sm} />
@@ -369,14 +451,14 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
         </button>
         <button
           onClick={() => onEdit(task)}
-          className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm font-medium text-sky-400 bg-sky-900/50 hover:bg-sky-800/70 rounded-md transition-all border border-sky-700/50 hover:border-sky-600 hover:shadow-md min-h-[36px]"
+          className={`flex items-center justify-center gap-1.5 ${textSizes.button} font-medium text-sky-400 bg-sky-900/50 hover:bg-sky-800/70 rounded-md transition-all border border-sky-700/50 hover:border-sky-600 hover:shadow-md ${taskSize === 'compact' ? 'min-h-[32px]' : 'min-h-[36px]'}`}
         >
           <EditIcon className={iconSizes.sm} />
           <span className="hidden sm:inline">編集</span>
         </button>
         <button
           onClick={() => onDelete(task.id)}
-          className="flex items-center justify-center gap-1.5 px-3 py-1.5 text-sm font-medium text-red-400 bg-red-900/50 hover:bg-red-800/70 rounded-md transition-all border border-red-700/50 hover:border-red-600 hover:shadow-md min-h-[36px]"
+          className={`flex items-center justify-center gap-1.5 ${textSizes.button} font-medium text-red-400 bg-red-900/50 hover:bg-red-800/70 rounded-md transition-all border border-red-700/50 hover:border-red-600 hover:shadow-md ${taskSize === 'compact' ? 'min-h-[32px]' : 'min-h-[36px]'}`}
         >
           <DeleteIcon className={iconSizes.sm} />
           <span className="hidden sm:inline">削除</span>

@@ -43,6 +43,10 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedTasks, setSelectedTasks] = useState<Set<string>>(new Set());
   const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [taskSize, setTaskSize] = useState<'compact' | 'normal' | 'expanded'>(() => {
+    const saved = localStorage.getItem('taskListSize');
+    return (saved as 'compact' | 'normal' | 'expanded') || 'normal';
+  });
   const [filters, setFilters] = useState<FilterState>({
     status: 'all',
     priority: 'all',
@@ -114,6 +118,11 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
     if (isSelectionMode) {
       setSelectedTasks(new Set());
     }
+  };
+
+  const handleTaskSizeChange = (size: 'compact' | 'normal' | 'expanded') => {
+    setTaskSize(size);
+    localStorage.setItem('taskListSize', size);
   };
 
   const applyFilters = (tasks: Task[]): Task[] => {
@@ -209,7 +218,46 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
       <div className={`${isInSplitView ? 'flex-shrink-0' : ''} space-y-4`}>
         {/* Filter Controls */}
         <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4 items-start">
+            {/* Task Size Controls */}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-slate-300">表示サイズ:</label>
+              <div className="flex bg-slate-700 rounded border border-slate-600">
+                <button
+                  onClick={() => handleTaskSizeChange('compact')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'compact' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  } rounded-l`}
+                  title="コンパクト表示"
+                >
+                  S
+                </button>
+                <button
+                  onClick={() => handleTaskSizeChange('normal')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'normal' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  }`}
+                  title="通常表示"
+                >
+                  M
+                </button>
+                <button
+                  onClick={() => handleTaskSizeChange('expanded')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'expanded' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  } rounded-r`}
+                  title="拡大表示"
+                >
+                  L
+                </button>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-slate-300">ステータス:</label>
               <select
@@ -434,6 +482,8 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
                           isSelectionMode={isSelectionMode}
                           isSelected={selectedTasks.has(task.id)}
                           onSelectionChange={handleTaskSelection}
+                          taskSize={taskSize}
+                          onTaskSizeChange={handleTaskSizeChange}
                         />
                       </div>
                     )}
