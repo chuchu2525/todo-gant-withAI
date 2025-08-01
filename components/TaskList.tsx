@@ -16,6 +16,7 @@ interface TaskListProps {
   tasks: Task[];
   onEditTask: (task: Task) => void;
   onDeleteTask: (taskId: string) => void;
+  onUpdateTask?: (updatedTask: Task) => void;
   onBulkUpdate?: (tasks: Task[]) => void;
   onReorderTasks?: (reorderedTasks: Task[]) => void;
   isInSplitView?: boolean;
@@ -37,7 +38,7 @@ const SORT_LABELS: { [key in SortKey]: string } = {
   status: 'ステータス',
 };
 
-export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onBulkUpdate, onReorderTasks, isInSplitView = false }) => {
+export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onUpdateTask, onBulkUpdate, onReorderTasks, isInSplitView = false }) => {
   const [sortKey, setSortKey] = useState<SortKey>('startDate');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedTasks, setSelectedTasks] = useState<Set<string>>(new Set());
@@ -368,6 +369,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
                           task={task}
                           onEdit={onEditTask}
                           onDelete={onDeleteTask}
+                          onUpdateTask={onUpdateTask}
                           allTasks={tasks}
                           isSelectionMode={isSelectionMode}
                           isSelected={selectedTasks.has(task.id)}

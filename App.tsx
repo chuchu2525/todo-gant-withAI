@@ -94,6 +94,12 @@ const App: React.FC = () => {
     setEditingTask(null);
   };
 
+  const handleInlineUpdateTask = (updatedTask: Task) => {
+    const newTasks = tasks.map(task => (task.id === updatedTask.id ? updatedTask : task));
+    setTasks(newTasks);
+    syncTasksToYaml(newTasks);
+  };
+
   const handleDeleteTask = (taskId: string) => {
     if (window.confirm('このタスクを削除してもよろしいですか？依存するタスクに影響する可能性があります。')) {
       const newTasks = tasks.filter(task => task.id !== taskId)
@@ -163,7 +169,7 @@ const App: React.FC = () => {
   const renderSingleView = (viewType: 'list' | 'gantt' | 'ai', isInSplitView: boolean = false) => {
     switch (viewType) {
       case 'list':
-        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} isInSplitView={isInSplitView} />;
+        return <TaskList tasks={tasks} onEditTask={handleEditTask} onDeleteTask={handleDeleteTask} onUpdateTask={handleInlineUpdateTask} onBulkUpdate={handleBulkUpdate} onReorderTasks={handleReorderTasks} isInSplitView={isInSplitView} />;
       case 'gantt':
         return <GanttChart tasks={tasks} onEditTask={handleEditTask} onTaskDateChange={handleTaskDateChange} onMultipleTaskDateChange={handleMultipleTaskDateChange} isInSplitView={isInSplitView} />;
       case 'ai':
