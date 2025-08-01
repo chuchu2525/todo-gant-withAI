@@ -1,11 +1,13 @@
 # CLAUDE.md
 
+機能追加の時は必ず PRD を作成すること
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Development Commands
 
 - **Start development server**: `npm run dev`
-- **Build for production**: `npm run build` 
+- **Build for production**: `npm run build`
 - **Preview production build**: `npm run preview`
 - **Run tests**: `npm test`
 - **Run tests with UI**: `npm test:ui`
@@ -28,18 +30,21 @@ This is a React-based todo/gantt chart application with AI integration. The app 
 
 ### Core Architecture
 
-**State Management**: 
+**State Management**:
+
 - App-level state in `App.tsx` manages all tasks, view modes, and synchronization
 - Tasks are stored as YAML in localStorage and parsed/stringified via `yamlService.ts`
 - Real-time sync between GUI changes and YAML representation
 
 **View System**:
-- Single views: `list`, `gantt`, `ai`  
+
+- Single views: `list`, `gantt`, `ai`
 - Split views: `split-list-gantt`, `split-list-ai`, `split-gantt-ai`
 - Mobile responsive with split views fallback to single views
 - `ResizablePanel` component handles split view layouts with persistent sizing
 
 **Data Flow**:
+
 1. Tasks stored as YAML string in localStorage
 2. YAML parsed to Task objects for rendering
 3. GUI modifications update Task objects
@@ -64,6 +69,7 @@ This is a React-based todo/gantt chart application with AI integration. The app 
 ### Type System
 
 Core types defined in `types.ts`:
+
 - `Task`: Main task entity with dependencies, dates, status, priority
 - `ViewMode`: Union type for all view configurations
 - `SplitViewConfig`: Configuration for split view layouts
@@ -72,8 +78,9 @@ Core types defined in `types.ts`:
 ### Security Features
 
 The geminiService implements several security measures:
+
 - Secure API key management with validation
-- Input sanitization and malicious payload detection  
+- Input sanitization and malicious payload detection
 - Request/response validation
 - Size limits on YAML and instruction inputs
 - No sensitive data logging in production
@@ -89,6 +96,6 @@ The geminiService implements several security measures:
 
 - Root level: Main app files (App.tsx, types.ts, constants.ts)
 - `/components/`: React components
-- `/services/`: Business logic and external integrations  
+- `/services/`: Business logic and external integrations
 - `/src/`: Additional source files including tests
 - `/styles/`: Global CSS

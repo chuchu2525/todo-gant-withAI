@@ -255,7 +255,15 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
           )}
         </div>
       </div>
-      {task.description && <p className="text-slate-400 text-sm mb-3">{task.description}</p>}
+      {task.description && (
+        <p 
+          className="text-slate-400 text-sm mb-3 cursor-pointer hover:text-slate-200 transition-colors"
+          onClick={() => onEdit(task)}
+          title="クリックして編集"
+        >
+          {task.description}
+        </p>
+      )}
       <div className="grid grid-cols-1 gap-y-2 text-sm mb-3">
         <div className="flex flex-col sm:flex-row sm:gap-x-4 gap-y-1">
           <div className="text-slate-400 sm:flex-1">
@@ -339,7 +347,16 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
         </div>
       </div>
        <div className="text-sm mb-4">
-        <p className="text-slate-400"><strong className="text-slate-300">依存先:</strong> {getDependencyNames(task.dependencies)}</p>
+        <p className="text-slate-400">
+          <strong className="text-slate-300">依存先:</strong> 
+          <span 
+            className="cursor-pointer hover:text-slate-200 transition-colors ml-2"
+            onClick={() => onEdit(task)}
+            title="クリックして編集"
+          >
+            {getDependencyNames(task.dependencies)}
+          </span>
+        </p>
       </div>
       <div className="flex flex-col sm:flex-row justify-end gap-2 sm:space-x-2 sm:gap-0">
         <button
