@@ -16,6 +16,7 @@ interface TaskListProps {
   tasks: Task[];
   onEditTask: (task: Task) => void;
   onDeleteTask: (taskId: string) => void;
+  onUpdateTask?: (updatedTask: Task) => void;
   onBulkUpdate?: (tasks: Task[]) => void;
   onReorderTasks?: (reorderedTasks: Task[]) => void;
   isInSplitView?: boolean;
@@ -37,11 +38,15 @@ const SORT_LABELS: { [key in SortKey]: string } = {
   status: 'ステータス',
 };
 
-export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onBulkUpdate, onReorderTasks, isInSplitView = false }) => {
+export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteTask, onUpdateTask, onBulkUpdate, onReorderTasks, isInSplitView = false }) => {
   const [sortKey, setSortKey] = useState<SortKey>('startDate');
   const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
   const [selectedTasks, setSelectedTasks] = useState<Set<string>>(new Set());
   const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [taskSize, setTaskSize] = useState<'compact' | 'normal' | 'expanded'>(() => {
+    const saved = localStorage.getItem('taskListSize');
+    return (saved as 'compact' | 'normal' | 'expanded') || 'normal';
+  });
   const [filters, setFilters] = useState<FilterState>({
     status: 'all',
     priority: 'all',
@@ -98,11 +103,26 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
     setIsSelectionMode(false);
   };
 
+  const handleBulkPriorityChange = (priority: TaskPriority) => {
+    if (selectedTasks.size === 0 || !onBulkUpdate) return;
+    const updatedTasks = tasks.map(task => 
+      selectedTasks.has(task.id) ? { ...task, priority } : task
+    );
+    onBulkUpdate(updatedTasks);
+    setSelectedTasks(new Set());
+    setIsSelectionMode(false);
+  };
+
   const toggleSelectionMode = () => {
     setIsSelectionMode(!isSelectionMode);
     if (isSelectionMode) {
       setSelectedTasks(new Set());
     }
+  };
+
+  const handleTaskSizeChange = (size: 'compact' | 'normal' | 'expanded') => {
+    setTaskSize(size);
+    localStorage.setItem('taskListSize', size);
   };
 
   const applyFilters = (tasks: Task[]): Task[] => {
@@ -198,7 +218,46 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
       <div className={`${isInSplitView ? 'flex-shrink-0' : ''} space-y-4`}>
         {/* Filter Controls */}
         <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 mb-4 items-start">
+            {/* Task Size Controls */}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-slate-300">表示サイズ:</label>
+              <div className="flex bg-slate-700 rounded border border-slate-600">
+                <button
+                  onClick={() => handleTaskSizeChange('compact')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'compact' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  } rounded-l`}
+                  title="コンパクト表示"
+                >
+                  S
+                </button>
+                <button
+                  onClick={() => handleTaskSizeChange('normal')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'normal' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  }`}
+                  title="通常表示"
+                >
+                  M
+                </button>
+                <button
+                  onClick={() => handleTaskSizeChange('expanded')}
+                  className={`px-2 py-1 text-xs font-medium transition-colors ${
+                    taskSize === 'expanded' 
+                      ? 'bg-sky-600 text-white' 
+                      : 'text-slate-300 hover:text-white hover:bg-slate-600'
+                  } rounded-r`}
+                  title="拡大表示"
+                >
+                  L
+                </button>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
               <label className="text-sm font-medium text-slate-300">ステータス:</label>
               <select
@@ -312,28 +371,78 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
             </div>
             
             {selectedTasks.size > 0 && (
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
-                >
-                  <CheckIcon className={iconSizes.xs} />
-                  進行中に変更
-                </button>
-                <button
-                  onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
-                >
-                  <CheckIcon className={iconSizes.xs} />
-                  完了に変更
-                </button>
-                <button
-                  onClick={handleBulkDelete}
-                  className="flex items-center gap-1 px-3 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
-                >
-                  <DeleteIcon className={iconSizes.xs} />
-                  削除
-                </button>
+              <div className="flex flex-wrap gap-4">
+                {/* Status Change Section */}
+                <div className="bg-slate-700/50 rounded-lg p-2 border border-slate-600">
+                  <div className="text-xs text-slate-300 font-medium mb-1 flex items-center gap-1">
+                    <CheckIcon className="w-3 h-3" />
+                    ステータス変更
+                  </div>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => handleBulkStatusChange(TaskStatus.IN_PROGRESS)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                      title="選択したタスクを進行中に変更"
+                    >
+                      進行中
+                    </button>
+                    <button
+                      onClick={() => handleBulkStatusChange(TaskStatus.COMPLETED)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
+                      title="選択したタスクを完了に変更"
+                    >
+                      完了
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Priority Change Section */}
+                <div className="bg-slate-700/50 rounded-lg p-2 border border-slate-600">
+                  <div className="text-xs text-slate-300 font-medium mb-1 flex items-center gap-1">
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                    優先度変更
+                  </div>
+                  <div className="flex gap-1">
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.HIGH)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded transition-colors"
+                      title="選択したタスクを高優先度に変更"
+                    >
+                      高
+                    </button>
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.MEDIUM)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-yellow-600 hover:bg-yellow-700 text-white rounded transition-colors"
+                      title="選択したタスクを中優先度に変更"
+                    >
+                      中
+                    </button>
+                    <button
+                      onClick={() => handleBulkPriorityChange(TaskPriority.LOW)}
+                      className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-gray-600 hover:bg-gray-700 text-white rounded transition-colors"
+                      title="選択したタスクを低優先度に変更"
+                    >
+                      低
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Delete Section */}
+                <div className="bg-red-900/30 rounded-lg p-2 border border-red-700">
+                  <div className="text-xs text-red-300 font-medium mb-1 flex items-center gap-1">
+                    <DeleteIcon className="w-3 h-3" />
+                    削除
+                  </div>
+                  <button
+                    onClick={handleBulkDelete}
+                    className="flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-700 hover:bg-red-800 text-white rounded transition-colors"
+                    title="選択したタスクを削除"
+                  >
+                    削除
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -368,10 +477,13 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
                           task={task}
                           onEdit={onEditTask}
                           onDelete={onDeleteTask}
+                          onUpdateTask={onUpdateTask}
                           allTasks={tasks}
                           isSelectionMode={isSelectionMode}
                           isSelected={selectedTasks.has(task.id)}
                           onSelectionChange={handleTaskSelection}
+                          taskSize={taskSize}
+                          onTaskSizeChange={handleTaskSizeChange}
                         />
                       </div>
                     )}
