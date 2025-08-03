@@ -251,9 +251,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
             </div>
           ) : (
             <h3 
-              className={`${textSizes.title} font-semibold text-sky-400 cursor-pointer hover:text-sky-300 transition-colors`}
-              onClick={() => startInlineEdit('name', task.name)}
-              title="クリックして編集"
+              className={`${textSizes.title} font-semibold text-sky-400 ${!isSelectionMode ? 'cursor-pointer hover:text-sky-300' : 'cursor-default'} transition-colors`}
+              onClick={!isSelectionMode ? () => startInlineEdit('name', task.name) : undefined}
+              title={!isSelectionMode ? "クリックして編集" : ""}
             >
               {task.name}
             </h3>
@@ -290,9 +290,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
             </div>
           ) : (
             <span 
-              className={`px-2 py-1 text-xs font-semibold text-white rounded-full cursor-pointer hover:opacity-80 transition-opacity ${PRIORITY_COLORS[task.priority]}`}
-              onClick={() => startInlineEdit('priority', task.priority)}
-              title="クリックして編集"
+              className={`px-2 py-1 text-xs font-semibold text-white rounded-full ${!isSelectionMode ? 'cursor-pointer hover:opacity-80' : 'cursor-default'} transition-opacity ${PRIORITY_COLORS[task.priority]}`}
+              onClick={!isSelectionMode ? () => startInlineEdit('priority', task.priority) : undefined}
+              title={!isSelectionMode ? "クリックして編集" : ""}
             >
               {PRIORITY_TEXT_JP[task.priority]}
             </span>
@@ -328,9 +328,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
             </div>
           ) : (
             <span 
-              className={`px-2 py-1 text-xs font-semibold text-white rounded-full cursor-pointer hover:opacity-80 transition-opacity ${STATUS_COLORS[task.status]}`}
-              onClick={() => startInlineEdit('status', task.status)}
-              title="クリックして編集"
+              className={`px-2 py-1 text-xs font-semibold text-white rounded-full ${!isSelectionMode ? 'cursor-pointer hover:opacity-80' : 'cursor-default'} transition-opacity ${STATUS_COLORS[task.status]}`}
+              onClick={!isSelectionMode ? () => startInlineEdit('status', task.status) : undefined}
+              title={!isSelectionMode ? "クリックして編集" : ""}
             >
               {STATUS_TEXT_JP[task.status]}
             </span>
@@ -339,9 +339,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
       </div>
       {task.description && (
         <p 
-          className={`text-slate-400 ${textSizes.description} mb-3 cursor-pointer hover:text-slate-200 transition-colors`}
-          onClick={() => onEdit(task)}
-          title="クリックして編集"
+          className={`text-slate-400 ${textSizes.description} mb-3 ${!isSelectionMode ? 'cursor-pointer hover:text-slate-200' : 'cursor-default'} transition-colors`}
+          onClick={!isSelectionMode ? () => onEdit(task) : undefined}
+          title={!isSelectionMode ? "クリックして編集" : ""}
         >
           {task.description}
         </p>
@@ -379,9 +379,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
               </div>
             ) : (
               <span 
-                className="cursor-pointer hover:text-slate-200 transition-colors ml-2"
-                onClick={() => startInlineEdit('startDate', task.startDate)}
-                title="クリックして編集"
+                className={`${!isSelectionMode ? 'cursor-pointer hover:text-slate-200' : 'cursor-default'} transition-colors ml-2`}
+                onClick={!isSelectionMode ? () => startInlineEdit('startDate', task.startDate) : undefined}
+                title={!isSelectionMode ? "クリックして編集" : ""}
               >
                 {formatDate(task.startDate)}
               </span>
@@ -418,9 +418,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
               </div>
             ) : (
               <span 
-                className="cursor-pointer hover:text-slate-200 transition-colors ml-2"
-                onClick={() => startInlineEdit('endDate', task.endDate)}
-                title="クリックして編集"
+                className={`${!isSelectionMode ? 'cursor-pointer hover:text-slate-200' : 'cursor-default'} transition-colors ml-2`}
+                onClick={!isSelectionMode ? () => startInlineEdit('endDate', task.endDate) : undefined}
+                title={!isSelectionMode ? "クリックして編集" : ""}
               >
                 {formatDate(task.endDate)}
               </span>
@@ -432,9 +432,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
         <p className="text-slate-400">
           <strong className="text-slate-300">依存先:</strong> 
           <span 
-            className="cursor-pointer hover:text-slate-200 transition-colors ml-2"
-            onClick={() => onEdit(task)}
-            title="クリックして編集"
+            className={`${!isSelectionMode ? 'cursor-pointer hover:text-slate-200' : 'cursor-default'} transition-colors ml-2`}
+            onClick={!isSelectionMode ? () => onEdit(task) : undefined}
+            title={!isSelectionMode ? "クリックして編集" : ""}
           >
             {getDependencyNames(task.dependencies)}
           </span>
