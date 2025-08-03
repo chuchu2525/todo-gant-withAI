@@ -251,9 +251,9 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
             </div>
           ) : (
             <h3 
-              className={`${textSizes.title} font-semibold text-sky-400 ${!isSelectionMode ? 'cursor-pointer hover:text-sky-300' : 'cursor-default'} transition-colors`}
-              onClick={!isSelectionMode ? () => startInlineEdit('name', task.name) : undefined}
-              title={!isSelectionMode ? "クリックして編集" : ""}
+              className={`${textSizes.title} font-semibold text-sky-400 cursor-pointer ${!isSelectionMode ? 'hover:text-sky-300' : 'hover:text-sky-200'} transition-colors`}
+              onClick={!isSelectionMode ? () => startInlineEdit('name', task.name) : () => onSelectionChange && onSelectionChange(task.id, !isSelected)}
+              title={!isSelectionMode ? "クリックして編集" : "クリックして選択/解除"}
             >
               {task.name}
             </h3>
