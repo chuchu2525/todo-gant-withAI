@@ -685,9 +685,9 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
               {dateUnits.map((unitDate, i) => {
                 let displayContent;
                 if (timeUnit === 'day') {
-                  const day = unitDate.toLocaleDateString(undefined, { day: 'numeric' });
-                  const month = unitDate.toLocaleDateString(undefined, { month: 'short' });
-                  const weekday = unitDate.toLocaleDateString(undefined, { weekday: 'short' });
+                  const day = unitDate.toLocaleDateString('ja-JP', { day: 'numeric' });
+                  const month = unitDate.toLocaleDateString('ja-JP', { month: 'short' });
+                  const weekday = unitDate.toLocaleDateString('ja-JP', { weekday: 'short' });
                   displayContent = (
                     <div className="flex flex-col items-center justify-center h-full leading-tight whitespace-nowrap">
                       <span className="text-xs">{month} {day}</span>
@@ -697,10 +697,10 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
                 } else if (timeUnit === 'week') {
                   const weekEnd = new Date(unitDate);
                   weekEnd.setDate(unitDate.getDate() + 6);
-                  const displayDate = `${unitDate.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}`;
+                  const displayDate = `${unitDate.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })}`;
                   displayContent = displayDate;
                 } else { // month
-                  const displayDate = unitDate.toLocaleDateString(undefined, { year: 'numeric', month: 'long' });
+                  const displayDate = unitDate.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long' });
                   displayContent = displayDate;
                 }
                 return (

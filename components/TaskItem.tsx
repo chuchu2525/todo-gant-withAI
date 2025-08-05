@@ -29,7 +29,7 @@ interface TaskItemProps {
 
 const formatDate = (dateString: string): string => {
   const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
+  return new Date(dateString).toLocaleDateString('ja-JP', options);
 };
 
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUpdateTask, allTasks, isSelectionMode, isSelected, onSelectionChange, taskSize = 'normal', onTaskSizeChange }) => {

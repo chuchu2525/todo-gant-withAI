@@ -206,7 +206,7 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   });
 
   if (tasks.length === 0) {
-    return <p className="text-center text-slate-400 py-8">No tasks yet. Add one to get started!</p>;
+    return <p className="text-center text-slate-400 py-8">まだタスクがありません。最初のタスクを追加してください！</p>;
   }
 
   if (filteredTasks.length === 0) {

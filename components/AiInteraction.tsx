@@ -100,7 +100,7 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
             disabled={isLoading}
             className="mb-2 px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500 disabled:opacity-50"
           >
-            {isLoading && aiSummary === '' ? 'Generating Summary...' : 'Get AI Summary'}
+            {isLoading && aiSummary === '' ? 'AIサマリー生成中...' : 'AIサマリーを取得'}
           </button>
           {aiSummary && (
             <div className="bg-slate-800 p-4 rounded-md shadow">
@@ -110,11 +110,11 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-sky-400 mb-2">Manage Tasks with AI (via YAML)</h3>
+          <h3 className="text-xl font-semibold text-sky-400 mb-2">AIでタスクを管理 (YAML経由)</h3>
           <form onSubmit={handlePromptSubmit} className="space-y-3">
             <div>
               <label htmlFor="ai-prompt" className="block text-sm font-medium text-slate-300">
-                Enter command (e.g., "Add a new task 'Deploy App' due next Friday with high priority")
+                コマンドを入力 (例: "来週の金曜日までに高優先度で'アプリデプロイ'タスクを追加")
               </label>
               <textarea
                 id="ai-prompt"
@@ -122,7 +122,7 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
                 onChange={(e) => setUserPrompt(e.target.value)}
                 rows={3}
                 className="mt-1 block w-full bg-slate-700 border-slate-600 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm text-slate-100 disabled:opacity-60"
-                placeholder="Describe changes to tasks..."
+                placeholder="タスクへの変更を記述..."
                 disabled={isLoading}
               />
             </div>
@@ -131,20 +131,20 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
               disabled={isLoading}
               className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-green-500 disabled:opacity-50"
             >
-              {isLoading ? 'Processing...' : 'Update Tasks with AI'}
+              {isLoading ? '処理中...' : 'AIでタスクを更新'}
             </button>
           </form>
         </div>
 
         <div>
-          <h3 className="text-xl font-semibold text-sky-400 mb-2">Current Tasks (YAML) - Edit or Paste Here</h3>
+          <h3 className="text-xl font-semibold text-sky-400 mb-2">現在のタスク (YAML) - ここで編集または貼り付け</h3>
           <div className={`${isInSplitView ? 'flex-1' : ''}`}>
             <textarea
               value={editableYaml}
               onChange={(e) => setEditableYaml(e.target.value)}
               rows={yamlRows}
               className="w-full bg-slate-700 border-slate-600 text-slate-100 p-3 text-xs rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
-              aria-label="Current tasks in YAML format, editable"
+              aria-label="YAML形式の現在のタスク、編集可能"
               disabled={isLoading}
             />
             <button
@@ -152,7 +152,7 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
               disabled={isLoading}
               className="mt-2 px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-purple-500 disabled:opacity-50"
             >
-              {isLoading ? 'Applying YAML...' : 'Apply YAML Changes'}
+              {isLoading ? 'YAML適用中...' : 'YAML変更を適用'}
             </button>
           </div>
         </div>

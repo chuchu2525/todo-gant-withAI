@@ -275,7 +275,7 @@ const App: React.FC = () => {
                       : 'text-slate-300 hover:bg-slate-700/70 hover:text-white hover:shadow-md'}`}
                 >
                   {getViewIcon(view)}
-                  {view.charAt(0).toUpperCase() + view.slice(1)} View
+                  {view === 'list' ? 'リスト表示' : view === 'gantt' ? 'ガント表示' : 'AI表示'}
                 </button>
               );
             })}
@@ -346,7 +346,7 @@ const App: React.FC = () => {
         )}
          {isLoading && currentView !== 'ai' && ( // Show general loading indicator if not in AI view (AI view has its own)
           <div className="fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="text-white text-xl">Loading...</div>
+            <div className="text-white text-xl">読み込み中...</div>
           </div>
         )}
 
@@ -378,9 +378,9 @@ const App: React.FC = () => {
       
       <footer className="text-center p-4 text-xs text-slate-400 border-t border-slate-700/30 mt-8 bg-slate-800/20">
         <div className="flex items-center justify-center gap-2">
-          <span>Powered by React, Tailwind CSS, and Gemini AI</span>
+          <span>React、Tailwind CSS、Gemini AIで構築</span>
           <span className="text-slate-600">•</span>
-          <span className="text-sky-400">Made with ❤️</span>
+          <span className="text-sky-400">❤️で作成</span>
         </div>
       </footer>
     </div>

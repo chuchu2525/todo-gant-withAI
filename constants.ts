@@ -1,6 +1,6 @@
 import { TaskPriority, TaskStatus } from './types';
 
-export const APP_TITLE = "AI Powered TODO App";
+export const APP_TITLE = "AI搭載TODOアプリ";
 
 export const DEFAULT_TASK_STATUS = TaskStatus.NOT_STARTED;
 export const DEFAULT_TASK_PRIORITY = TaskPriority.MEDIUM;
