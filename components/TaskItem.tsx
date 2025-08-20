@@ -24,7 +24,6 @@ interface TaskItemProps {
   isSelected?: boolean;
   onSelectionChange?: (taskId: string, isSelected: boolean) => void;
   taskSize?: 'compact' | 'normal' | 'expanded';
-  onTaskSizeChange?: (size: 'compact' | 'normal' | 'expanded') => void;
 }
 
 const formatDate = (dateString: string): string => {
@@ -32,7 +31,7 @@ const formatDate = (dateString: string): string => {
   return new Date(dateString).toLocaleDateString('ja-JP', options);
 };
 
-export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUpdateTask, allTasks, isSelectionMode, isSelected, onSelectionChange, taskSize = 'normal', onTaskSizeChange }) => {
+export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUpdateTask, allTasks, isSelectionMode, isSelected, onSelectionChange, taskSize = 'normal' }) => {
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -171,46 +170,6 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, onDelete, onUp
 
   return (
     <div className={`bg-slate-800/90 backdrop-blur-sm shadow-lg rounded-lg ${getSizeClasses()} transition-all hover:shadow-xl hover:shadow-sky-500/20 border border-slate-700/50 ${isSelectionMode && isSelected ? 'ring-2 ring-purple-500 shadow-purple-500/20' : ''} relative group`}>
-      {/* Size Control */}
-      {onTaskSizeChange && (
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-          <div className="bg-slate-700/90 rounded-md border border-slate-600 flex">
-            <button
-              onClick={() => onTaskSizeChange('compact')}
-              className={`px-2 py-1 text-xs font-medium transition-colors ${
-                taskSize === 'compact' 
-                  ? 'bg-sky-600 text-white' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
-              } rounded-l-md`}
-              title="コンパクト表示"
-            >
-              S
-            </button>
-            <button
-              onClick={() => onTaskSizeChange('normal')}
-              className={`px-2 py-1 text-xs font-medium transition-colors ${
-                taskSize === 'normal' 
-                  ? 'bg-sky-600 text-white' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
-              }`}
-              title="通常表示"
-            >
-              M
-            </button>
-            <button
-              onClick={() => onTaskSizeChange('expanded')}
-              className={`px-2 py-1 text-xs font-medium transition-colors ${
-                taskSize === 'expanded' 
-                  ? 'bg-sky-600 text-white' 
-                  : 'text-slate-300 hover:text-white hover:bg-slate-600'
-              } rounded-r-md`}
-              title="拡大表示"
-            >
-              L
-            </button>
-          </div>
-        </div>
-      )}
       
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center gap-3">

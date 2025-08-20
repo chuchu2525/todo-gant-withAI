@@ -483,7 +483,6 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
                           isSelected={selectedTasks.has(task.id)}
                           onSelectionChange={handleTaskSelection}
                           taskSize={taskSize}
-                          onTaskSizeChange={handleTaskSizeChange}
                         />
                       </div>
                     )}
