@@ -214,7 +214,10 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
   }
 
   return (
-    <div className={`${isInSplitView ? 'h-full overflow-hidden' : ''} flex flex-col`}>
+    <div
+      data-testid="tasklist-container"
+      className={`${isInSplitView ? 'h-full overflow-hidden' : ''} flex flex-col`}
+    >
       <div className={`${isInSplitView ? 'flex-shrink-0' : ''} space-y-4`}>
         {/* Filter Controls */}
         <div className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 shadow-sm">
@@ -316,13 +319,14 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
               return (
                 <button
                   key={key}
+                  data-testid={`sort-button-${key}`}
                   onClick={() => handleSort(key)}
                   className={`flex items-center gap-1 px-3 py-1 text-xs rounded border transition-colors font-medium ${activeClass}`}
                 >
                   <span>{SORT_LABELS[key]}</span>
                   {isActive && (
-                    sortOrder === 'asc' 
-                      ? <ChevronUpIcon className={iconSizes.xs} /> 
+                    sortOrder === 'asc'
+                      ? <ChevronUpIcon className={iconSizes.xs} />
                       : <ChevronDownIcon className={iconSizes.xs} />
                   )}
                 </button>
@@ -497,4 +501,3 @@ export const TaskList: React.FC<TaskListProps> = ({ tasks, onEditTask, onDeleteT
     </div>
   );
 };
-    

@@ -91,7 +91,10 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
   const yamlRows = isInSplitView ? 10 : 15;
   
   return (
-    <div className={`${isInSplitView ? 'h-full overflow-hidden' : ''} flex flex-col`}>
+    <div
+      data-testid="ai-interaction-container"
+      className={`${isInSplitView ? 'h-full overflow-hidden' : ''} flex flex-col`}
+    >
       <div className={`${isInSplitView ? 'flex-1 overflow-auto' : ''} space-y-6 p-1`}>
         <div>
           <h3 className="text-xl font-semibold text-sky-400 mb-2">AI Task Summary</h3>
@@ -160,4 +163,3 @@ export const AiInteraction: React.FC<AiInteractionProps> = ({
     </div>
   );
 };
-    

@@ -12,12 +12,12 @@ export default defineConfig(({ mode }) => {
       },
       resolve: {
         alias: {
-          '@': path.resolve(__dirname, '.'),
+          '@': path.resolve(__dirname, 'src'),
         }
       },
       test: {
         environment: 'jsdom',
-        setupFiles: './src/test/setup.ts',
+        setupFiles: './tests/setup.ts',
         globals: true
       }
     };

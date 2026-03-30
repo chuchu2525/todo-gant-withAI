@@ -4,7 +4,7 @@ import {
   exportMultipleTasksToGoogleCalendar,
   getGoogleCalendarUrlForTask 
 } from '../../../services/calendarService';
-import { Task, TaskStatus, TaskPriority } from '../../../types';
+import { Task, TaskStatus, TaskPriority } from '@/types';
 
 describe('calendarService', () => {
   const mockTask: Task = {

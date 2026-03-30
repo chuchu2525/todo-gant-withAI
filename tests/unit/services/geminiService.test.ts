@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
-import { getAiTaskSummary, updateTasksViaAi } from '../../../services/geminiService';
-import { Task, TaskStatus, TaskPriority } from '../../../types';
+import { getAiTaskSummary, updateTasksViaAi, resetApiKeyManagerForTesting, resetApiKeyManagerInstanceForTesting } from '../../../src/services/geminiService';
+import { Task, TaskStatus, TaskPriority } from '../../../src/types';
 
 // GoogleGenAIをモック
 const mockGenerateContent = vi.fn();
@@ -38,6 +38,8 @@ describe('geminiService', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockGenerateContent.mockClear();
+    // 各テスト前にAPIキーマネージャーのインスタンスを完全にリセット
+    resetApiKeyManagerInstanceForTesting();
     // APIキーをモック
     vi.stubGlobal('process', {
       env: {
@@ -48,15 +50,27 @@ describe('geminiService', () => {
 
   describe('getAiTaskSummary', () => {
     it('APIキーが設定されていない場合、適切なメッセージを返す', async () => {
+      // 環境変数をクリアしてから新しいマネージャーを作成
       vi.stubGlobal('process', {
         env: {}
       });
-      
+
+      // 新しいマネージャーインスタンスを作成（APIキーがない状態）
+      resetApiKeyManagerInstanceForTesting();
+
       const result = await getAiTaskSummary(mockTasks);
       expect(result).toBe('API Key not configured. Cannot fetch summary.');
     });
 
     it('タスクが空の場合、適切なメッセージを返す', async () => {
+      // このテストではAPIキーが設定されている必要がある
+      vi.stubGlobal('process', {
+        env: {
+          GEMINI_API_KEY: 'test-api-key'
+        }
+      });
+      resetApiKeyManagerInstanceForTesting();
+
       const result = await getAiTaskSummary([]);
       expect(result).toBe('No tasks to summarize.');
     });
@@ -85,15 +99,26 @@ describe('geminiService', () => {
       vi.stubGlobal('process', {
         env: {}
       });
-      
+
+      // APIキーマネージャーをリセットして再初期化をトリガー
+      resetApiKeyManagerForTesting();
+
       await expect(updateTasksViaAi('yaml content', 'instruction')).rejects.toThrow('API Key not configured. Cannot update tasks via AI.');
     });
 
     it('正常なYAMLレスポンスを返す', async () => {
+      // このテストではAPIキーが設定されている必要がある
+      vi.stubGlobal('process', {
+        env: {
+          GEMINI_API_KEY: 'test-api-key'
+        }
+      });
+      resetApiKeyManagerInstanceForTesting();
+
       const mockResponse = {
         text: '```yaml\ntasks:\n  - id: 1\n    name: Updated Task\n```'
       };
-      
+
       mockGenerateContent.mockResolvedValue(mockResponse);
 
       const result = await updateTasksViaAi('original yaml', 'update instruction');
@@ -140,29 +165,40 @@ describe('geminiService', () => {
 
     it('APIキーが環境変数に存在しない場合、警告を出力', async () => {
       const consoleWarnSpy = vi.spyOn(console, 'warn');
-      
+
       vi.stubGlobal('process', {
         env: {
           NODE_ENV: 'development'
         }
       });
-      
+
+      // APIキーマネージャーをリセットして警告をトリガー
+      resetApiKeyManagerForTesting();
+
       // 新しいgeminiServiceをインポートして警告をトリガー
       const result = await getAiTaskSummary(mockTasks);
-      
+
       expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('GEMINI_API_KEY not found'));
       expect(result).toBe('API Key not configured. Cannot fetch summary.');
-      
+
       consoleWarnSpy.mockRestore();
     });
 
     it('悪意のある入力を検出して拒否する', async () => {
+      // このテストではAPIキーが設定されている必要がある
+      vi.stubGlobal('process', {
+        env: {
+          GEMINI_API_KEY: 'test-api-key'
+        }
+      });
+      resetApiKeyManagerInstanceForTesting();
+
       const maliciousTask = {
         ...mockTasks[0],
         name: '<script>alert("xss")</script>',
         description: 'javascript:alert("xss")'
       };
-      
+
       const result = await getAiTaskSummary([maliciousTask]);
       expect(result).toBe('Invalid input detected. Cannot process request.');
     });

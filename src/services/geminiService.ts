@@ -13,23 +13,32 @@ class SecureApiKeyManager {
 
   private initializeApiKey() {
     if (this.isInitialized) return;
-    
+
     // セキュリティ: 環境変数からAPIキーを取得、コンソールに出力しない
     if (typeof process !== 'undefined' && process.env && process.env.GEMINI_API_KEY) {
       this.apiKey = process.env.GEMINI_API_KEY;
     } else {
-      // セキュリティ: APIキーがない場合の警告（プロダクション環境では無効化）
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn("GEMINI_API_KEY not found in process.env. Please set it in your environment variables.");
-      }
       this.apiKey = null;
     }
-    
+
     this.isInitialized = true;
   }
 
+  // テスト用のリセット機能
+  public resetForTesting() {
+    this.apiKey = null;
+    this.isInitialized = false;
+  }
+
   public hasApiKey(): boolean {
-    return this.apiKey !== null && this.apiKey.length > 0;
+    const hasKey = this.apiKey !== null && this.apiKey.length > 0;
+
+    // セキュリティ: APIキーがない場合の警告（プロダクション環境では無効化）
+    if (!hasKey && process.env.NODE_ENV !== 'production') {
+      console.warn("GEMINI_API_KEY not found in process.env. Please set it in your environment variables.");
+    }
+
+    return hasKey;
   }
 
   public getApiKey(): string | null {
@@ -47,7 +56,7 @@ class SecureApiKeyManager {
 }
 
 // シングルトンパターンでAPIキーマネージャーを管理
-const apiKeyManager = new SecureApiKeyManager();
+let apiKeyManager = new SecureApiKeyManager();
 
 // セキュリティ強化: AI インスタンスの安全な初期化
 function createSecureAiInstance(): GoogleGenAI | null {
@@ -231,3 +240,13 @@ export const getApiKeyStatus = () => ({
   hasApiKey: apiKeyManager.hasApiKey(),
   isValid: apiKeyManager.isValidApiKey()
 });
+
+// テスト用のAPIキーマネージャーリセット機能
+export const resetApiKeyManagerForTesting = () => {
+  apiKeyManager.resetForTesting();
+};
+
+// テスト用の完全なリセット機能（新しいインスタンスを作成）
+export const resetApiKeyManagerInstanceForTesting = () => {
+  apiKeyManager = new SecureApiKeyManager();
+};

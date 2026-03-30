@@ -1,0 +1,4721 @@
+{
+  "schemaVersion": 1,
+  "projectPath": "/Users/yuukun/Documents/Project/todo-gant-withAI",
+  "projectRootName": "todo-gant-withAI",
+  "graphRenderingMode": "multi-agent",
+  "linkDisplayMode": "all",
+  "graphStats": {
+    "totalNodes": 64,
+    "folders": 17,
+    "files": 47,
+    "images": 0,
+    "videos": 0,
+    "audio": 0,
+    "code": 27,
+    "text": 10,
+    "html": 1,
+    "yaml": 1,
+    "json": 4,
+    "other": 4,
+    "totalLines": 0,
+    "maxLines": 0
+  },
+  "directoryTree": {
+    "name": "todo-gant-withAI",
+    "type": "directory",
+    "children": [
+      {
+        "name": ".claude",
+        "type": "directory",
+        "children": [
+          {
+            "name": "agents",
+            "type": "directory",
+            "children": [
+              {
+                "name": "backend-engineer.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "code-reviewer.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "devops-engineer.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "engineering-manager.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "frontend-engineer.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "tech-lead.md",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "test-engineer.md",
+                "type": "file",
+                "lines": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": ".serena",
+        "type": "directory",
+        "children": [
+          {
+            "name": "cache",
+            "type": "directory",
+            "children": [
+              {
+                "name": "typescript",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "document_symbols_cache_v23-06-25.pkl",
+                    "type": "file",
+                    "lines": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "project.yml",
+            "type": "file",
+            "lines": 0
+          }
+        ]
+      },
+      {
+        "name": "App.tsx",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "components",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AiInteraction.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "GanttChart.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "Modal.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "ResizablePanel.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "TaskForm.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "TaskItem.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "TaskList.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "icons",
+            "type": "directory",
+            "children": [
+              {
+                "name": "index.tsx",
+                "type": "file",
+                "lines": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "constants.ts",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "e2e-test-scenarios.md",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "globals.d.ts",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "index.tsx",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "metadata.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "nohup.out",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "services",
+        "type": "directory",
+        "children": [
+          {
+            "name": "calendarService.ts",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "geminiService.ts",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "yamlService.ts",
+            "type": "file",
+            "lines": 0
+          }
+        ]
+      },
+      {
+        "name": "src",
+        "type": "directory",
+        "children": [
+          {
+            "name": "__tests__",
+            "type": "directory",
+            "children": [
+              {
+                "name": "SplitViewIntegration.test.tsx",
+                "type": "file",
+                "lines": 0
+              }
+            ]
+          },
+          {
+            "name": "components",
+            "type": "directory",
+            "children": [
+              {
+                "name": "ErrorBoundary.tsx",
+                "type": "file",
+                "lines": 0
+              },
+              {
+                "name": "__tests__",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "ErrorBoundary.test.tsx",
+                    "type": "file",
+                    "lines": 0
+                  },
+                  {
+                    "name": "ScrollBehavior.test.tsx",
+                    "type": "file",
+                    "lines": 0
+                  },
+                  {
+                    "name": "TaskForm.test.tsx",
+                    "type": "file",
+                    "lines": 0
+                  },
+                  {
+                    "name": "TaskItem.test.tsx",
+                    "type": "file",
+                    "lines": 0
+                  },
+                  {
+                    "name": "TaskList.test.tsx",
+                    "type": "file",
+                    "lines": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "services",
+            "type": "directory",
+            "children": [
+              {
+                "name": "__tests__",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "calendarService.test.ts",
+                    "type": "file",
+                    "lines": 0
+                  },
+                  {
+                    "name": "geminiService.test.ts",
+                    "type": "file",
+                    "lines": 0
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "test",
+            "type": "directory",
+            "children": [
+              {
+                "name": "setup.ts",
+                "type": "file",
+                "lines": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "styles",
+        "type": "directory",
+        "children": [
+          {
+            "name": "globals.css",
+            "type": "file",
+            "lines": 0
+          }
+        ]
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "types.ts",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "vite.config.ts",
+        "type": "file",
+        "lines": 0
+      }
+    ]
+  },
+  "graphData": {
+    "nodes": [
+      {
+        "id": "todo-gant-withAI",
+        "name": "todo-gant-withAI",
+        "path": "todo-gant-withAI",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": null,
+        "childFileCount": 16,
+        "x": -3.745939913659041,
+        "y": -1.2869304654131577,
+        "z": 49.441855834567136,
+        "vx": -5.046956691872494e-19,
+        "vy": 2.875197785604181e-19,
+        "vz": 6.822630697622954e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude",
+        "name": ".claude",
+        "path": "todo-gant-withAI/.claude",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 3.412404302224283,
+        "y": -98.61950048933765,
+        "z": 35.769493126013614,
+        "vx": -5.832652525919141e-19,
+        "vy": 7.1485686183909745e-19,
+        "vz": 7.019125466932985e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents",
+        "name": "agents",
+        "path": "todo-gant-withAI/.claude/agents",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude",
+        "childFileCount": 7,
+        "x": 11.184237510909227,
+        "y": -185.65960757559307,
+        "z": 24.904238485464898,
+        "vx": -6.851171459987516e-19,
+        "vy": 3.9259470430385695e-19,
+        "vz": 6.212063920131408e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/backend-engineer.md",
+        "name": "backend-engineer.md",
+        "path": "todo-gant-withAI/.claude/agents/backend-engineer.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": 2.4497221688757045,
+        "y": -200.28505004108544,
+        "z": -11.420308196993044,
+        "vx": -9.24613507721088e-19,
+        "vy": 1.2257440529044653e-19,
+        "vz": 6.264865274282029e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/code-reviewer.md",
+        "name": "code-reviewer.md",
+        "path": "todo-gant-withAI/.claude/agents/code-reviewer.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": 44.78801671271123,
+        "y": -205.972580756162,
+        "z": 12.686283799256234,
+        "vx": -4.871062758099697e-19,
+        "vy": 6.409607531226263e-19,
+        "vz": 6.991750825338437e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/devops-engineer.md",
+        "name": "devops-engineer.md",
+        "path": "todo-gant-withAI/.claude/agents/devops-engineer.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": -18.760895949091086,
+        "y": -212.58119899853506,
+        "z": 18.32926101631271,
+        "vx": -6.805122477548866e-19,
+        "vy": 2.59884807280237e-19,
+        "vz": 6.640284335767585e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/engineering-manager.md",
+        "name": "engineering-manager.md",
+        "path": "todo-gant-withAI/.claude/agents/engineering-manager.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": -3.4342200819788418,
+        "y": -211.70619439216617,
+        "z": 52.10115544551475,
+        "vx": -7.046516490990464e-19,
+        "vy": 4.362417418423336e-19,
+        "vz": 7.41540462663843e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/frontend-engineer.md",
+        "name": "frontend-engineer.md",
+        "path": "todo-gant-withAI/.claude/agents/frontend-engineer.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": 34.35531602505116,
+        "y": -210.94636380684244,
+        "z": 47.4267346218981,
+        "vx": -5.773963066005918e-19,
+        "vy": 3.812424398497397e-19,
+        "vz": 5.99548346143844e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/tech-lead.md",
+        "name": "tech-lead.md",
+        "path": "todo-gant-withAI/.claude/agents/tech-lead.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": 20.050391223167885,
+        "y": -219.61036506773445,
+        "z": 0.941196528902867,
+        "vx": -3.67385462144857e-19,
+        "vy": 4.456802149557073e-19,
+        "vz": 6.621033263583624e-19
+      },
+      {
+        "id": "todo-gant-withAI/.claude/agents/test-engineer.md",
+        "name": "test-engineer.md",
+        "path": "todo-gant-withAI/.claude/agents/test-engineer.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.claude/agents",
+        "childFileCount": 0,
+        "x": 14.083347137966442,
+        "y": -228.30521936338764,
+        "z": 28.949821784907915,
+        "vx": -8.678732929140721e-19,
+        "vy": 4.089172408957594e-19,
+        "vz": 7.630356318495619e-19
+      },
+      {
+        "id": "todo-gant-withAI/.gitignore",
+        "name": ".gitignore",
+        "path": "todo-gant-withAI/.gitignore",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#57606f",
+        "originalColor": "#57606f",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -43.20733574310976,
+        "y": 4.4686930684187285,
+        "z": 34.4591148516917,
+        "vx": -5.68448579152117e-19,
+        "vy": 3.1184792848893846e-19,
+        "vz": 8.633830633973523e-19
+      },
+      {
+        "id": "todo-gant-withAI/.serena",
+        "name": ".serena",
+        "path": "todo-gant-withAI/.serena",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 1,
+        "x": 0.9494728520647666,
+        "y": -9.97855753585375,
+        "z": 150.09747770601857,
+        "vx": -7.136917824481607e-19,
+        "vy": 2.0982077892318925e-19,
+        "vz": 4.1998943116945015e-19
+      },
+      {
+        "id": "todo-gant-withAI/.serena/cache",
+        "name": "cache",
+        "path": "todo-gant-withAI/.serena/cache",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.serena",
+        "childFileCount": 0,
+        "x": 6.670459713875708,
+        "y": -17.523699197760827,
+        "z": 230.60463498224553,
+        "vx": -8.573574448746183e-19,
+        "vy": 2.0305485780704334e-19,
+        "vz": 6.200032586030604e-19
+      },
+      {
+        "id": "todo-gant-withAI/.serena/cache/typescript",
+        "name": "typescript",
+        "path": "todo-gant-withAI/.serena/cache/typescript",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/.serena/cache",
+        "childFileCount": 1,
+        "x": 12.054899142716344,
+        "y": -23.123911245775368,
+        "z": 292.4726287882636,
+        "vx": -8.990210633730347e-19,
+        "vy": 2.1424507817576737e-19,
+        "vz": 1.1477318095020075e-18
+      },
+      {
+        "id": "todo-gant-withAI/.serena/cache/typescript/document_symbols_cache_v23-06-25.pkl",
+        "name": "document_symbols_cache_v23-06-25.pkl",
+        "path": "todo-gant-withAI/.serena/cache/typescript/document_symbols_cache_v23-06-25.pkl",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#57606f",
+        "originalColor": "#57606f",
+        "defaultGlow": 0.18,
+        "glowIntensity": 2.4,
+        "highlighted": true,
+        "parentPath": "todo-gant-withAI/.serena/cache/typescript",
+        "childFileCount": 0,
+        "x": 17.629951090684045,
+        "y": -26.822428037881714,
+        "z": 331.45359262455315,
+        "vx": -8.752495383222739e-19,
+        "vy": 3.205184950961227e-19,
+        "vz": 1.3737559652692963e-18
+      },
+      {
+        "id": "todo-gant-withAI/.serena/project.yml",
+        "name": "project.yml",
+        "path": "todo-gant-withAI/.serena/project.yml",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#f1c40f",
+        "originalColor": "#f1c40f",
+        "defaultGlow": 0.18,
+        "glowIntensity": 2.4,
+        "highlighted": true,
+        "parentPath": "todo-gant-withAI/.serena",
+        "childFileCount": 0,
+        "x": -1.824204442544632,
+        "y": -9.95489555988366,
+        "z": 189.44390144775733,
+        "vx": -1.0302419130490547e-18,
+        "vy": -1.5407306328744963e-19,
+        "vz": 6.387348032450708e-19
+      },
+      {
+        "id": "todo-gant-withAI/App.tsx",
+        "name": "App.tsx",
+        "path": "todo-gant-withAI/App.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -15.147239528289727,
+        "y": -0.2920752460872563,
+        "z": 8.309875731064592,
+        "vx": -4.523554985252868e-19,
+        "vy": 3.676060219498046e-19,
+        "vz": 8.530704033149305e-19
+      },
+      {
+        "id": "todo-gant-withAI/CLAUDE.md",
+        "name": "CLAUDE.md",
+        "path": "todo-gant-withAI/CLAUDE.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -27.261736526284068,
+        "y": -30.16289562416629,
+        "z": 27.596561061138573,
+        "vx": -4.2851007147709436e-19,
+        "vy": 2.68417838379809e-19,
+        "vz": 7.205728280357036e-19
+      },
+      {
+        "id": "todo-gant-withAI/README.md",
+        "name": "README.md",
+        "path": "todo-gant-withAI/README.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -40.48140941103588,
+        "y": -20.805447725912025,
+        "z": 59.99384137738842,
+        "vx": -6.663743152249422e-19,
+        "vy": 5.264753139175397e-19,
+        "vz": 3.8031412301685135e-19
+      },
+      {
+        "id": "todo-gant-withAI/components",
+        "name": "components",
+        "path": "todo-gant-withAI/components",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 7,
+        "x": 133.58632384100343,
+        "y": 11.213906357272602,
+        "z": 63.913221591900424,
+        "vx": -1.1615301742311688e-18,
+        "vy": 1.834207953188591e-19,
+        "vz": 4.669823017116849e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/AiInteraction.tsx",
+        "name": "AiInteraction.tsx",
+        "path": "todo-gant-withAI/components/AiInteraction.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 149.1297458885291,
+        "y": 44.59227796909401,
+        "z": 46.342769457424595,
+        "vx": -1.0846435861479457e-18,
+        "vy": 2.0979972249819644e-19,
+        "vz": 4.703594736932916e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/GanttChart.tsx",
+        "name": "GanttChart.tsx",
+        "path": "todo-gant-withAI/components/GanttChart.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 161.25866877062313,
+        "y": -18.48640091843565,
+        "z": 56.589003701473516,
+        "vx": -9.620616242193387e-19,
+        "vy": 1.9615233827206056e-19,
+        "vz": 3.3976878090483006e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/Modal.tsx",
+        "name": "Modal.tsx",
+        "path": "todo-gant-withAI/components/Modal.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 157.21121141055912,
+        "y": -12.262366621078293,
+        "z": 87.85599663282618,
+        "vx": -9.285979461152462e-19,
+        "vy": 1.7654165059073324e-19,
+        "vz": 4.2674381420971287e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/ResizablePanel.tsx",
+        "name": "ResizablePanel.tsx",
+        "path": "todo-gant-withAI/components/ResizablePanel.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 156.6223645809577,
+        "y": 3.7241179218936025,
+        "z": 30.980532311464327,
+        "vx": -1.140232585166657e-18,
+        "vy": 3.319226925962818e-19,
+        "vz": 3.845700419419243e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/TaskForm.tsx",
+        "name": "TaskForm.tsx",
+        "path": "todo-gant-withAI/components/TaskForm.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 152.65877015363864,
+        "y": 43.7031245264651,
+        "z": 81.13363743361404,
+        "vx": -1.1352093155572997e-18,
+        "vy": 3.659078032872294e-19,
+        "vz": 3.9967028527589886e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/TaskItem.tsx",
+        "name": "TaskItem.tsx",
+        "path": "todo-gant-withAI/components/TaskItem.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 153.53793714601622,
+        "y": 17.69777296124395,
+        "z": 99.27628100945435,
+        "vx": -9.990315101334292e-19,
+        "vy": 2.856518580371771e-19,
+        "vz": 4.52536810244361e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/TaskList.tsx",
+        "name": "TaskList.tsx",
+        "path": "todo-gant-withAI/components/TaskList.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 0,
+        "x": 171.94888927453124,
+        "y": 22.86088298572276,
+        "z": 52.72016797997131,
+        "vx": -1.0649393686470798e-18,
+        "vy": 1.8123257493872326e-19,
+        "vz": 6.4968009649311785e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/icons",
+        "name": "icons",
+        "path": "todo-gant-withAI/components/icons",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components",
+        "childFileCount": 1,
+        "x": 203.48276744390324,
+        "y": 15.467918207831705,
+        "z": 74.17464664945011,
+        "vx": -1.190585485969639e-18,
+        "vy": 1.541704942767726e-19,
+        "vz": 5.729033109194694e-19
+      },
+      {
+        "id": "todo-gant-withAI/components/icons/index.tsx",
+        "name": "index.tsx",
+        "path": "todo-gant-withAI/components/icons/index.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/components/icons",
+        "childFileCount": 0,
+        "x": 248.13455290601044,
+        "y": 18.367055137456134,
+        "z": 79.61998344610085,
+        "vx": -7.990518682392343e-19,
+        "vy": 1.8524326211673612e-19,
+        "vz": 5.196651078273085e-19
+      },
+      {
+        "id": "todo-gant-withAI/constants.ts",
+        "name": "constants.ts",
+        "path": "todo-gant-withAI/constants.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 6.442969957762271,
+        "y": -29.789409549389745,
+        "z": 17.788329114545334,
+        "vx": -6.48335021392965e-19,
+        "vy": 5.851115128037197e-20,
+        "vz": 9.014762526977466e-19
+      },
+      {
+        "id": "todo-gant-withAI/e2e-test-scenarios.md",
+        "name": "e2e-test-scenarios.md",
+        "path": "todo-gant-withAI/e2e-test-scenarios.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -8.835894172724018,
+        "y": -42.80907419893331,
+        "z": 58.51860020484275,
+        "vx": -4.0020507897117017e-19,
+        "vy": 3.8410084929698014e-19,
+        "vz": 7.985695332958619e-19
+      },
+      {
+        "id": "todo-gant-withAI/globals.d.ts",
+        "name": "globals.d.ts",
+        "path": "todo-gant-withAI/globals.d.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 36.74651802108438,
+        "y": -6.990127338354263,
+        "z": 50.95283674491823,
+        "vx": -5.115824347325208e-19,
+        "vy": 5.11609746126744e-19,
+        "vz": 7.14211316717241e-19
+      },
+      {
+        "id": "todo-gant-withAI/index.html",
+        "name": "index.html",
+        "path": "todo-gant-withAI/index.html",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#e44d26",
+        "originalColor": "#e44d26",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 14.939826751740426,
+        "y": 17.889644084839453,
+        "z": 81.93670585290208,
+        "vx": -7.452197996483283e-19,
+        "vy": 2.5950052348054633e-19,
+        "vz": 8.70713092679608e-19
+      },
+      {
+        "id": "todo-gant-withAI/index.tsx",
+        "name": "index.tsx",
+        "path": "todo-gant-withAI/index.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 16.652505571550492,
+        "y": -20.38270501418424,
+        "z": 82.30739416893007,
+        "vx": -4.823567306675892e-19,
+        "vy": 4.462802507335454e-19,
+        "vz": 6.266556716678403e-19
+      },
+      {
+        "id": "todo-gant-withAI/metadata.json",
+        "name": "metadata.json",
+        "path": "todo-gant-withAI/metadata.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -16.26267417886654,
+        "y": -12.406796191498895,
+        "z": 87.92324260885026,
+        "vx": -6.128721753172009e-19,
+        "vy": -2.3500851369320975e-19,
+        "vz": 4.430799386725606e-19
+      },
+      {
+        "id": "todo-gant-withAI/nohup.out",
+        "name": "nohup.out",
+        "path": "todo-gant-withAI/nohup.out",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#57606f",
+        "originalColor": "#57606f",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 20.321167147118466,
+        "y": -36.97172682595615,
+        "z": 46.537981588307034,
+        "vx": -7.4063955075816555e-19,
+        "vy": 2.8797931885393906e-19,
+        "vz": 6.394881747532461e-19
+      },
+      {
+        "id": "todo-gant-withAI/package-lock.json",
+        "name": "package-lock.json",
+        "path": "todo-gant-withAI/package-lock.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 25.180323051864193,
+        "y": -0.6715332323165701,
+        "z": 17.64816787113122,
+        "vx": -4.639188577809556e-19,
+        "vy": 5.536174851114872e-19,
+        "vz": 7.323024875437973e-19
+      },
+      {
+        "id": "todo-gant-withAI/package.json",
+        "name": "package.json",
+        "path": "todo-gant-withAI/package.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 23.51111254065227,
+        "y": 30.838351241822508,
+        "z": 52.42836858184614,
+        "vx": -6.719358689928084e-19,
+        "vy": 5.0056620214635345e-19,
+        "vz": 9.585113608734223e-19
+      },
+      {
+        "id": "todo-gant-withAI/services",
+        "name": "services",
+        "path": "todo-gant-withAI/services",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 3,
+        "x": -96.4644904382914,
+        "y": -2.1173250274764777,
+        "z": 82.3948010451744,
+        "vx": -9.48155409456062e-19,
+        "vy": 2.6293725969063355e-19,
+        "vz": 3.83477779969882e-19
+      },
+      {
+        "id": "todo-gant-withAI/services/calendarService.ts",
+        "name": "calendarService.ts",
+        "path": "todo-gant-withAI/services/calendarService.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/services",
+        "childFileCount": 0,
+        "x": -125.3741490355308,
+        "y": -2.5296372120076165,
+        "z": 114.01105864757223,
+        "vx": -1.4901560426716092e-18,
+        "vy": 2.4139964546933384e-19,
+        "vz": 3.2059868164515474e-19
+      },
+      {
+        "id": "todo-gant-withAI/services/geminiService.ts",
+        "name": "geminiService.ts",
+        "path": "todo-gant-withAI/services/geminiService.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/services",
+        "childFileCount": 0,
+        "x": -135.3203726219266,
+        "y": -19.063008655006563,
+        "z": 86.06736292733129,
+        "vx": -1.3673183548294475e-18,
+        "vy": 3.5162573766356987e-19,
+        "vz": 3.819419003997074e-19
+      },
+      {
+        "id": "todo-gant-withAI/services/yamlService.ts",
+        "name": "yamlService.ts",
+        "path": "todo-gant-withAI/services/yamlService.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/services",
+        "childFileCount": 0,
+        "x": -135.42466409390357,
+        "y": 15.002123952100284,
+        "z": 87.8628360201597,
+        "vx": -1.2073040044598994e-18,
+        "vy": 3.570896294813822e-19,
+        "vz": 2.410299456132593e-19
+      },
+      {
+        "id": "todo-gant-withAI/src",
+        "name": "src",
+        "path": "todo-gant-withAI/src",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -46.90369286194939,
+        "y": 51.877146146251285,
+        "z": -90.49201716613317,
+        "vx": -6.274212770745727e-19,
+        "vy": 2.4460205050991127e-19,
+        "vz": 6.399166600347361e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/__tests__",
+        "name": "__tests__",
+        "path": "todo-gant-withAI/src/__tests__",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src",
+        "childFileCount": 1,
+        "x": -41.69632763562496,
+        "y": 98.41346632006847,
+        "z": -111.60449444132415,
+        "vx": -6.041753359496028e-19,
+        "vy": 2.6116586738901477e-19,
+        "vz": 6.816985271609781e-20
+      },
+      {
+        "id": "todo-gant-withAI/src/__tests__/SplitViewIntegration.test.tsx",
+        "name": "SplitViewIntegration.test.tsx",
+        "path": "todo-gant-withAI/src/__tests__/SplitViewIntegration.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/__tests__",
+        "childFileCount": 0,
+        "x": -39.618488149367316,
+        "y": 135.90056034143035,
+        "z": -125.83887603215624,
+        "vx": -5.792696221827135e-19,
+        "vy": 3.3353129325475577e-19,
+        "vz": -1.4251917283807031e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/components",
+        "name": "components",
+        "path": "todo-gant-withAI/src/components",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src",
+        "childFileCount": 1,
+        "x": -42.91208817550861,
+        "y": 91.26783452407325,
+        "z": -194.03730136719952,
+        "vx": -5.137269559828317e-19,
+        "vy": 1.169261365280054e-19,
+        "vz": 3.589106265640647e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/components/ErrorBoundary.tsx",
+        "name": "ErrorBoundary.tsx",
+        "path": "todo-gant-withAI/src/components/ErrorBoundary.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components",
+        "childFileCount": 0,
+        "x": -22.566545554154885,
+        "y": 105.85987376043255,
+        "z": -220.74879461394048,
+        "vx": -3.2636877555207167e-19,
+        "vy": -6.285008344973749e-22,
+        "vz": 7.497053517867279e-21
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__",
+        "name": "__tests__",
+        "path": "todo-gant-withAI/src/components/__tests__",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components",
+        "childFileCount": 5,
+        "x": -44.738536331251375,
+        "y": 121.41341161420095,
+        "z": -273.3715808649534,
+        "vx": -4.006123777927273e-19,
+        "vy": 1.1467402524395434e-19,
+        "vz": 8.900063415026705e-20
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__/ErrorBoundary.test.tsx",
+        "name": "ErrorBoundary.test.tsx",
+        "path": "todo-gant-withAI/src/components/__tests__/ErrorBoundary.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components/__tests__",
+        "childFileCount": 0,
+        "x": -16.981024652014753,
+        "y": 143.28926152710088,
+        "z": -291.2508330234153,
+        "vx": -4.385445265825572e-19,
+        "vy": 2.0112167214817628e-19,
+        "vz": -6.440302120598368e-20
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__/ScrollBehavior.test.tsx",
+        "name": "ScrollBehavior.test.tsx",
+        "path": "todo-gant-withAI/src/components/__tests__/ScrollBehavior.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components/__tests__",
+        "childFileCount": 0,
+        "x": -60.46132257655098,
+        "y": 155.771863922484,
+        "z": -284.075709413569,
+        "vx": -4.2383502992278866e-19,
+        "vy": 9.742264407454639e-20,
+        "vz": -2.4087993948892006e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__/TaskForm.test.tsx",
+        "name": "TaskForm.test.tsx",
+        "path": "todo-gant-withAI/src/components/__tests__/TaskForm.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components/__tests__",
+        "childFileCount": 0,
+        "x": -28.516052527684266,
+        "y": 108.55004883369705,
+        "z": -307.3853322574592,
+        "vx": -4.214576164270247e-19,
+        "vy": -4.5312201381142736e-20,
+        "vz": 3.9554490681948736e-20
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__/TaskItem.test.tsx",
+        "name": "TaskItem.test.tsx",
+        "path": "todo-gant-withAI/src/components/__tests__/TaskItem.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components/__tests__",
+        "childFileCount": 0,
+        "x": -67.6243258786446,
+        "y": 113.92860381292043,
+        "z": -304.84688046451157,
+        "vx": -5.3772604357256845e-19,
+        "vy": 7.657190813603354e-20,
+        "vz": 1.0586568024587726e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/components/__tests__/TaskList.test.tsx",
+        "name": "TaskList.test.tsx",
+        "path": "todo-gant-withAI/src/components/__tests__/TaskList.test.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/components/__tests__",
+        "childFileCount": 0,
+        "x": -46.6012297947937,
+        "y": 140.9594415226571,
+        "z": -309.522737431296,
+        "vx": -3.4458827578966483e-19,
+        "vy": -1.0783394830366742e-19,
+        "vz": -9.131833255627593e-20
+      },
+      {
+        "id": "todo-gant-withAI/src/services",
+        "name": "services",
+        "path": "todo-gant-withAI/src/services",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src",
+        "childFileCount": 0,
+        "x": -113.3681290466276,
+        "y": 66.57515495195547,
+        "z": -122.0511030007639,
+        "vx": -6.471975625880167e-19,
+        "vy": 2.0938022938634303e-19,
+        "vz": 4.800532463759147e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/services/__tests__",
+        "name": "__tests__",
+        "path": "todo-gant-withAI/src/services/__tests__",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/services",
+        "childFileCount": 2,
+        "x": -173.57236554899777,
+        "y": 79.1704260944005,
+        "z": -148.9101360130914,
+        "vx": -8.79292346405365e-19,
+        "vy": 2.7909557781493076e-19,
+        "vz": 3.236027892317319e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/services/__tests__/calendarService.test.ts",
+        "name": "calendarService.test.ts",
+        "path": "todo-gant-withAI/src/services/__tests__/calendarService.test.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/services/__tests__",
+        "childFileCount": 0,
+        "x": -204.83508013610776,
+        "y": 101.48710081591632,
+        "z": -156.1173739561734,
+        "vx": -1.0371636153760017e-18,
+        "vy": 2.8352720839482543e-19,
+        "vz": 1.7357633215249912e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/services/__tests__/geminiService.test.ts",
+        "name": "geminiService.test.ts",
+        "path": "todo-gant-withAI/src/services/__tests__/geminiService.test.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/services/__tests__",
+        "childFileCount": 0,
+        "x": -205.4905132906328,
+        "y": 71.28784468402176,
+        "z": -170.2806709430905,
+        "vx": -9.571718857420334e-19,
+        "vy": 2.7321772242213513e-19,
+        "vz": 2.3608446025208157e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/test",
+        "name": "test",
+        "path": "todo-gant-withAI/src/test",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src",
+        "childFileCount": 1,
+        "x": -45.97753432585376,
+        "y": 31.70575069536737,
+        "z": -138.83918331464807,
+        "vx": -4.764434846742345e-19,
+        "vy": 3.6500690459921446e-19,
+        "vz": 5.4318252293211275e-19
+      },
+      {
+        "id": "todo-gant-withAI/src/test/setup.ts",
+        "name": "setup.ts",
+        "path": "todo-gant-withAI/src/test/setup.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/src/test",
+        "childFileCount": 0,
+        "x": -47.31531071402234,
+        "y": 13.697454898819458,
+        "z": -175.02350015380014,
+        "vx": -3.925387291524494e-19,
+        "vy": 5.362701265730613e-19,
+        "vz": 2.7582066504661823e-19
+      },
+      {
+        "id": "todo-gant-withAI/styles",
+        "name": "styles",
+        "path": "todo-gant-withAI/styles",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#2c3038",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 1,
+        "x": -13.041194394779883,
+        "y": 57.65330670514688,
+        "z": 76.92443214621485,
+        "vx": -1.0228499072468313e-18,
+        "vy": 3.8471802119387083e-19,
+        "vz": 5.024245012514894e-19
+      },
+      {
+        "id": "todo-gant-withAI/styles/globals.css",
+        "name": "globals.css",
+        "path": "todo-gant-withAI/styles/globals.css",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#1572b6",
+        "originalColor": "#1572b6",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI/styles",
+        "childFileCount": 0,
+        "x": -18.279781226488662,
+        "y": 99.60064416837342,
+        "z": 94.20629619183877,
+        "vx": -1.3742293574244986e-18,
+        "vy": 6.537951240727664e-19,
+        "vz": 7.449024192270837e-19
+      },
+      {
+        "id": "todo-gant-withAI/tsconfig.json",
+        "name": "tsconfig.json",
+        "path": "todo-gant-withAI/tsconfig.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -32.97674638695985,
+        "y": 18.967799075312485,
+        "z": 72.10390880446138,
+        "vx": -6.841288218080906e-19,
+        "vy": 2.9532958618802956e-19,
+        "vz": 4.543514438389801e-19
+      },
+      {
+        "id": "todo-gant-withAI/types.ts",
+        "name": "types.ts",
+        "path": "todo-gant-withAI/types.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": 7.834677094294721,
+        "y": 29.443848273761184,
+        "z": 21.74968820244892,
+        "vx": -4.63766853492697e-19,
+        "vy": 4.296638907077543e-19,
+        "vz": 8.334776808851322e-19
+      },
+      {
+        "id": "todo-gant-withAI/vite.config.ts",
+        "name": "vite.config.ts",
+        "path": "todo-gant-withAI/vite.config.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#2c3038",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0,
+        "highlighted": false,
+        "parentPath": "todo-gant-withAI",
+        "childFileCount": 0,
+        "x": -21.80703408683474,
+        "y": 35.47032081166401,
+        "z": 36.866912506405626,
+        "vx": -6.056247912358076e-19,
+        "vy": 2.8423241057863325e-19,
+        "vz": 8.5003184292524545e-19
+      }
+    ],
+    "links": [
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/.claude",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude",
+        "target": "todo-gant-withAI/.claude/agents",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/backend-engineer.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/code-reviewer.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/devops-engineer.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/engineering-manager.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/frontend-engineer.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/tech-lead.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.claude/agents",
+        "target": "todo-gant-withAI/.claude/agents/test-engineer.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/.gitignore",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/.serena",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.serena",
+        "target": "todo-gant-withAI/.serena/cache",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.serena/cache",
+        "target": "todo-gant-withAI/.serena/cache/typescript",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.serena/cache/typescript",
+        "target": "todo-gant-withAI/.serena/cache/typescript/document_symbols_cache_v23-06-25.pkl",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/.serena",
+        "target": "todo-gant-withAI/.serena/project.yml",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/App.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/CLAUDE.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/README.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/components",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/AiInteraction.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/GanttChart.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/Modal.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/ResizablePanel.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/TaskForm.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/TaskItem.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/TaskList.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components",
+        "target": "todo-gant-withAI/components/icons",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/components/icons",
+        "target": "todo-gant-withAI/components/icons/index.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/constants.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/e2e-test-scenarios.md",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/globals.d.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/index.html",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/index.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/metadata.json",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/nohup.out",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/package-lock.json",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/package.json",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/services",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/services",
+        "target": "todo-gant-withAI/services/calendarService.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/services",
+        "target": "todo-gant-withAI/services/geminiService.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/services",
+        "target": "todo-gant-withAI/services/yamlService.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/src",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src",
+        "target": "todo-gant-withAI/src/__tests__",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/__tests__",
+        "target": "todo-gant-withAI/src/__tests__/SplitViewIntegration.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src",
+        "target": "todo-gant-withAI/src/components",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components",
+        "target": "todo-gant-withAI/src/components/ErrorBoundary.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components",
+        "target": "todo-gant-withAI/src/components/__tests__",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components/__tests__",
+        "target": "todo-gant-withAI/src/components/__tests__/ErrorBoundary.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components/__tests__",
+        "target": "todo-gant-withAI/src/components/__tests__/ScrollBehavior.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components/__tests__",
+        "target": "todo-gant-withAI/src/components/__tests__/TaskForm.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components/__tests__",
+        "target": "todo-gant-withAI/src/components/__tests__/TaskItem.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/components/__tests__",
+        "target": "todo-gant-withAI/src/components/__tests__/TaskList.test.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src",
+        "target": "todo-gant-withAI/src/services",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/services",
+        "target": "todo-gant-withAI/src/services/__tests__",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/services/__tests__",
+        "target": "todo-gant-withAI/src/services/__tests__/calendarService.test.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/services/__tests__",
+        "target": "todo-gant-withAI/src/services/__tests__/geminiService.test.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src",
+        "target": "todo-gant-withAI/src/test",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/src/test",
+        "target": "todo-gant-withAI/src/test/setup.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/styles",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI/styles",
+        "target": "todo-gant-withAI/styles/globals.css",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/tsconfig.json",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/types.ts",
+        "type": "tree"
+      },
+      {
+        "source": "todo-gant-withAI",
+        "target": "todo-gant-withAI/vite.config.ts",
+        "type": "tree"
+      }
+    ]
+  },
+  "trackedFiles": [
+    ".claude/agents/backend-engineer.md",
+    ".claude/agents/code-reviewer.md",
+    ".claude/agents/devops-engineer.md",
+    ".claude/agents/engineering-manager.md",
+    ".claude/agents/frontend-engineer.md",
+    ".claude/agents/tech-lead.md",
+    ".claude/agents/test-engineer.md",
+    ".gitignore",
+    ".serena/cache/typescript/document_symbols_cache_v23-06-25.pkl",
+    ".serena/project.yml",
+    "App.tsx",
+    "CLAUDE.md",
+    "README.md",
+    "components/AiInteraction.tsx",
+    "components/GanttChart.tsx",
+    "components/Modal.tsx",
+    "components/ResizablePanel.tsx",
+    "components/TaskForm.tsx",
+    "components/TaskItem.tsx",
+    "components/TaskList.tsx",
+    "components/icons/index.tsx",
+    "constants.ts",
+    "e2e-test-scenarios.md",
+    "globals.d.ts",
+    "index.html",
+    "index.tsx",
+    "metadata.json",
+    "nohup.out",
+    "package-lock.json",
+    "package.json",
+    "services/calendarService.ts",
+    "services/geminiService.ts",
+    "services/yamlService.ts",
+    "src/__tests__/SplitViewIntegration.test.tsx",
+    "src/components/ErrorBoundary.tsx",
+    "src/components/__tests__/ErrorBoundary.test.tsx",
+    "src/components/__tests__/ScrollBehavior.test.tsx",
+    "src/components/__tests__/TaskForm.test.tsx",
+    "src/components/__tests__/TaskItem.test.tsx",
+    "src/components/__tests__/TaskList.test.tsx",
+    "src/services/__tests__/calendarService.test.ts",
+    "src/services/__tests__/geminiService.test.ts",
+    "src/test/setup.ts",
+    "styles/globals.css",
+    "tsconfig.json",
+    "types.ts",
+    "vite.config.ts"
+  ],
+  "uiState": {
+    "expandedDirs": [
+      "todo-gant-withAI",
+      "todo-gant-withAI/todo-gant-withAI",
+      "todo-gant-withAI/components",
+      "todo-gant-withAI/todo-gant-withAI/components",
+      "todo-gant-withAI/components/icons",
+      "todo-gant-withAI/todo-gant-withAI/components/icons",
+      "todo-gant-withAI/services",
+      "todo-gant-withAI/todo-gant-withAI/services",
+      "todo-gant-withAI/src",
+      "todo-gant-withAI/todo-gant-withAI/src",
+      "todo-gant-withAI/src/__tests__",
+      "todo-gant-withAI/todo-gant-withAI/src/__tests__",
+      "todo-gant-withAI/src/components",
+      "todo-gant-withAI/todo-gant-withAI/src/components",
+      "todo-gant-withAI/src/components/__tests__",
+      "todo-gant-withAI/todo-gant-withAI/src/components/__tests__",
+      "todo-gant-withAI/src/services",
+      "todo-gant-withAI/todo-gant-withAI/src/services",
+      "todo-gant-withAI/src/services/__tests__",
+      "todo-gant-withAI/todo-gant-withAI/src/services/__tests__",
+      "todo-gant-withAI/src/test",
+      "todo-gant-withAI/todo-gant-withAI/src/test",
+      "todo-gant-withAI/styles",
+      "todo-gant-withAI/todo-gant-withAI/styles",
+      "todo-gant-withAI/.kamui",
+      "todo-gant-withAI/todo-gant-withAI/.kamui",
+      "todo-gant-withAI/.kamui/prompt",
+      "todo-gant-withAI/todo-gant-withAI/.kamui/prompt",
+      "todo-gant-withAI/.qoder",
+      "todo-gant-withAI/todo-gant-withAI/.qoder",
+      "todo-gant-withAI/.qoder/quests",
+      "todo-gant-withAI/todo-gant-withAI/.qoder/quests",
+      "todo-gant-withAI/src/components/icons",
+      "todo-gant-withAI/todo-gant-withAI/src/components/icons",
+      "todo-gant-withAI/src/styles",
+      "todo-gant-withAI/todo-gant-withAI/src/styles",
+      "todo-gant-withAI/tests",
+      "todo-gant-withAI/todo-gant-withAI/tests",
+      "todo-gant-withAI/tests/integration",
+      "todo-gant-withAI/todo-gant-withAI/tests/integration",
+      "todo-gant-withAI/tests/unit",
+      "todo-gant-withAI/todo-gant-withAI/tests/unit",
+      "todo-gant-withAI/tests/unit/components",
+      "todo-gant-withAI/todo-gant-withAI/tests/unit/components",
+      "todo-gant-withAI/tests/unit/services",
+      "todo-gant-withAI/todo-gant-withAI/tests/unit/services",
+      "todo-gant-withAI/.serena",
+      "todo-gant-withAI/todo-gant-withAI/.serena",
+      "todo-gant-withAI/.serena/cache",
+      "todo-gant-withAI/todo-gant-withAI/.serena/cache",
+      "todo-gant-withAI/.serena/cache/typescript",
+      "todo-gant-withAI/todo-gant-withAI/.serena/cache/typescript"
+    ],
+    "selectedPath": null
+  },
+  "directoryTreeMeta": {
+    "mode": "full",
+    "maxDepthApplied": 10,
+    "maxEntriesPerDirectory": 0,
+    "isPartial": false
+  },
+  "gitHistoryMeta": {
+    "mode": "full",
+    "isPartial": false,
+    "branchPulse": {
+      "generatedAt": 1762871261031,
+      "targets": [
+        "issue18-feature/japanese-lang",
+        "backend-design",
+        "task/task-1760497876724-f7509e",
+        "task/task-1760497878841-a47877",
+        "main",
+        "master",
+        "chuchu2525/try/cc",
+        "chuchu2525/issue14/feat/spilit-view",
+        "chuchu2525/chuchu2525/issue12",
+        "chuchu2525/issue9-sort-tasks-in-List-view",
+        "chuchu2525/issue6-editPage-japanese",
+        "chuchu2525/feature-yaml-based",
+        "conflict",
+        "feature-yaml-based",
+        "chuchu2525/feature-gant",
+        "chuchu2525/feature-dependency"
+      ],
+      "statsByBranch": {
+        "issue18-feature/japanese-lang": {
+          "branch": "issue18-feature/japanese-lang",
+          "head": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+          "baseRef": "origin/issue18-feature/japanese-lang",
+          "baseHead": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+          "mergeBase": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "task/task-1760497878841-a47877": {
+          "branch": "task/task-1760497878841-a47877",
+          "head": "6081ad2e374cb6de441e565678331de563f779c9",
+          "baseRef": "main",
+          "baseHead": "6081ad2e374cb6de441e565678331de563f779c9",
+          "mergeBase": "6081ad2e374cb6de441e565678331de563f779c9",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "task/task-1760497876724-f7509e": {
+          "branch": "task/task-1760497876724-f7509e",
+          "head": "6081ad2e374cb6de441e565678331de563f779c9",
+          "baseRef": "main",
+          "baseHead": "6081ad2e374cb6de441e565678331de563f779c9",
+          "mergeBase": "6081ad2e374cb6de441e565678331de563f779c9",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "backend-design": {
+          "branch": "backend-design",
+          "head": "6081ad2e374cb6de441e565678331de563f779c9",
+          "baseRef": "main",
+          "baseHead": "6081ad2e374cb6de441e565678331de563f779c9",
+          "mergeBase": "6081ad2e374cb6de441e565678331de563f779c9",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "main": {
+          "branch": "main",
+          "head": "6081ad2e374cb6de441e565678331de563f779c9",
+          "baseRef": "origin/main",
+          "baseHead": "6081ad2e374cb6de441e565678331de563f779c9",
+          "mergeBase": "6081ad2e374cb6de441e565678331de563f779c9",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        }
+      }
+    }
+  },
+  "gitHistoryState": {
+    "selectedTimelineIndex": 1,
+    "activeCommitHash": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+    "entries": [
+      {
+        "type": "live",
+        "label": "現在のコードベース",
+        "files": [],
+        "branch": "issue18-feature/japanese-lang",
+        "targetCommitHash": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI",
+        "timestamp": 1762871261062,
+        "lane": 1,
+        "branchLabel": "issue18-feature/japanese-lang",
+        "branchTags": [
+          "issue18-feature/japanese-lang"
+        ],
+        "isDefaultWorktree": true,
+        "branchColor": "#e84f7f",
+        "index": 0
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'issue18-feature/japanese-lang' of https://gith…",
+        "commit": {
+          "hash": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+          "subject": "Merge branch 'issue18-feature/japanese-lang' of https://github.com/chuchu2525/todo-gant-withAI into issue18-feature/japanese-lang",
+          "author": "chuchu2525",
+          "timestamp": 1755690780,
+          "parents": [
+            "4009824079ea341386de91a385eb1b7684916d98",
+            "7c340ae40414fc30bcf00ad5aca0fb2a29f78e34"
+          ],
+          "parent": "4009824079ea341386de91a385eb1b7684916d98",
+          "refs": "HEAD -> issue18-feature/japanese-lang, origin/issue18-feature/japanese-lang",
+          "branches": [
+            "HEAD -> issue18-feature/japanese-lang",
+            "origin/issue18-feature/japanese-lang",
+            "issue18-feature/japanese-lang"
+          ]
+        },
+        "commitHash": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "4009824079ea341386de91a385eb1b7684916d98",
+            "lane": 0
+          },
+          {
+            "hash": "7c340ae40414fc30bcf00ad5aca0fb2a29f78e34",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "issue18-feature/japanese-lang",
+        "branchColor": "#e84f7f",
+        "branchTags": [
+          "issue18-feature/japanese-lang"
+        ],
+        "worktrees": [
+          {
+            "path": "/Users/yuukun/Documents/Project/todo-gant-withAI",
+            "head": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+            "branch": "issue18-feature/japanese-lang",
+            "isMerged": true,
+            "mergeCommitHash": "918d6d3d391ad820a51fd5d2469842ab88fdd5be",
+            "status": {
+              "staged": [
+                {
+                  "path": "pp.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "pp.tsx",
+                  "timestamp": 1762871260423
+                }
+              ],
+              "unstaged": [
+                {
+                  "path": "components/AiInteraction.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/AiInteraction.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/GanttChart.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/GanttChart.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/Modal.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/Modal.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/ResizablePanel.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/ResizablePanel.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/TaskForm.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/TaskForm.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/TaskItem.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/TaskItem.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/TaskList.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/TaskList.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "components/icons/index.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "components/icons/index.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "constants.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "constants.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "index.tsx",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "index.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "nohup.out",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "nohup.out",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "package.json",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "package.json",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "services/calendarService.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "services/calendarService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "services/geminiService.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "services/geminiService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "services/yamlService.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "services/yamlService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/__tests__/SplitViewIntegration.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/__tests__/SplitViewIntegration.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/__tests__/ErrorBoundary.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/components/__tests__/ErrorBoundary.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/__tests__/ScrollBehavior.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/components/__tests__/ScrollBehavior.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/__tests__/TaskForm.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/components/__tests__/TaskForm.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/__tests__/TaskItem.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/components/__tests__/TaskItem.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/__tests__/TaskList.test.tsx",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/components/__tests__/TaskList.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/services/__tests__/calendarService.test.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/services/__tests__/calendarService.test.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/services/__tests__/geminiService.test.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/services/__tests__/geminiService.test.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/test/setup.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "src/test/setup.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "styles/globals.css",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "styles/globals.css",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tsconfig.json",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "tsconfig.json",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "types.ts",
+                  "originalPath": null,
+                  "status": "deleted",
+                  "rawPath": "types.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "vite.config.ts",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "vite.config.ts",
+                  "timestamp": 1762871260423
+                }
+              ],
+              "untracked": [
+                {
+                  "path": ".env",
+                  "status": "untracked",
+                  "rawPath": ".env",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".kamui/model-versions-cache.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/model-versions-cache.json",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".kamui/prompt/merge-prompt.txt",
+                  "status": "untracked",
+                  "rawPath": ".kamui/prompt/merge-prompt.txt",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".kamui/system-graph-state.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/system-graph-state.json",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".kamui/tasks-state.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/tasks-state.json",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".qoder/quests/commercial-readiness-assessment.md",
+                  "status": "untracked",
+                  "rawPath": ".qoder/quests/commercial-readiness-assessment.md",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".worktrees/task-1760497876724-f7509e/",
+                  "status": "untracked",
+                  "rawPath": ".worktrees/task-1760497876724-f7509e/",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": ".worktrees/task-1760497878841-a47877/",
+                  "status": "untracked",
+                  "rawPath": ".worktrees/task-1760497878841-a47877/",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/App.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/App.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/AiInteraction.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/AiInteraction.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/GanttChart.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/GanttChart.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/Modal.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/Modal.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/ResizablePanel.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/ResizablePanel.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/TaskForm.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/TaskForm.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/TaskItem.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/TaskItem.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/TaskList.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/TaskList.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/components/icons/index.tsx",
+                  "status": "untracked",
+                  "rawPath": "src/components/icons/index.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/constants.ts",
+                  "status": "untracked",
+                  "rawPath": "src/constants.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/services/calendarService.ts",
+                  "status": "untracked",
+                  "rawPath": "src/services/calendarService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/services/geminiService.ts",
+                  "status": "untracked",
+                  "rawPath": "src/services/geminiService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/services/yamlService.ts",
+                  "status": "untracked",
+                  "rawPath": "src/services/yamlService.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/styles/globals.css",
+                  "status": "untracked",
+                  "rawPath": "src/styles/globals.css",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/types.ts",
+                  "status": "untracked",
+                  "rawPath": "src/types.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "src/vite-env.d.ts",
+                  "status": "untracked",
+                  "rawPath": "src/vite-env.d.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/integration/SplitViewIntegration.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/integration/SplitViewIntegration.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/setup.ts",
+                  "status": "untracked",
+                  "rawPath": "tests/setup.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/components/ErrorBoundary.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/components/ErrorBoundary.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/components/ScrollBehavior.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/components/ScrollBehavior.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/components/TaskForm.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/components/TaskForm.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/components/TaskItem.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/components/TaskItem.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/components/TaskList.test.tsx",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/components/TaskList.test.tsx",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/services/calendarService.test.ts",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/services/calendarService.test.ts",
+                  "timestamp": 1762871260423
+                },
+                {
+                  "path": "tests/unit/services/geminiService.test.ts",
+                  "status": "untracked",
+                  "rawPath": "tests/unit/services/geminiService.test.ts",
+                  "timestamp": 1762871260423
+                }
+              ],
+              "capturedAt": 1762871260423
+            },
+            "normalizedPath": "/Users/yuukun/Documents/Project/todo-gant-withAI",
+            "lane": 1
+          }
+        ],
+        "index": 1
+      },
+      {
+        "type": "commit",
+        "label": "全体的な日本語対応 Fixes #18",
+        "commit": {
+          "hash": "4009824079ea341386de91a385eb1b7684916d98",
+          "subject": "全体的な日本語対応 Fixes #18",
+          "author": "chuchu2525",
+          "timestamp": 1755690611,
+          "parents": [
+            "f25c4b646a97d8074d74d6e3af4b9c177540a783"
+          ],
+          "parent": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+          "refs": "",
+          "branches": [
+            "issue18-feature/japanese-lang"
+          ]
+        },
+        "commitHash": "4009824079ea341386de91a385eb1b7684916d98",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "issue18-feature/japanese-lang",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 2
+      },
+      {
+        "type": "commit",
+        "label": "add: serenamcpセットアップ",
+        "commit": {
+          "hash": "7c340ae40414fc30bcf00ad5aca0fb2a29f78e34",
+          "subject": "add: serenamcpセットアップ",
+          "author": "chuchu2525",
+          "timestamp": 1755072050,
+          "parents": [
+            "45b2fc7a2e5646bb63ae2ead435a450f6a8d9c4c"
+          ],
+          "parent": "45b2fc7a2e5646bb63ae2ead435a450f6a8d9c4c",
+          "refs": "",
+          "branches": [
+            "issue18-feature/japanese-lang"
+          ]
+        },
+        "commitHash": "7c340ae40414fc30bcf00ad5aca0fb2a29f78e34",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "45b2fc7a2e5646bb63ae2ead435a450f6a8d9c4c",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "issue18-feature/japanese-lang",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 3
+      },
+      {
+        "type": "commit",
+        "label": "fix: タスクサイズの修正",
+        "commit": {
+          "hash": "45b2fc7a2e5646bb63ae2ead435a450f6a8d9c4c",
+          "subject": "fix: タスクサイズの修正",
+          "author": "chuchu2525",
+          "timestamp": 1755072035,
+          "parents": [
+            "f25c4b646a97d8074d74d6e3af4b9c177540a783"
+          ],
+          "parent": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+          "refs": "",
+          "branches": [
+            "issue18-feature/japanese-lang"
+          ]
+        },
+        "commitHash": "45b2fc7a2e5646bb63ae2ead435a450f6a8d9c4c",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "issue18-feature/japanese-lang",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 4
+      },
+      {
+        "type": "commit",
+        "label": "全体的な日本語対応 Fixes #18",
+        "commit": {
+          "hash": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+          "subject": "全体的な日本語対応 Fixes #18",
+          "author": "chuchu2525",
+          "timestamp": 1754382175,
+          "parents": [
+            "6081ad2e374cb6de441e565678331de563f779c9"
+          ],
+          "parent": "6081ad2e374cb6de441e565678331de563f779c9",
+          "refs": "",
+          "branches": [
+            "issue18-feature/japanese-lang"
+          ]
+        },
+        "commitHash": "f25c4b646a97d8074d74d6e3af4b9c177540a783",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "6081ad2e374cb6de441e565678331de563f779c9",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "issue18-feature/japanese-lang",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 5
+      },
+      {
+        "type": "unstaged",
+        "label": "未ステージ [backend-design] (1)",
+        "files": [
+          "BACKEND_PRD.md"
+        ],
+        "branch": "backend-design",
+        "targetCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+        "timestamp": 1762871260419,
+        "sortOrder": 0,
+        "lane": 6,
+        "branchColor": "#4fe8b8",
+        "index": 6
+      },
+      {
+        "type": "unstaged",
+        "label": "未ステージ [task/task-1760497876724-f7509e] (4)",
+        "files": [
+          "docs/backend/README.md",
+          "docs/backend/adr/0001-backend-architecture.md",
+          "docs/backend/db/schema.sql",
+          "docs/backend/openapi.yaml"
+        ],
+        "branch": "task/task-1760497876724-f7509e",
+        "targetCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+        "timestamp": 1762871260440,
+        "sortOrder": 0,
+        "lane": 5,
+        "branchColor": "#e8a84f",
+        "index": 7
+      },
+      {
+        "type": "anchor",
+        "label": "[backend-design]",
+        "branch": "backend-design",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+        "parentCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "lane": 6,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [
+          {
+            "type": "unstaged",
+            "label": "未ステージ [backend-design] (1)",
+            "files": [
+              "BACKEND_PRD.md"
+            ],
+            "branch": "backend-design",
+            "targetCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+            "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+            "timestamp": 1762871260419,
+            "sortOrder": 0,
+            "lane": 6,
+            "branchColor": "#4fe8b8",
+            "index": 6
+          }
+        ],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "backend-design",
+        "taskId": "backend-design",
+        "taskStatus": null,
+        "taskStatusLabel": null,
+        "taskName": null,
+        "tooltip": "ID: backend-design\nBranch: backend-design\nWorktree: Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+        "branchColor": "#4fe8b8",
+        "index": 8
+      },
+      {
+        "type": "anchor",
+        "label": "[作業中] codex1: バックエンドの設計を行う",
+        "branch": "task/task-1760497876724-f7509e",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+        "parentCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "lane": 5,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [
+          {
+            "type": "unstaged",
+            "label": "未ステージ [task/task-1760497876724-f7509e] (4)",
+            "files": [
+              "docs/backend/README.md",
+              "docs/backend/adr/0001-backend-architecture.md",
+              "docs/backend/db/schema.sql",
+              "docs/backend/openapi.yaml"
+            ],
+            "branch": "task/task-1760497876724-f7509e",
+            "targetCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+            "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+            "timestamp": 1762871260440,
+            "sortOrder": 0,
+            "lane": 5,
+            "branchColor": "#e8a84f",
+            "index": 7
+          }
+        ],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "task/task-1760497876724-f7509e",
+        "taskId": "task-1760497876724-f7509e",
+        "taskStatus": "working",
+        "taskStatusLabel": "作業中",
+        "taskName": "codex1: バックエンドの設計を行う",
+        "tooltip": "タスク: codex1: バックエンドの設計を行う\nステータス: 作業中\nID: task-1760497876724-f7509e\nBranch: task/task-1760497876724-f7509e\nWorktree: Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+        "branchColor": "#e8a84f",
+        "index": 9
+      },
+      {
+        "type": "anchor",
+        "label": "[作業中] claude1: バックエンドの設計を行う",
+        "branch": "task/task-1760497878841-a47877",
+        "worktreePath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497878841-a47877",
+        "parentCommitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "lane": 4,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "task/task-1760497878841-a47877",
+        "taskId": "task-1760497878841-a47877",
+        "taskStatus": "working",
+        "taskStatusLabel": "作業中",
+        "taskName": "claude1: バックエンドの設計を行う",
+        "tooltip": "タスク: claude1: バックエンドの設計を行う\nステータス: 作業中\nID: task-1760497878841-a47877\nBranch: task/task-1760497878841-a47877\nWorktree: Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497878841-a47877",
+        "branchColor": "#b84fe8",
+        "index": 10
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #17 from chuchu2525/try/cc",
+        "commit": {
+          "hash": "6081ad2e374cb6de441e565678331de563f779c9",
+          "subject": "Merge pull request #17 from chuchu2525/try/cc",
+          "author": "chuchu2525",
+          "timestamp": 1754230233,
+          "parents": [
+            "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+            "6d6ef69581452a85b793baa4efe88cae18f7880b"
+          ],
+          "parent": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+          "refs": "origin/main, origin/HEAD, task/task-1760497878841-a47877, task/task-1760497876724-f7509e, task/task-1760497802651-d306bc, task/task-1760497795326-60c6f6, task/task-1760493423207-0b5667, task/demo-1, main, chuchu2525-vaduz, backend-design",
+          "branches": [
+            "origin/main",
+            "origin/HEAD",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "task/task-1760497802651-d306bc",
+            "task/task-1760497795326-60c6f6",
+            "task/task-1760493423207-0b5667",
+            "task/demo-1",
+            "main",
+            "chuchu2525-vaduz",
+            "backend-design",
+            "issue18-feature/japanese-lang",
+            "chuchu2525/try/cc"
+          ]
+        },
+        "commitHash": "6081ad2e374cb6de441e565678331de563f779c9",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+            "lane": 0
+          },
+          {
+            "hash": "6d6ef69581452a85b793baa4efe88cae18f7880b",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "main",
+          "chuchu2525-vaduz",
+          "chuchu2525/try/cc",
+          "task/demo-1",
+          "task/task-1760493423207-0b5667",
+          "task/task-1760497795326-60c6f6",
+          "task/task-1760497802651-d306bc"
+        ],
+        "worktrees": [
+          {
+            "path": "/Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+            "head": "6081ad2e374cb6de441e565678331de563f779c9",
+            "branch": "backend-design",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [],
+              "unstaged": [],
+              "untracked": [
+                {
+                  "path": "BACKEND_PRD.md",
+                  "status": "untracked",
+                  "rawPath": "BACKEND_PRD.md",
+                  "timestamp": 1762871260419
+                }
+              ],
+              "capturedAt": 1762871260419
+            },
+            "normalizedPath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.conductor/chuchu2525-vaduz",
+            "lane": 6
+          },
+          {
+            "path": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+            "head": "6081ad2e374cb6de441e565678331de563f779c9",
+            "branch": "task/task-1760497876724-f7509e",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [],
+              "unstaged": [],
+              "untracked": [
+                {
+                  "path": "docs/backend/README.md",
+                  "status": "untracked",
+                  "rawPath": "docs/backend/README.md",
+                  "timestamp": 1762871260440
+                },
+                {
+                  "path": "docs/backend/adr/0001-backend-architecture.md",
+                  "status": "untracked",
+                  "rawPath": "docs/backend/adr/0001-backend-architecture.md",
+                  "timestamp": 1762871260440
+                },
+                {
+                  "path": "docs/backend/db/schema.sql",
+                  "status": "untracked",
+                  "rawPath": "docs/backend/db/schema.sql",
+                  "timestamp": 1762871260440
+                },
+                {
+                  "path": "docs/backend/openapi.yaml",
+                  "status": "untracked",
+                  "rawPath": "docs/backend/openapi.yaml",
+                  "timestamp": 1762871260440
+                }
+              ],
+              "capturedAt": 1762871260440
+            },
+            "normalizedPath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497876724-f7509e",
+            "lane": 5
+          },
+          {
+            "path": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497878841-a47877",
+            "head": "6081ad2e374cb6de441e565678331de563f779c9",
+            "branch": "task/task-1760497878841-a47877",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [],
+              "unstaged": [],
+              "untracked": [],
+              "capturedAt": 1762871260442
+            },
+            "normalizedPath": "/Users/yuukun/Documents/Project/todo-gant-withAI/.worktrees/task-1760497878841-a47877",
+            "lane": 4
+          }
+        ],
+        "index": 11
+      },
+      {
+        "type": "commit",
+        "label": "feat: タスク名のクリック時に選択/解除機能を追加し、UIのフィードバックを改善",
+        "commit": {
+          "hash": "6d6ef69581452a85b793baa4efe88cae18f7880b",
+          "subject": "feat: タスク名のクリック時に選択/解除機能を追加し、UIのフィードバックを改善",
+          "author": "chuchu2525",
+          "timestamp": 1754230068,
+          "parents": [
+            "4bd00e6a9e9e5d79223f291e626cee6c9245ca00"
+          ],
+          "parent": "4bd00e6a9e9e5d79223f291e626cee6c9245ca00",
+          "refs": "origin/try/cc, try/cc",
+          "branches": [
+            "origin/try/cc",
+            "try/cc",
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "6d6ef69581452a85b793baa4efe88cae18f7880b",
+        "lane": 2,
+        "parentLinks": [
+          {
+            "hash": "4bd00e6a9e9e5d79223f291e626cee6c9245ca00",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "try/cc",
+        "branchColor": "#4fe8b8",
+        "branchTags": [
+          "try/cc"
+        ],
+        "index": 12
+      },
+      {
+        "type": "commit",
+        "label": "list view 選択モード中のタイトル編集等を制限",
+        "commit": {
+          "hash": "4bd00e6a9e9e5d79223f291e626cee6c9245ca00",
+          "subject": "list view 選択モード中のタイトル編集等を制限",
+          "author": "chuchu2525",
+          "timestamp": 1754229319,
+          "parents": [
+            "62f0dc04f9656d0cc6ad9fcb07048e5b52d21f91"
+          ],
+          "parent": "62f0dc04f9656d0cc6ad9fcb07048e5b52d21f91",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "4bd00e6a9e9e5d79223f291e626cee6c9245ca00",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "62f0dc04f9656d0cc6ad9fcb07048e5b52d21f91",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 13
+      },
+      {
+        "type": "commit",
+        "label": "feat: タスクサイズの変更機能を追加し、タスクリストの表示を改善",
+        "commit": {
+          "hash": "62f0dc04f9656d0cc6ad9fcb07048e5b52d21f91",
+          "subject": "feat: タスクサイズの変更機能を追加し、タスクリストの表示を改善",
+          "author": "chuchu2525",
+          "timestamp": 1754068059,
+          "parents": [
+            "f411b5668e6f439450a6dcad261b07017abc2e57"
+          ],
+          "parent": "f411b5668e6f439450a6dcad261b07017abc2e57",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "62f0dc04f9656d0cc6ad9fcb07048e5b52d21f91",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "f411b5668e6f439450a6dcad261b07017abc2e57",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 14
+      },
+      {
+        "type": "commit",
+        "label": "feat: タスクの優先度一括変更機能を追加し、UIを改善",
+        "commit": {
+          "hash": "f411b5668e6f439450a6dcad261b07017abc2e57",
+          "subject": "feat: タスクの優先度一括変更機能を追加し、UIを改善",
+          "author": "chuchu2525",
+          "timestamp": 1754067411,
+          "parents": [
+            "e7b7aa9f2b6ff72546dd9e2c318d769af252d5ca"
+          ],
+          "parent": "e7b7aa9f2b6ff72546dd9e2c318d769af252d5ca",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "f411b5668e6f439450a6dcad261b07017abc2e57",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "e7b7aa9f2b6ff72546dd9e2c318d769af252d5ca",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 15
+      },
+      {
+        "type": "commit",
+        "label": "feat: タスクの説明と依存先をクリック可能にし、編集機能を追加",
+        "commit": {
+          "hash": "e7b7aa9f2b6ff72546dd9e2c318d769af252d5ca",
+          "subject": "feat: タスクの説明と依存先をクリック可能にし、編集機能を追加",
+          "author": "chuchu2525",
+          "timestamp": 1754067241,
+          "parents": [
+            "4851ffb720dae9738c5945e52bf91b4ff9aa1d76"
+          ],
+          "parent": "4851ffb720dae9738c5945e52bf91b4ff9aa1d76",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "e7b7aa9f2b6ff72546dd9e2c318d769af252d5ca",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "4851ffb720dae9738c5945e52bf91b4ff9aa1d76",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 16
+      },
+      {
+        "type": "commit",
+        "label": "タスクの中身を編集ボタン以外からも変更できるように機能追加",
+        "commit": {
+          "hash": "4851ffb720dae9738c5945e52bf91b4ff9aa1d76",
+          "subject": "タスクの中身を編集ボタン以外からも変更できるように機能追加",
+          "author": "chuchu2525",
+          "timestamp": 1754067038,
+          "parents": [
+            "aec9392d79c93008043637c2bd100b20c4a7bf44"
+          ],
+          "parent": "aec9392d79c93008043637c2bd100b20c4a7bf44",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "4851ffb720dae9738c5945e52bf91b4ff9aa1d76",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "aec9392d79c93008043637c2bd100b20c4a7bf44",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 17
+      },
+      {
+        "type": "commit",
+        "label": "feat: CLAUDE.mdファイルを追加し、開発コマンドやアーキテクチャの概要を提供",
+        "commit": {
+          "hash": "aec9392d79c93008043637c2bd100b20c4a7bf44",
+          "subject": "feat: CLAUDE.mdファイルを追加し、開発コマンドやアーキテクチャの概要を提供",
+          "author": "chuchu2525",
+          "timestamp": 1754066359,
+          "parents": [
+            "8243c8d08a5d1dfc2f3cb23472d3c5f275567ed9"
+          ],
+          "parent": "8243c8d08a5d1dfc2f3cb23472d3c5f275567ed9",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "aec9392d79c93008043637c2bd100b20c4a7bf44",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "8243c8d08a5d1dfc2f3cb23472d3c5f275567ed9",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 18
+      },
+      {
+        "type": "commit",
+        "label": "feat: 各エージェントのマークダウンファイルを追加し、機能と責任を明確化",
+        "commit": {
+          "hash": "8243c8d08a5d1dfc2f3cb23472d3c5f275567ed9",
+          "subject": "feat: 各エージェントのマークダウンファイルを追加し、機能と責任を明確化",
+          "author": "chuchu2525",
+          "timestamp": 1754066180,
+          "parents": [
+            "9818cc91bc6f4805c7da2a08e1d5a077c51158ef"
+          ],
+          "parent": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+          "refs": "",
+          "branches": [
+            "chuchu2525/try/cc",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "8243c8d08a5d1dfc2f3cb23472d3c5f275567ed9",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "chuchu2525/try/cc",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 19
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #15 from chuchu2525/issue14/feat/spilit-v…",
+        "commit": {
+          "hash": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+          "subject": "Merge pull request #15 from chuchu2525/issue14/feat/spilit-view",
+          "author": "chuchu2525",
+          "timestamp": 1752640209,
+          "parents": [
+            "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+            "1743abdb35ccea7a77f85239001543a87b01c075"
+          ],
+          "parent": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/issue14/feat/spilit-view"
+          ]
+        },
+        "commitHash": "9818cc91bc6f4805c7da2a08e1d5a077c51158ef",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+            "lane": 0
+          },
+          {
+            "hash": "1743abdb35ccea7a77f85239001543a87b01c075",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/issue14/feat/spilit-view"
+        ],
+        "index": 20
+      },
+      {
+        "type": "commit",
+        "label": "split viewにおけるスクロールの問題を改善",
+        "commit": {
+          "hash": "1743abdb35ccea7a77f85239001543a87b01c075",
+          "subject": "split viewにおけるスクロールの問題を改善",
+          "author": "chuchu2525",
+          "timestamp": 1752565347,
+          "parents": [
+            "17b254dee0b0b18209192a58b21d3a97a6c96b56"
+          ],
+          "parent": "17b254dee0b0b18209192a58b21d3a97a6c96b56",
+          "refs": "origin/issue14/feat/spilit-view",
+          "branches": [
+            "origin/issue14/feat/spilit-view",
+            "chuchu2525/issue14/feat/spilit-view",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "1743abdb35ccea7a77f85239001543a87b01c075",
+        "lane": 7,
+        "parentLinks": [
+          {
+            "hash": "17b254dee0b0b18209192a58b21d3a97a6c96b56",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "issue14/feat/spilit-view",
+        "branchColor": "#e8a84f",
+        "branchTags": [
+          "issue14/feat/spilit-view"
+        ],
+        "index": 21
+      },
+      {
+        "type": "commit",
+        "label": "feat: ResizablePanelコンポーネントを追加し、分割ビュー機能を実装",
+        "commit": {
+          "hash": "17b254dee0b0b18209192a58b21d3a97a6c96b56",
+          "subject": "feat: ResizablePanelコンポーネントを追加し、分割ビュー機能を実装",
+          "author": "chuchu2525",
+          "timestamp": 1752555026,
+          "parents": [
+            "bc858d7959a0c5058a2894f78c79e9a8631b10f8"
+          ],
+          "parent": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+          "refs": "",
+          "branches": [
+            "chuchu2525/issue14/feat/spilit-view",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "17b254dee0b0b18209192a58b21d3a97a6c96b56",
+        "lane": 8,
+        "parentLinks": [
+          {
+            "hash": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "chuchu2525/issue14/feat/spilit-view",
+        "branchColor": "#4fe84f",
+        "branchTags": [],
+        "index": 22
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #13 from chuchu2525/chuchu2525/issue12",
+        "commit": {
+          "hash": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+          "subject": "Merge pull request #13 from chuchu2525/chuchu2525/issue12",
+          "author": "chuchu2525",
+          "timestamp": 1752131026,
+          "parents": [
+            "be2f26b4d04966344824557d89285cf12c6a60df",
+            "24495427f703354c34ad93cc022865dd24e5e035"
+          ],
+          "parent": "be2f26b4d04966344824557d89285cf12c6a60df",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/chuchu2525/issue12"
+          ]
+        },
+        "commitHash": "bc858d7959a0c5058a2894f78c79e9a8631b10f8",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "be2f26b4d04966344824557d89285cf12c6a60df",
+            "lane": 0
+          },
+          {
+            "hash": "24495427f703354c34ad93cc022865dd24e5e035",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/chuchu2525/issue12"
+        ],
+        "index": 23
+      },
+      {
+        "type": "commit",
+        "label": "feat: GanttChartにドラッグ中のツールチップと自動スクロール機能を追加",
+        "commit": {
+          "hash": "24495427f703354c34ad93cc022865dd24e5e035",
+          "subject": "feat: GanttChartにドラッグ中のツールチップと自動スクロール機能を追加",
+          "author": "chuchu2525",
+          "timestamp": 1752128615,
+          "parents": [
+            "ebc7aca8f79bf29e04d5e91c1ac831763b623e57"
+          ],
+          "parent": "ebc7aca8f79bf29e04d5e91c1ac831763b623e57",
+          "refs": "origin/chuchu2525/issue12",
+          "branches": [
+            "origin/chuchu2525/issue12",
+            "chuchu2525/chuchu2525/issue12",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "24495427f703354c34ad93cc022865dd24e5e035",
+        "lane": 9,
+        "parentLinks": [
+          {
+            "hash": "ebc7aca8f79bf29e04d5e91c1ac831763b623e57",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "chuchu2525/issue12",
+        "branchColor": "#b84fe8",
+        "branchTags": [
+          "chuchu2525/issue12"
+        ],
+        "index": 24
+      },
+      {
+        "type": "commit",
+        "label": "feat: モーダルとタスクコンポーネントのアイコン統合およびスタイル改善",
+        "commit": {
+          "hash": "ebc7aca8f79bf29e04d5e91c1ac831763b623e57",
+          "subject": "feat: モーダルとタスクコンポーネントのアイコン統合およびスタイル改善",
+          "author": "chuchu2525",
+          "timestamp": 1752128023,
+          "parents": [
+            "c03806ea1a9e61a86b7776608d4f5414ae9116cd"
+          ],
+          "parent": "c03806ea1a9e61a86b7776608d4f5414ae9116cd",
+          "refs": "",
+          "branches": [
+            "chuchu2525/chuchu2525/issue12",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "ebc7aca8f79bf29e04d5e91c1ac831763b623e57",
+        "lane": 10,
+        "parentLinks": [
+          {
+            "hash": "c03806ea1a9e61a86b7776608d4f5414ae9116cd",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "chuchu2525/chuchu2525/issue12",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 25
+      },
+      {
+        "type": "commit",
+        "label": "feat: TaskListの一括更新およびドラッグ＆ドロップ並び替え機能を実装",
+        "commit": {
+          "hash": "c03806ea1a9e61a86b7776608d4f5414ae9116cd",
+          "subject": "feat: TaskListの一括更新およびドラッグ＆ドロップ並び替え機能を実装",
+          "author": "chuchu2525",
+          "timestamp": 1752112464,
+          "parents": [
+            "57137543733c023b96722df76c483fda8225d86e"
+          ],
+          "parent": "57137543733c023b96722df76c483fda8225d86e",
+          "refs": "",
+          "branches": [
+            "chuchu2525/chuchu2525/issue12",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "c03806ea1a9e61a86b7776608d4f5414ae9116cd",
+        "lane": 10,
+        "parentLinks": [
+          {
+            "hash": "57137543733c023b96722df76c483fda8225d86e",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "chuchu2525/chuchu2525/issue12",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 26
+      },
+      {
+        "type": "commit",
+        "label": "feat: Google Calendarへのタスクエクスポート機能を追加し、関連するテストを実装",
+        "commit": {
+          "hash": "57137543733c023b96722df76c483fda8225d86e",
+          "subject": "feat: Google Calendarへのタスクエクスポート機能を追加し、関連するテストを実装",
+          "author": "chuchu2525",
+          "timestamp": 1752071544,
+          "parents": [
+            "c3b6560770ced097b466b90e7b59a2b60406d1ca"
+          ],
+          "parent": "c3b6560770ced097b466b90e7b59a2b60406d1ca",
+          "refs": "",
+          "branches": [
+            "chuchu2525/chuchu2525/issue12",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "57137543733c023b96722df76c483fda8225d86e",
+        "lane": 10,
+        "parentLinks": [
+          {
+            "hash": "c3b6560770ced097b466b90e7b59a2b60406d1ca",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "chuchu2525/chuchu2525/issue12",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 27
+      },
+      {
+        "type": "commit",
+        "label": "feat: テストフレームワーク導入および各種コンポーネント・サービスのテスト実装",
+        "commit": {
+          "hash": "c3b6560770ced097b466b90e7b59a2b60406d1ca",
+          "subject": "feat: テストフレームワーク導入および各種コンポーネント・サービスのテスト実装",
+          "author": "chuchu2525",
+          "timestamp": 1752054882,
+          "parents": [
+            "be2f26b4d04966344824557d89285cf12c6a60df"
+          ],
+          "parent": "be2f26b4d04966344824557d89285cf12c6a60df",
+          "refs": "",
+          "branches": [
+            "chuchu2525/chuchu2525/issue12",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "c3b6560770ced097b466b90e7b59a2b60406d1ca",
+        "lane": 10,
+        "parentLinks": [
+          {
+            "hash": "be2f26b4d04966344824557d89285cf12c6a60df",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "chuchu2525/chuchu2525/issue12",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 28
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartおよびTaskItemコンポーネントから未使用のTaskPriorityとTaskStatusのイン…",
+        "commit": {
+          "hash": "be2f26b4d04966344824557d89285cf12c6a60df",
+          "subject": "GanttChartおよびTaskItemコンポーネントから未使用のTaskPriorityとTaskStatusのインポートを削除し、コードのクリーンアップを実施。",
+          "author": "chuchu2525",
+          "timestamp": 1750679121,
+          "parents": [
+            "363c2a88127e4f6c16a4bf06a2a7e5dc6017d647"
+          ],
+          "parent": "363c2a88127e4f6c16a4bf06a2a7e5dc6017d647",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "be2f26b4d04966344824557d89285cf12c6a60df",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "363c2a88127e4f6c16a4bf06a2a7e5dc6017d647",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 29
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #10 from chuchu2525/issue9-sort-tasks-in-…",
+        "commit": {
+          "hash": "363c2a88127e4f6c16a4bf06a2a7e5dc6017d647",
+          "subject": "Merge pull request #10 from chuchu2525/issue9-sort-tasks-in-List-view",
+          "author": "chuchu2525",
+          "timestamp": 1750093556,
+          "parents": [
+            "6cbf97a46cd74499a55b8aabf621da91d4267269",
+            "38e6c1aa6ca85cc0db90e3253f4b5ea3dd0206a9"
+          ],
+          "parent": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/issue9-sort-tasks-in-List-view"
+          ]
+        },
+        "commitHash": "363c2a88127e4f6c16a4bf06a2a7e5dc6017d647",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+            "lane": 0
+          },
+          {
+            "hash": "38e6c1aa6ca85cc0db90e3253f4b5ea3dd0206a9",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/issue9-sort-tasks-in-List-view"
+        ],
+        "index": 30
+      },
+      {
+        "type": "commit",
+        "label": "タスク一覧コンポーネントのソートボタンのスタイルを改善し、昇順と降順で異なる色を適用。ボタンのクラス名を整理し、可読性を…",
+        "commit": {
+          "hash": "38e6c1aa6ca85cc0db90e3253f4b5ea3dd0206a9",
+          "subject": "タスク一覧コンポーネントのソートボタンのスタイルを改善し、昇順と降順で異なる色を適用。ボタンのクラス名を整理し、可読性を向上させました。",
+          "author": "chuchu2525",
+          "timestamp": 1750093389,
+          "parents": [
+            "2e1c207af2e1959fed33bc417e24b89038a2f659"
+          ],
+          "parent": "2e1c207af2e1959fed33bc417e24b89038a2f659",
+          "refs": "origin/issue9-sort-tasks-in-List-view",
+          "branches": [
+            "origin/issue9-sort-tasks-in-List-view",
+            "chuchu2525/issue9-sort-tasks-in-List-view",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "38e6c1aa6ca85cc0db90e3253f4b5ea3dd0206a9",
+        "lane": 11,
+        "parentLinks": [
+          {
+            "hash": "2e1c207af2e1959fed33bc417e24b89038a2f659",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "issue9-sort-tasks-in-List-view",
+        "branchColor": "#e8e84f",
+        "branchTags": [
+          "issue9-sort-tasks-in-List-view"
+        ],
+        "index": 31
+      },
+      {
+        "type": "commit",
+        "label": "タスク一覧コンポーネントにソート機能を追加し、開始日、終了日、優先度、ステータスでの並べ替えを実装。ソートボタンを追加し…",
+        "commit": {
+          "hash": "2e1c207af2e1959fed33bc417e24b89038a2f659",
+          "subject": "タスク一覧コンポーネントにソート機能を追加し、開始日、終了日、優先度、ステータスでの並べ替えを実装。ソートボタンを追加し、タスクがない場合のメッセージを表示するように修正。",
+          "author": "chuchu2525",
+          "timestamp": 1750093146,
+          "parents": [
+            "6cbf97a46cd74499a55b8aabf621da91d4267269"
+          ],
+          "parent": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+          "refs": "",
+          "branches": [
+            "chuchu2525/issue9-sort-tasks-in-List-view",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "2e1c207af2e1959fed33bc417e24b89038a2f659",
+        "lane": 12,
+        "parentLinks": [
+          {
+            "hash": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "chuchu2525/issue9-sort-tasks-in-List-view",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 32
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #8 from chuchu2525/issue6-editPage-japane…",
+        "commit": {
+          "hash": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+          "subject": "Merge pull request #8 from chuchu2525/issue6-editPage-japanese",
+          "author": "chuchu2525",
+          "timestamp": 1750092745,
+          "parents": [
+            "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+            "a0d6fb0ad8b8e1e5564488316ad388dcc7e08f19"
+          ],
+          "parent": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/issue6-editPage-japanese"
+          ]
+        },
+        "commitHash": "6cbf97a46cd74499a55b8aabf621da91d4267269",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+            "lane": 0
+          },
+          {
+            "hash": "a0d6fb0ad8b8e1e5564488316ad388dcc7e08f19",
+            "lane": 6
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/issue6-editPage-japanese"
+        ],
+        "index": 33
+      },
+      {
+        "type": "commit",
+        "label": "タスク関連のテキストを日本語に翻訳し、タスクのステータスと優先度を表示するための日本語の定数を追加。ツールチップのスタイ…",
+        "commit": {
+          "hash": "a0d6fb0ad8b8e1e5564488316ad388dcc7e08f19",
+          "subject": "タスク関連のテキストを日本語に翻訳し、タスクのステータスと優先度を表示するための日本語の定数を追加。ツールチップのスタイルを改善し、タスクフォームのバリデーションメッセージを日本語に変更。",
+          "author": "chuchu2525",
+          "timestamp": 1749720803,
+          "parents": [
+            "efb0b158385cb17c30cf9956b9afbc4b83534aae"
+          ],
+          "parent": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+          "refs": "origin/issue6-editPage-japanese",
+          "branches": [
+            "origin/issue6-editPage-japanese",
+            "chuchu2525/issue6-editPage-japanese",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "a0d6fb0ad8b8e1e5564488316ad388dcc7e08f19",
+        "lane": 13,
+        "parentLinks": [
+          {
+            "hash": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "issue6-editPage-japanese",
+        "branchColor": "#4fe84f",
+        "branchTags": [
+          "issue6-editPage-japanese"
+        ],
+        "index": 34
+      },
+      {
+        "type": "commit",
+        "label": "AI Powered Todo AppのE2Eテストシナリオを新規作成。タスクの追加、編集、削除、依存関係設定、Gant…",
+        "commit": {
+          "hash": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+          "subject": "AI Powered Todo AppのE2Eテストシナリオを新規作成。タスクの追加、編集、削除、依存関係設定、Ganttチャート表示、レスポンシブデザインなど、各機能の動作確認手順と期待結果を詳細に記述。",
+          "author": "chuchu2525",
+          "timestamp": 1749716762,
+          "parents": [
+            "8b87b8a1f749a6913df5f56cd5e7ddcc3da15968"
+          ],
+          "parent": "8b87b8a1f749a6913df5f56cd5e7ddcc3da15968",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "efb0b158385cb17c30cf9956b9afbc4b83534aae",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "8b87b8a1f749a6913df5f56cd5e7ddcc3da15968",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 35
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #5 from chuchu2525/feature-yaml-based",
+        "commit": {
+          "hash": "8b87b8a1f749a6913df5f56cd5e7ddcc3da15968",
+          "subject": "Merge pull request #5 from chuchu2525/feature-yaml-based",
+          "author": "chuchu2525",
+          "timestamp": 1749138738,
+          "parents": [
+            "30226a56bb393ecb40c310cf802afdea2a7ef904",
+            "fa2292af3e51880f5e727f5ae81cc4ddf6409c37"
+          ],
+          "parent": "30226a56bb393ecb40c310cf802afdea2a7ef904",
+          "refs": "",
+          "branches": [
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-yaml-based"
+          ]
+        },
+        "commitHash": "8b87b8a1f749a6913df5f56cd5e7ddcc3da15968",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "30226a56bb393ecb40c310cf802afdea2a7ef904",
+            "lane": 0
+          },
+          {
+            "hash": "fa2292af3e51880f5e727f5ae81cc4ddf6409c37",
+            "lane": 7
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/feature-yaml-based"
+        ],
+        "index": 36
+      },
+      {
+        "type": "commit",
+        "label": "Resolve merge conflict: Keep feature-yaml-based padding valu…",
+        "commit": {
+          "hash": "fa2292af3e51880f5e727f5ae81cc4ddf6409c37",
+          "subject": "Resolve merge conflict: Keep feature-yaml-based padding values",
+          "author": "chuchu2525",
+          "timestamp": 1749138610,
+          "parents": [
+            "75605a57b73d58b3ec708832046b708180f30023",
+            "30226a56bb393ecb40c310cf802afdea2a7ef904"
+          ],
+          "parent": "75605a57b73d58b3ec708832046b708180f30023",
+          "refs": "origin/feature-yaml-based",
+          "branches": [
+            "origin/feature-yaml-based",
+            "chuchu2525/feature-yaml-based",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "conflict"
+          ]
+        },
+        "commitHash": "fa2292af3e51880f5e727f5ae81cc4ddf6409c37",
+        "lane": 15,
+        "parentLinks": [
+          {
+            "hash": "75605a57b73d58b3ec708832046b708180f30023",
+            "lane": 7
+          },
+          {
+            "hash": "30226a56bb393ecb40c310cf802afdea2a7ef904",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "feature-yaml-based",
+        "branchColor": "#e84f4f",
+        "branchTags": [
+          "conflict",
+          "feature-yaml-based"
+        ],
+        "index": 37
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'feature-yaml-based' of https://github.com/chuc…",
+        "commit": {
+          "hash": "75605a57b73d58b3ec708832046b708180f30023",
+          "subject": "Merge branch 'feature-yaml-based' of https://github.com/chuchu2525/todo-gant-withAI into feature-yaml-based",
+          "author": "chuchu2525",
+          "timestamp": 1749137917,
+          "parents": [
+            "e1c0a58e4227ef70eabcf34bea780a39e4d8d6e3",
+            "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b"
+          ],
+          "parent": "e1c0a58e4227ef70eabcf34bea780a39e4d8d6e3",
+          "refs": "",
+          "branches": [
+            "chuchu2525/feature-yaml-based",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "feature-yaml-based"
+          ]
+        },
+        "commitHash": "75605a57b73d58b3ec708832046b708180f30023",
+        "lane": 16,
+        "parentLinks": [
+          {
+            "hash": "e1c0a58e4227ef70eabcf34bea780a39e4d8d6e3",
+            "lane": 7
+          },
+          {
+            "hash": "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b",
+            "lane": 8
+          }
+        ],
+        "primaryBranchName": "chuchu2525/feature-yaml-based",
+        "branchColor": "#4fe8b8",
+        "branchTags": [],
+        "index": 38
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartコンポーネントにタスク編集機能を追加し、タスクの依存関係を選択するための検索機能をTaskFormコ…",
+        "commit": {
+          "hash": "e1c0a58e4227ef70eabcf34bea780a39e4d8d6e3",
+          "subject": "GanttChartコンポーネントにタスク編集機能を追加し、タスクの依存関係を選択するための検索機能をTaskFormコンポーネントに実装。UIのスタイルを改善し、レスポンシブデザインを強化。",
+          "author": "chuchu2525",
+          "timestamp": 1749137004,
+          "parents": [
+            "144d8d962d16a11042223f0eb662ac4d1959c9b8"
+          ],
+          "parent": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+          "refs": "",
+          "branches": [
+            "chuchu2525/feature-yaml-based",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "e1c0a58e4227ef70eabcf34bea780a39e4d8d6e3",
+        "lane": 16,
+        "parentLinks": [
+          {
+            "hash": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+            "lane": 7
+          }
+        ],
+        "primaryBranchName": "chuchu2525/feature-yaml-based",
+        "branchColor": "#4fe8b8",
+        "branchTags": [],
+        "index": 39
+      },
+      {
+        "type": "commit",
+        "label": "Appコンポーネントのヘッダーとメインセクションのパディングを調整し、全体のスタイルを改善。特定のビューモードに応じたパ…",
+        "commit": {
+          "hash": "30226a56bb393ecb40c310cf802afdea2a7ef904",
+          "subject": "Appコンポーネントのヘッダーとメインセクションのパディングを調整し、全体のスタイルを改善。特定のビューモードに応じたパディングの変更を追加。",
+          "author": "chuchu2525",
+          "timestamp": 1749130198,
+          "parents": [
+            "d7980c1047aee2bd29b76661bed34db586ef97de"
+          ],
+          "parent": "d7980c1047aee2bd29b76661bed34db586ef97de",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "30226a56bb393ecb40c310cf802afdea2a7ef904",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "d7980c1047aee2bd29b76661bed34db586ef97de",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 40
+      },
+      {
+        "type": "commit",
+        "label": "Revert \"add feature of insert and modify yaml by gui\"",
+        "commit": {
+          "hash": "ded57c690e542884795658b0234b02282a9f2e58",
+          "subject": "Revert \"add feature of insert and modify yaml by gui\"",
+          "author": "chuchu2525",
+          "timestamp": 1749122100,
+          "parents": [
+            "07ae1ec1ea1dca446ad9db58a4034974b6ed3948"
+          ],
+          "parent": "07ae1ec1ea1dca446ad9db58a4034974b6ed3948",
+          "refs": "origin/revert-3-feature-yaml-based",
+          "branches": [
+            "origin/revert-3-feature-yaml-based"
+          ]
+        },
+        "commitHash": "ded57c690e542884795658b0234b02282a9f2e58",
+        "lane": 18,
+        "parentLinks": [
+          {
+            "hash": "07ae1ec1ea1dca446ad9db58a4034974b6ed3948",
+            "lane": 9
+          }
+        ],
+        "primaryBranchName": "revert-3-feature-yaml-based",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "revert-3-feature-yaml-based"
+        ],
+        "index": 41
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #3 from chuchu2525/feature-yaml-based",
+        "commit": {
+          "hash": "07ae1ec1ea1dca446ad9db58a4034974b6ed3948",
+          "subject": "Merge pull request #3 from chuchu2525/feature-yaml-based",
+          "author": "chuchu2525",
+          "timestamp": 1749121512,
+          "parents": [
+            "d7980c1047aee2bd29b76661bed34db586ef97de",
+            "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b"
+          ],
+          "parent": "d7980c1047aee2bd29b76661bed34db586ef97de",
+          "refs": "",
+          "branches": [
+            "chuchu2525/feature-yaml-based"
+          ]
+        },
+        "commitHash": "07ae1ec1ea1dca446ad9db58a4034974b6ed3948",
+        "lane": 16,
+        "parentLinks": [
+          {
+            "hash": "d7980c1047aee2bd29b76661bed34db586ef97de",
+            "lane": 0
+          },
+          {
+            "hash": "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b",
+            "lane": 8
+          }
+        ],
+        "primaryBranchName": "chuchu2525/feature-yaml-based",
+        "branchColor": "#4fe8b8",
+        "branchTags": [],
+        "index": 42
+      },
+      {
+        "type": "commit",
+        "label": "Update components/AiInteraction.tsx",
+        "commit": {
+          "hash": "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b",
+          "subject": "Update components/AiInteraction.tsx",
+          "author": "chuchu2525",
+          "timestamp": 1749121499,
+          "parents": [
+            "144d8d962d16a11042223f0eb662ac4d1959c9b8"
+          ],
+          "parent": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+          "refs": "",
+          "branches": [
+            "chuchu2525/feature-yaml-based",
+            "feature-yaml-based",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "a86b4e4771eb222147b7a4bfbf7c7c8b74d8ba3b",
+        "lane": 16,
+        "parentLinks": [
+          {
+            "hash": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+            "lane": 7
+          }
+        ],
+        "primaryBranchName": "chuchu2525/feature-yaml-based",
+        "branchColor": "#4fe8b8",
+        "branchTags": [],
+        "index": 43
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #2 from chuchu2525/feature-gant",
+        "commit": {
+          "hash": "d7980c1047aee2bd29b76661bed34db586ef97de",
+          "subject": "Merge pull request #2 from chuchu2525/feature-gant",
+          "author": "chuchu2525",
+          "timestamp": 1749014324,
+          "parents": [
+            "685510b4849ffa51531d99f2ce72214f4322b95e",
+            "dddcf75fa91a96a93636ec64a770c6b497f630e3"
+          ],
+          "parent": "685510b4849ffa51531d99f2ce72214f4322b95e",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "d7980c1047aee2bd29b76661bed34db586ef97de",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "685510b4849ffa51531d99f2ce72214f4322b95e",
+            "lane": 0
+          },
+          {
+            "hash": "dddcf75fa91a96a93636ec64a770c6b497f630e3",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "chuchu2525/feature-gant"
+        ],
+        "index": 44
+      },
+      {
+        "type": "commit",
+        "label": "Appコンポーネントのパディングを調整し、GanttChartコンポーネントの不要なコメントを削除。全体のスタイルを改善…",
+        "commit": {
+          "hash": "dddcf75fa91a96a93636ec64a770c6b497f630e3",
+          "subject": "Appコンポーネントのパディングを調整し、GanttChartコンポーネントの不要なコメントを削除。全体のスタイルを改善。",
+          "author": "chuchu2525",
+          "timestamp": 1749014290,
+          "parents": [
+            "29f50635638fc46d94f5d959ab6f55f6d9343463"
+          ],
+          "parent": "29f50635638fc46d94f5d959ab6f55f6d9343463",
+          "refs": "origin/feature-gant",
+          "branches": [
+            "origin/feature-gant",
+            "conflict",
+            "chuchu2525/feature-gant",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "dddcf75fa91a96a93636ec64a770c6b497f630e3",
+        "lane": 19,
+        "parentLinks": [
+          {
+            "hash": "29f50635638fc46d94f5d959ab6f55f6d9343463",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "feature-gant",
+        "branchColor": "#e84f7f",
+        "branchTags": [
+          "feature-gant"
+        ],
+        "index": 45
+      },
+      {
+        "type": "commit",
+        "label": "Appコンポーネントのスタイルを調整し、GanttChartコンポーネントの高さを修正。不要なクラスを削除し、フッターの…",
+        "commit": {
+          "hash": "29f50635638fc46d94f5d959ab6f55f6d9343463",
+          "subject": "Appコンポーネントのスタイルを調整し、GanttChartコンポーネントの高さを修正。不要なクラスを削除し、フッターのパディングを変更。",
+          "author": "chuchu2525",
+          "timestamp": 1749013440,
+          "parents": [
+            "8d34d2f3c205bfb1215c62fdedf54cf0a5f0e505"
+          ],
+          "parent": "8d34d2f3c205bfb1215c62fdedf54cf0a5f0e505",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "29f50635638fc46d94f5d959ab6f55f6d9343463",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "8d34d2f3c205bfb1215c62fdedf54cf0a5f0e505",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [],
+        "index": 46
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartの一番上の行を垂直スクロール時に固定",
+        "commit": {
+          "hash": "8d34d2f3c205bfb1215c62fdedf54cf0a5f0e505",
+          "subject": "GanttChartの一番上の行を垂直スクロール時に固定",
+          "author": "chuchu2525",
+          "timestamp": 1748922472,
+          "parents": [
+            "e83f398d710fd68e9dbcc33e93cda2e2c2874014"
+          ],
+          "parent": "e83f398d710fd68e9dbcc33e93cda2e2c2874014",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "8d34d2f3c205bfb1215c62fdedf54cf0a5f0e505",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "e83f398d710fd68e9dbcc33e93cda2e2c2874014",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [],
+        "index": 47
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartコンポーネントにビューモード切替機能を追加し、行の高さを状態管理するように変更。タスクの表示幅を動的…",
+        "commit": {
+          "hash": "e83f398d710fd68e9dbcc33e93cda2e2c2874014",
+          "subject": "GanttChartコンポーネントにビューモード切替機能を追加し、行の高さを状態管理するように変更。タスクの表示幅を動的に調整し、依存関係の線をS字カーブで描画するように改善。",
+          "author": "chuchu2525",
+          "timestamp": 1748846911,
+          "parents": [
+            "2bcdec2aa7ab16fafb53e4d9ebcdc2018b1433d8"
+          ],
+          "parent": "2bcdec2aa7ab16fafb53e4d9ebcdc2018b1433d8",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "e83f398d710fd68e9dbcc33e93cda2e2c2874014",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "2bcdec2aa7ab16fafb53e4d9ebcdc2018b1433d8",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [],
+        "index": 48
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartコンポーネントにタスク編集機能を追加し、ツールチップを実装。タスクをクリックすると編集が可能になり、…",
+        "commit": {
+          "hash": "2bcdec2aa7ab16fafb53e4d9ebcdc2018b1433d8",
+          "subject": "GanttChartコンポーネントにタスク編集機能を追加し、ツールチップを実装。タスクをクリックすると編集が可能になり、マウスオーバー時にタスク名を表示するように変更。",
+          "author": "chuchu2525",
+          "timestamp": 1748627267,
+          "parents": [
+            "48905a642fedd7f165a1f9bf886cae5daa874979"
+          ],
+          "parent": "48905a642fedd7f165a1f9bf886cae5daa874979",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "2bcdec2aa7ab16fafb53e4d9ebcdc2018b1433d8",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "48905a642fedd7f165a1f9bf886cae5daa874979",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [],
+        "index": 49
+      },
+      {
+        "type": "commit",
+        "label": "GanttChartコンポーネントにラベル幅のリサイズ機能を追加し、タスク名の表示を改善。最小・最大幅を設定し、ドラッグ…",
+        "commit": {
+          "hash": "48905a642fedd7f165a1f9bf886cae5daa874979",
+          "subject": "GanttChartコンポーネントにラベル幅のリサイズ機能を追加し、タスク名の表示を改善。最小・最大幅を設定し、ドラッグ操作で動的に調整可能",
+          "author": "chuchu2525",
+          "timestamp": 1748626690,
+          "parents": [
+            "685510b4849ffa51531d99f2ce72214f4322b95e"
+          ],
+          "parent": "685510b4849ffa51531d99f2ce72214f4322b95e",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design",
+            "chuchu2525/feature-gant"
+          ]
+        },
+        "commitHash": "48905a642fedd7f165a1f9bf886cae5daa874979",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "685510b4849ffa51531d99f2ce72214f4322b95e",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [],
+        "index": 50
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #1 from chuchu2525/feature-dependency",
+        "commit": {
+          "hash": "685510b4849ffa51531d99f2ce72214f4322b95e",
+          "subject": "Merge pull request #1 from chuchu2525/feature-dependency",
+          "author": "chuchu2525",
+          "timestamp": 1748625912,
+          "parents": [
+            "46ea64af65679a1bb8d532a27dbc05f12990c736",
+            "ae389be6df8f78a7953e329a5606ecd137ebe95a"
+          ],
+          "parent": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+          "refs": "",
+          "branches": [
+            "conflict",
+            "main",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "685510b4849ffa51531d99f2ce72214f4322b95e",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+            "lane": 0
+          },
+          {
+            "hash": "ae389be6df8f78a7953e329a5606ecd137ebe95a",
+            "lane": 11
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 51
+      },
+      {
+        "type": "commit",
+        "label": "タスクフォームに依存関係の検索機能を追加し、依存関係の選択方法を改善",
+        "commit": {
+          "hash": "ae389be6df8f78a7953e329a5606ecd137ebe95a",
+          "subject": "タスクフォームに依存関係の検索機能を追加し、依存関係の選択方法を改善",
+          "author": "chuchu2525",
+          "timestamp": 1748625558,
+          "parents": [
+            "46ea64af65679a1bb8d532a27dbc05f12990c736"
+          ],
+          "parent": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+          "refs": "origin/feature-dependency",
+          "branches": [
+            "conflict",
+            "origin/feature-dependency",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "ae389be6df8f78a7953e329a5606ecd137ebe95a",
+        "lane": 17,
+        "parentLinks": [
+          {
+            "hash": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "conflict",
+        "branchColor": "#e8a84f",
+        "branchTags": [
+          "feature-dependency"
+        ],
+        "index": 52
+      },
+      {
+        "type": "commit",
+        "label": "add feature of insert and modify yaml by gui",
+        "commit": {
+          "hash": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+          "subject": "add feature of insert and modify yaml by gui",
+          "author": "chuchu2525",
+          "timestamp": 1748624470,
+          "parents": [
+            "46ea64af65679a1bb8d532a27dbc05f12990c736"
+          ],
+          "parent": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+          "refs": "",
+          "branches": [
+            "chuchu2525/feature-yaml-based",
+            "issue18-feature/japanese-lang",
+            "task/task-1760497878841-a47877",
+            "task/task-1760497876724-f7509e",
+            "backend-design"
+          ]
+        },
+        "commitHash": "144d8d962d16a11042223f0eb662ac4d1959c9b8",
+        "lane": 16,
+        "parentLinks": [
+          {
+            "hash": "46ea64af65679a1bb8d532a27dbc05f12990c736",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "chuchu2525/feature-yaml-based",
+        "branchColor": "#4fe8b8",
+        "branchTags": [],
+        "index": 53
+      },
+      {
+        "type": "empty",
+        "label": "初期状態 (初回コミット以前)",
+        "files": [],
+        "marker": "pre-history",
+        "index": 54
+      }
+    ]
+  },
+  "projectRoot": "/Users/yuukun/Documents/Project/todo-gant-withAI",
+  "savedAt": 1762871318023
+}

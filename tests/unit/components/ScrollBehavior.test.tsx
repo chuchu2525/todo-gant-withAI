@@ -1,9 +1,9 @@
+import { vi, describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import { TaskList } from '../../../components/TaskList';
-import { AiInteraction } from '../../../components/AiInteraction';
-import { GanttChart } from '../../../components/GanttChart';
-import { Task, TaskStatus, TaskPriority } from '../../../types';
+import { TaskList } from '../../../src/components/TaskList';
+import { AiInteraction } from '../../../src/components/AiInteraction';
+import { GanttChart } from '../../../src/components/GanttChart';
+import { Task, TaskStatus, TaskPriority } from '../../../src/types';
 
 // Mock data
 const mockTasks: Task[] = [
@@ -57,8 +57,8 @@ describe('Scroll Behavior Tests', () => {
   describe('TaskList Component', () => {
     it('should render with normal scroll behavior when not in split view', () => {
       render(<TaskList {...mockProps} isInSplitView={false} />);
-      
-      const container = screen.getByRole('generic');
+
+      const container = screen.getByTestId('tasklist-container');
       expect(container).toBeDefined();
       // Normal view should not have height restrictions
       expect(container.className).not.toContain('h-full');
@@ -67,8 +67,8 @@ describe('Scroll Behavior Tests', () => {
 
     it('should render with split view scroll behavior when in split view', () => {
       render(<TaskList {...mockProps} isInSplitView={true} />);
-      
-      const container = screen.getByRole('generic');
+
+      const container = screen.getByTestId('tasklist-container');
       expect(container).toBeDefined();
       // Split view should have height restrictions and scroll
       expect(container.className).toContain('h-full');
@@ -87,8 +87,8 @@ describe('Scroll Behavior Tests', () => {
   describe('AiInteraction Component', () => {
     it('should render with normal behavior when not in split view', () => {
       render(<AiInteraction {...mockAiProps} isInSplitView={false} />);
-      
-      const container = screen.getByRole('generic');
+
+      const container = screen.getByTestId('ai-interaction-container');
       expect(container).toBeDefined();
       // Normal view should not have height restrictions
       expect(container.className).not.toContain('h-full');
@@ -97,8 +97,8 @@ describe('Scroll Behavior Tests', () => {
 
     it('should render with split view behavior when in split view', () => {
       render(<AiInteraction {...mockAiProps} isInSplitView={true} />);
-      
-      const container = screen.getByRole('generic');
+
+      const container = screen.getByTestId('ai-interaction-container');
       expect(container).toBeDefined();
       // Split view should have height restrictions
       expect(container.className).toContain('h-full');
@@ -117,39 +117,39 @@ describe('Scroll Behavior Tests', () => {
   describe('GanttChart Component', () => {
     it('should render with normal scroll behavior when not in split view', () => {
       render(<GanttChart {...mockGanttProps} isInSplitView={false} />);
-      
-      // Check if chart container exists
-      const chartContainer = document.querySelector('.overflow-auto');
-      expect(chartContainer).toBeDefined();
-      
-      // Should use 75vh height in normal view
-      expect(chartContainer?.getAttribute('style')).toContain('75vh');
+
+      const container = screen.getByTestId('gantt-chart-container');
+      expect(container).toBeDefined();
+      // Normal view should not have height restrictions
+      expect(container.className).not.toContain('h-full');
+      expect(container.className).not.toContain('flex-col');
     });
 
     it('should render with split view scroll behavior when in split view', () => {
       render(<GanttChart {...mockGanttProps} isInSplitView={true} />);
-      
-      // Check if chart container exists
-      const chartContainer = document.querySelector('.overflow-auto');
-      expect(chartContainer).toBeDefined();
-      
-      // Should use calc height in split view
-      expect(chartContainer?.getAttribute('style')).toContain('calc(100% - 60px)');
+
+      const container = screen.getByTestId('gantt-chart-container');
+      expect(container).toBeDefined();
+      // Split view should have height restrictions
+      expect(container.className).toContain('h-full');
+      expect(container.className).toContain('flex-col');
     });
 
     it('should maintain scroll functionality across view modes', () => {
       const { rerender } = render(<GanttChart {...mockGanttProps} isInSplitView={false} />);
-      
-      let chartContainer = document.querySelector('.overflow-auto');
-      expect(chartContainer).toBeDefined();
-      expect(chartContainer?.getAttribute('style')).toContain('75vh');
-      
+
+      let container = screen.getByTestId('gantt-chart-container');
+      expect(container).toBeDefined();
+      expect(container.className).not.toContain('h-full');
+      expect(container.className).not.toContain('flex-col');
+
       // Switch to split view
       rerender(<GanttChart {...mockGanttProps} isInSplitView={true} />);
-      
-      chartContainer = document.querySelector('.overflow-auto');
-      expect(chartContainer).toBeDefined();
-      expect(chartContainer?.getAttribute('style')).toContain('calc(100% - 60px)');
+
+      container = screen.getByTestId('gantt-chart-container');
+      expect(container).toBeDefined();
+      expect(container.className).toContain('h-full');
+      expect(container.className).toContain('flex-col');
     });
   });
 

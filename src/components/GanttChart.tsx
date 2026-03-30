@@ -532,7 +532,11 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
   };
 
   return (
-    <div className={`bg-slate-800 p-4 rounded-lg shadow-lg relative ${isInSplitView ? 'h-full flex flex-col' : ''}`} ref={chartContainerRef}>
+    <div
+      data-testid="gantt-chart-container"
+      className={`bg-slate-800 p-4 rounded-lg shadow-lg relative ${isInSplitView ? 'h-full flex flex-col' : ''}`}
+      ref={chartContainerRef}
+    >
       <div className={`flex justify-between items-center mb-4 ${isInSplitView ? 'flex-shrink-0' : ''}`}>
         <h3 className="text-xl font-semibold text-sky-400">Gantt Chart</h3>
         <div className="flex items-center space-x-4">
@@ -1018,4 +1022,3 @@ export const GanttChart: React.FC<GanttChartProps> = ({ tasks, onEditTask, onTas
     </div>
   );
 };
-    

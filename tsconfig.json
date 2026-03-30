@@ -25,6 +25,14 @@
 
     "paths": {
       "@/*" :  ["./*"]
-    }
-  }
+    },
+
+    /* Vitest */
+    "types": ["vitest/globals"]
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "src/vite-env.d.ts"
+  ]
 }
