@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Todo Gantt with AI API
+  version: 0.1.0
+  description: |
+    タスク管理(Gantt)とAI補助のためのバックエンドAPI。初期段階ではシングルユーザー想定。
+servers:
+  - url: http://localhost:4000
+    description: Local dev
+tags:
+  - name: health
+  - name: tasks
+  - name: ai
+  - name: yaml
+paths:
+  /api/v1/health:
+    get:
+      tags: [health]
+      summary: Liveness probe
+      responses:
+        '200':
+          description: OK
+  /api/v1/ready:
+    get:
+      tags: [health]
+      summary: Readiness probe
+      responses:
+        '200':
+          description: Ready
+
+  /api/v1/tasks:
+    get:
+      tags: [tasks]
+      summary: タスク一覧取得
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskDto'
+    post:
+      tags: [tasks]
+      summary: タスク作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDto'
+
+  /api/v1/tasks/{id}:
+    get:
+      tags: [tasks]
+      summary: タスク詳細取得
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/TaskDto' } } } }
+        '404': { description: Not Found }
+    patch:
+      tags: [tasks]
+      summary: タスク更新
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskUpdate'
+      responses:
+        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/TaskDto' } } } }
+        '404': { description: Not Found }
+    delete:
+      tags: [tasks]
+      summary: タスク削除
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '204': { description: No Content }
+        '404': { description: Not Found }
+
+  /api/v1/tasks/bulk:
+    patch:
+      tags: [tasks]
+      summary: タスク一括更新(並べ替え・日付変更等)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                updates:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id: { type: string, format: uuid }
+                      name: { type: string }
+                      description: { type: string }
+                      status: { $ref: '#/components/schemas/TaskStatus' }
+                      priority: { $ref: '#/components/schemas/TaskPriority' }
+                      startDate: { type: string, format: date }
+                      endDate: { type: string, format: date }
+                      dependencies:
+                        type: array
+                        items: { type: string, format: uuid }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskDto'
+
+  /api/v1/ai/summary:
+    post:
+      tags: [ai]
+      summary: タスク要約を返す
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiSummaryRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiSummaryResponse'
+
+  /api/v1/ai/update-yaml:
+    post:
+      tags: [ai]
+      summary: YAMLタスクリストを指示に基づき更新
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiUpdateYamlRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiUpdateYamlResponse'
+
+  /api/v1/import/yaml:
+    post:
+      tags: [yaml]
+      summary: YAMLをDBに取り込み
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                yaml:
+                  type: string
+      responses:
+        '200': { description: OK }
+
+  /api/v1/export/yaml:
+    get:
+      tags: [yaml]
+      summary: DBからYAMLを書き出し
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  yaml:
+                    type: string
+
+components:
+  schemas:
+    TaskStatus:
+      type: string
+      enum: ["Not Started", "In Progress", "Completed"]
+    TaskPriority:
+      type: string
+      enum: ["High", "Medium", "Low"]
+    TaskDto:
+      type: object
+      required: [id, name, status, priority, startDate, endDate, dependencies]
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        description: { type: string }
+        status: { $ref: '#/components/schemas/TaskStatus' }
+        priority: { $ref: '#/components/schemas/TaskPriority' }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        dependencies:
+          type: array
+          items: { type: string, format: uuid }
+    TaskCreate:
+      allOf:
+        - $ref: '#/components/schemas/TaskDto'
+      required: [name, status, priority, startDate, endDate]
+      properties:
+        id: { readOnly: true }
+    TaskUpdate:
+      type: object
+      properties:
+        name: { type: string }
+        description: { type: string }
+        status: { $ref: '#/components/schemas/TaskStatus' }
+        priority: { $ref: '#/components/schemas/TaskPriority' }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        dependencies:
+          type: array
+          items: { type: string, format: uuid }
+
+    AiSummaryRequest:
+      type: object
+      properties:
+        tasks:
+          type: array
+          items: { $ref: '#/components/schemas/TaskDto' }
+      required: [tasks]
+    AiSummaryResponse:
+      type: object
+      properties:
+        summary: { type: string }
+
+    AiUpdateYamlRequest:
+      type: object
+      properties:
+        currentYaml: { type: string }
+        userInstruction: { type: string }
+      required: [currentYaml, userInstruction]
+    AiUpdateYamlResponse:
+      type: object
+      properties:
+        yaml: { type: string }
